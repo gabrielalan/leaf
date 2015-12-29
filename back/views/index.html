@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+</head>
+<body>
+	<div id="container">
+		<div class="header">
+			<h1><a href="#">Leaf</a></h1>
+			<div class=""></div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="vendor/system.js/dist/system.js"></script>
+	<script type="text/javascript">
+		System.config({
+			baseURL: 'js',
+			defaultJSExtensions: true,
+			format: 'cjs',
+			map: {
+				'Fluxxor': '/vendor/fluxxor/build/fluxxor.js'
+			}
+		});
+
+		System.import('main.js');
+	</script>
+</body>
+</html>

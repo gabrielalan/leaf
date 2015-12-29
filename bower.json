@@ -1,0 +1,26 @@
+{
+  "name": "leaf",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gabrielalan/leaf",
+  "authors": [
+    "Gabriel Alan <gaba.alan@gmail.com>"
+  ],
+  "moduleType": [
+    "amd",
+    "es6",
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "front/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "system.js": "~0.19.9",
+    "fluxxor": "~1.7.3"
+  }
+}

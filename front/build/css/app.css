@@ -3233,7 +3233,27 @@ input[type="button"].btn-block {
 	color: red; // works for single-colored icons, because "fill" was set to "currentColor"
 } */
 .header h1 {
-  display: block; }
+  display: block;
+  margin: 10px; }
+
+.header .top-search {
+  margin-top: 20px; }
+
+.top-search {
+  background-color: #663333;
+  padding: 5px 0px; }
+  .top-search .top-search-button {
+    padding-left: 0px;
+    padding-right: 0px; }
+    .top-search .top-search-button .icon {
+      color: white;
+      font-size: 40px; }
+  .top-search .top-search-input {
+    padding-right: 0px; }
+    .top-search .top-search-input input {
+      padding: 16px 5px;
+      height: auto;
+      font-size: 18px; }
 
 .categories {
   background-color: #05aecd;

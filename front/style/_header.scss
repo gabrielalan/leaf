@@ -1,5 +1,37 @@
-.header h1 {
-	display: block;
+.header {
+	h1 {
+		display: block;
+		margin: 10px;
+	}
+
+	.top-search {
+		margin-top: 20px;
+	}
+}
+
+.top-search {
+	background-color: $leafGrey;
+	padding: 5px 0px;
+
+	.top-search-button {
+		padding-left: 0px;
+		padding-right: 0px;
+
+		.icon {
+			color: white;
+			font-size: 40px;
+		}
+	}
+
+	.top-search-input {
+		padding-right: 0px;
+
+		input {
+			padding: 16px 5px;
+			height: auto;
+			font-size: 18px;
+		}
+	}
 }
 
 .categories {

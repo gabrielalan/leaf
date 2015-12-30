@@ -22,12 +22,11 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-batch": "^1.0.5",
     "gulp-concat": "^2.6.0",
     "gulp-declare": "^0.3.0",
     "gulp-define-module": "^0.1.4",
     "gulp-handlebars": "^4.0.0",
-    "gulp-watch": "^4.3.5",
+    "gulp-sass": "^2.1.1",
     "gulp-wrap": "^0.11.0"
   }
 }

@@ -23,6 +23,6 @@
     "system.js": "~0.19.9",
     "fluxxor": "~1.7.3",
     "handlebars": "3.0.3",
-    "bootstrap": "~3.3.6"
+    "bootstrap-sass": "~3.3.6"
   }
 }

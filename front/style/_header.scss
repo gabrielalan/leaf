@@ -1,0 +1,25 @@
+.header h1 {
+	display: block;
+}
+
+.categories {
+	background-color: $leafBlue;
+	border-radius: 0px;
+	border: none;
+
+	.navbar-nav li a {
+		color: white;
+	}
+
+	.navbar-nav li.active a {
+		background-color: lighten($leafBlue, 5%);
+		color: white;
+	}
+
+	.navbar-nav li a .icon {
+		font-size: 20px;
+		float: left;
+		margin-right: 6px;
+		color: darken($leafBlue, 20%);
+	}
+}

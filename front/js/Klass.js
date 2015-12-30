@@ -2,14 +2,16 @@
 
 var Utils = require('Common/Utils');
 
-module.exports = {
+var Klass = {
 	create: function() {
 		var methods = arguments[0], 
 			klass = function() { this.construct.apply(this, arguments); };
 
+		klass.extends = Klass.create.bind(undefined, klass);
+
 		if( arguments.length >= 2 ) {
-			klass.prototype.parent = arguments[0].prototype;
 			klass.prototype = Object.create(arguments[0].prototype);
+			klass.prototype.parent = arguments[0].prototype;
 			methods = arguments[1];
 		}
 
@@ -26,3 +28,5 @@ module.exports = {
 		return klass;
 	}
 };
+
+module.exports = Klass;

@@ -1,6 +1,8 @@
 'use strict';
 
 var Flux = require("Flux"),
-	Widget = require('Widgets/Widget');
+	Header = require('Widgets/Header');
 
-	debugger;
+var header = new Header();
+
+header.render( document.getElementById('wrapper') );

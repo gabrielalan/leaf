@@ -28,6 +28,5 @@ var Klass = {
 		return klass;
 	}
 };
-window.Klass = Klass;
-window.Utils = Utils;
+
 module.exports = Klass;

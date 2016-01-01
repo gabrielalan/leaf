@@ -20,15 +20,12 @@ var NavigationItem = Widget.extends({
 	},
 
 	bindEvents: function() {
-		console.log(this.name);
-		return true;
-
 		var me = this, el = this.getEl().querySelector('a');
 
-		el.addEventListener(function(){
+		el.addEventListener('click', function(){
 			me.trigger('click');
 		});
 	}
 });
-window.NavigationItem = NavigationItem;
+
 module.exports = NavigationItem;

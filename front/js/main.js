@@ -5,6 +5,6 @@ var Flux = require("Flux"),
 
 var header = new Header();
 
-header.render( document.getElementById('wrapper') );
+header.render( document.querySelector('#wrapper .header-wrapper') );
 
 window.header = header;

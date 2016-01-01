@@ -53,7 +53,7 @@ var Widget = Observer.extends({
 	},
 
 	render: function(el) {
-		el.innerHTML = this.compile();
+		$(el).append(this.compile());
 
 		this.trigger('after:render');
 	},

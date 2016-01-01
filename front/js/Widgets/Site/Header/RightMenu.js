@@ -10,7 +10,14 @@ var RightMenu = Navigation.extends({
 	items: [
 		new NavigationItem({
 			label: 'Registrar',
-			active: true
+			active: true,
+			listeners: {
+				'click': [
+					function(){
+						debugger;
+					}
+				]
+			}
 		}),
 		new NavigationItem({
 			label: 'Fazer login'

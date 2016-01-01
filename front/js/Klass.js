@@ -4,15 +4,15 @@ var Utils = require('Common/Utils');
 
 var Klass = {
 	create: function() {
-		var methods = arguments[0], 
-			klass = function() { this.construct.apply(this, arguments); };
+		var methods = arguments.length >= 2 ? arguments[1] : arguments[0], 
+			name = methods.name || 'noNameKlass',
+			klass = Function('return function ' + name + '() { this.construct.apply(this, arguments); }')();
 
 		klass.extends = Klass.create.bind(undefined, klass);
 
 		if( arguments.length >= 2 ) {
 			klass.prototype = Object.create(arguments[0].prototype);
-			klass.prototype.parent = arguments[0].prototype;
-			methods = arguments[1];
+			klass.prototype.parent = Object.create(arguments[0].prototype);
 		}
 
 		// Copy the passed in methods
@@ -28,5 +28,6 @@ var Klass = {
 		return klass;
 	}
 };
-
+window.Klass = Klass;
+window.Utils = Utils;
 module.exports = Klass;

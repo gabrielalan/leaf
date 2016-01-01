@@ -1,8 +1,13 @@
 'use strict';
 
-var Klass = require('Klass');
+var Observer = require('Common/Observer'),
+	Utils = require('Common/Utils');
 
-var Widget = Klass.create({
+var Widget = Observer.extends({
+
+	name: 'Widget',
+
+	id: null,
 
 	/**
 	 * Template that wil be used
@@ -10,25 +15,63 @@ var Widget = Klass.create({
 	template: undefined,
 
 	/**
-	 * Rendered HTML of the widget
+	 * Compiled HTML of the widget
 	 */
-	rendered: undefined,
+	compiled: undefined,
 
-	construct: function() {	
+	/**
+	 * This array defines what property of that widget is a widget too
+	 */
+	widgets: [],
+
+	construct: function( configuration ) {
+		this.id = Utils.hash();
+
+		Utils.extend(this, configuration);
+
+		/* bind on after:render to dispatch on childs of childs */
+		this.on('after:render', this.executeFnOnChilds.bind(this, 'trigger', ['after:render']));
+	},
+
+	getEl: function() {
+		return window.document.getElementById(this.id);
 	},
 
 	compile: function() {
 		if( !this.template )
 			throw new Error('Template not found');
 
-		if( !this.rendered )
-			this.rendered = this.template(this);
+		if( !this.compiled ) {
+			this.executeFnOnChilds('compile');
 
-		return this.rendered;
+			this.compiled = this.template(this);
+
+			this.trigger('after:compile');
+		}
+
+		return this.compiled;
 	},
 
 	render: function(el) {
 		el.innerHTML = this.compile();
+
+		this.trigger('after:render');
+	},
+
+	executeFnOnChilds: function( fnName, args ) {
+		var me = this, current;
+
+		me.widgets.map(function( widget ){
+			current = me[widget];
+
+			if( Utils.is(current, 'array') ) {
+				current.map(function(child){
+					child[fnName].apply(child, args || []);	
+				});
+			} else if( current ) {
+				current[fnName].apply(current, args || []);
+			}
+		});
 	}
 });
 

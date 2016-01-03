@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+	<link rel="stylesheet" type="text/css" href="build/css/app.css" />
+</head>
+<body>
+	<div id="wrapper" class="container"></div>
+	
+	<script type="text/javascript" src="vendor/system.js/dist/system.js"></script>
+	<script type="text/javascript" src="vendor/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		System.config({
+			baseURL: 'js',
+			defaultJSExtensions: true,
+			format: 'cjs',
+			map: {
+				'Fluxxor': '/vendor/fluxxor/build/fluxxor.min.js',
+				'handlebars': '/vendor/handlebars/handlebars.runtime.min.js'
+			}
+		});
+
+		System.import('main.js');
+	</script>
+</body>
+</html>

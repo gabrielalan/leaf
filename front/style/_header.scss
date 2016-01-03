@@ -1,11 +1,18 @@
+$topMargin: 24px;
+
 .header {
 	h1 {
 		display: block;
 		margin: 10px;
+
+		img {
+			width: 100%;
+		}
 	}
 
-	.top-search {
-		margin-top: 20px;
+	.top-search, .top-menu {
+		margin-top: $topMargin;
+		margin-bottom: $topMargin;
 	}
 }
 
@@ -30,6 +37,19 @@
 			padding: 16px 5px;
 			height: auto;
 			font-size: 18px;
+		}
+	}
+}
+
+.top-menu {
+	li a {
+		padding: 25px;
+		border-radius: 0px;
+		background-color: $leafGrey;
+		color: white;
+
+		&:hover {
+			background-color: $leafBlue;
 		}
 	}
 }

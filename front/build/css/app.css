@@ -3517,6 +3517,21 @@ body {
 .padding-paragraph p {
   padding: 10px 20px; }
 
+.social {
+  padding-left: 20px; }
+  .social li {
+    list-style: none;
+    display: inline-block; }
+    .social li a {
+      display: inline-block;
+      padding: 12px;
+      line-height: 20px;
+      font-size: 22px;
+      background-color: grey;
+      color: white; }
+  .social li.facebook a {
+    background-color: #39599f; }
+
 .pc-pager .pc-page-left, .pc-pager .pc-page-right {
   display: inline-block;
   background-color: #663333;
@@ -3610,6 +3625,52 @@ body {
   -moz-transition: opacity 200ms ease-in-out;
   -ms-transition: opacity 200ms ease-in-out;
   transition: opacity 200ms ease-in-out; }
+
+.highlight {
+  display: flex; }
+  .highlight .hg-left, .highlight .hg-right-top, .highlight .hg-right-bottom {
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative; }
+  .highlight .hg-left {
+    width: 670px;
+    height: 570px;
+    margin-right: 5px; }
+  .highlight .hg-right-top {
+    width: 494px;
+    height: 320px;
+    margin-bottom: 5px; }
+  .highlight .hg-right-bottom {
+    width: 494px;
+    height: 245px; }
+  .highlight .hg-title {
+    display: block;
+    width: 350px;
+    padding: 20px;
+    position: absolute;
+    bottom: 10%;
+    left: 0px;
+    background-color: rgba(54, 42, 79, 0.8);
+    text-transform: uppercase;
+    -webkit-transition: background-color 150ms ease-in-out;
+    -moz-transition: background-color 150ms ease-in-out;
+    -ms-transition: background-color 150ms ease-in-out;
+    transition: background-color 150ms ease-in-out; }
+  .highlight .hg-title strong {
+    display: block;
+    color: #ffff66;
+    font-size: 50px;
+    font-family: Georgia;
+    font-weight: normal;
+    line-height: 42px; }
+  .highlight .hg-title span {
+    font-size: 13px;
+    color: white; }
+  .highlight .hg-right-top .hg-title strong, .highlight .hg-right-bottom .hg-title strong {
+    font-size: 35px; }
+  .highlight .hg-left:hover .hg-title, .highlight .hg-right-top:hover .hg-title, .highlight .hg-right-bottom:hover .hg-title {
+    background-color: #362a4f; }
 
 .header h1 {
   display: block;

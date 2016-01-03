@@ -20,6 +20,28 @@ body {
 	padding: 10px 20px;
 }
 
+.social {
+	padding-left: 20px;
+
+	li {
+		list-style: none;
+		display: inline-block;
+
+		a {
+			display: inline-block;
+			padding: 12px;
+			line-height: 20px;
+			font-size: 22px;
+			background-color: grey;
+			color: white;
+		}
+	}
+
+	li.facebook a {
+		background-color: $leafFacebook;
+	}
+}
+
 .pc-pager {
 	.pc-page-left, .pc-page-right {
 		display: inline-block;
@@ -140,4 +162,72 @@ $pcItemsSpace: 15px;
 	-moz-transition: opacity 200ms ease-in-out;
 	-ms-transition: opacity 200ms ease-in-out;
 	transition: opacity 200ms ease-in-out;
+}
+
+//highlight
+.highlight {
+	display: flex;
+
+	.hg-left, .hg-right-top, .hg-right-bottom {
+		display: block;
+		background-position: center;
+		background-repeat: no-repeat;
+		position: relative;
+	}
+
+	.hg-left {
+		width: 670px;
+		height: 570px;
+		margin-right: 5px;
+	}
+
+	.hg-right-top {
+		width: 494px;
+		height: 320px;	
+		margin-bottom: 5px;
+	}
+
+	.hg-right-bottom {
+		width: 494px;
+		height: 245px;
+	}
+
+	.hg-title {
+		display: block;
+		width: 350px;
+		padding: 20px;
+		position: absolute;
+		bottom: 10%;
+		left: 0px;
+		background-color: rgba($leafDarkBlue, 0.8);
+		text-transform: uppercase;
+		-webkit-transition: background-color 150ms ease-in-out;
+		-moz-transition: background-color 150ms ease-in-out;
+		-ms-transition: background-color 150ms ease-in-out;
+		transition: background-color 150ms ease-in-out;
+	}
+
+	.hg-title strong {
+		display: block;
+		color: $leafYellow;
+		font-size: 50px;
+		font-family: Georgia;
+		font-weight: normal;
+		line-height: 42px;
+	}
+
+	.hg-title span {
+		font-size: 13px;
+		color: white;
+	}
+
+	.hg-right-top .hg-title strong, .hg-right-bottom .hg-title strong {
+		font-size: 35px;
+	}
+
+	.hg-left:hover, .hg-right-top:hover, .hg-right-bottom:hover {
+		.hg-title {
+			background-color: rgba($leafDarkBlue, 1);
+		}
+	}
 }

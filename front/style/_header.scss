@@ -63,6 +63,12 @@ $topMargin: 24px;
 		color: white;
 	}
 
+	.navbar-nav .dropdown-menu li a {
+		color: $leafRed;
+		font-size: 16px;
+	}
+
+
 	.navbar-nav li.active a {
 		background-color: lighten($leafBlue, 5%);
 		color: white;

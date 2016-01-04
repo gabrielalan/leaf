@@ -3532,6 +3532,37 @@ body {
   .social li.facebook a {
     background-color: #39599f; }
 
+.dropdown-menu .dropdown-extra {
+  border-bottom: 1px solid #b9b9b9; }
+  .dropdown-menu .dropdown-extra a {
+    display: block;
+    width: 300px;
+    padding: 15px;
+    overflow: hidden; }
+  .dropdown-menu .dropdown-extra .dropdown-image {
+    width: 76px;
+    height: 76px;
+    float: left;
+    margin-right: 15px; }
+  .dropdown-menu .dropdown-extra .dropdown-title {
+    display: block;
+    color: blue;
+    font-size: 16px; }
+  .dropdown-menu .dropdown-extra .dropdown-desc {
+    color: #454545;
+    display: block;
+    white-space: pre-line;
+    line-height: 12px;
+    margin-bottom: 7px;
+    font-size: 14px; }
+  .dropdown-menu .dropdown-extra .dropdown-more {
+    display: block;
+    float: left;
+    background-color: #05aecd;
+    padding: 3px 20px;
+    font-size: 12px;
+    color: white; }
+
 .pc-pager .pc-page-left, .pc-pager .pc-page-right {
   display: inline-block;
   background-color: #663333;
@@ -3712,6 +3743,9 @@ body {
   border: none; }
   .categories .navbar-nav li a {
     color: white; }
+  .categories .navbar-nav .dropdown-menu li a {
+    color: #ef5966;
+    font-size: 16px; }
   .categories .navbar-nav li.active a {
     background-color: #06c3e6;
     color: white; }

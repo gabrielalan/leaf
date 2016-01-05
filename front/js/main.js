@@ -1,10 +1,11 @@
 'use strict';
 
 var Flux = require("Flux"),
-	Header = require('Widgets/Site/Header');
+	UserLocation = require('Widgets/Site/UserLocation');
 
-var header = new Header();
+var userLocal = new UserLocation();
 
-header.render( document.querySelector('#wrapper .header-wrapper') );
+userLocal.render(document.body);
 
-window.header = header;
+window.userLocal = userLocal;
+window.Flux = Flux;

@@ -1,9 +1,9 @@
 'use strict';
 
 var Fluxxor = require('Fluxxor'),
-    HighlightActions = require("Actions/HighlightActions"),
-    HighlightStore = require("Stores/HighlightStore");
+    UserLocationActions = require("Actions/UserLocationActions"),
+    UserLocationStore = require("Stores/UserLocationStore");
 
 module.exports = new Fluxxor.Flux({
-	'HighlightStore': HighlightStore
-}, HighlightActions.actions);
+	'UserLocationStore': new UserLocationStore()
+}, UserLocationActions.actions);

@@ -8,9 +8,9 @@ var defineModule = require('gulp-define-module');
 
 gulp.task('handlebars:back', function () { 
 	gulp.src('back/templates/**/*.html')
-		.pipe(handlebars())
+		.pipe(handlebars({handlebars: require('handlebars')}))
 		.pipe(defineModule('commonjs'))
-		.pipe(gulp.dest('back/views/'));
+		.pipe(gulp.dest('back/templates/'));
 });
 
 gulp.task('handlebars:front', function () { 

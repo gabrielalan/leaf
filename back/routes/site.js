@@ -2,21 +2,12 @@
 
 var express = require('express'),
 	router = express.Router(),
-	handlebars = require('handlebars'),
-	fs = require('fs');
+	index = require('../templates/index');
 
 router.get('/', (req, res, next) => {
-	fs.readFile('back/views/index.html', 'utf-8', function(error, source){
-		if( error ) {
-			res.send(error);
-			return false;
-		}
+	var html = index();
 
-		var template = handlebars.compile(source);
-		var html = template();
-
-		res.send(html);
-	});
+	res.send(html);
 });
 
 module.exports = router;

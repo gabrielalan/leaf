@@ -24,6 +24,11 @@ var Widget = Observer.extends({
 	 */
 	widgets: [],
 
+	/** 
+	 * Flux store
+	 */
+	store: null,
+
 	construct: function( configuration ) {
 		this.id = Utils.hash();
 
@@ -31,6 +36,30 @@ var Widget = Observer.extends({
 
 		/* bind on after:render to dispatch on childs of childs */
 		this.on('after:render', this.executeFnOnChilds.bind(this, 'trigger', ['after:render']));
+
+		this.setStoreListeners();
+	},
+
+	setStoreListeners: function() {
+		if( !this.store )
+			return false;
+
+		this.store.on('change', this.onStoreChange.bind(this));
+	},
+
+	/**
+	 * Dispatched when the store changes status
+	 */
+	onStoreChange: function() {
+		this.setLoading((typeof this.store.loading !== 'undefined' && this.store.loading));
+	},
+
+	/**
+	 * That method assumes that loading property is instance of Loading Widget
+	 */
+	setLoading: function(loading) {
+		if( this.loading )
+			this.loading.setState(loading);
 	},
 
 	getEl: function() {

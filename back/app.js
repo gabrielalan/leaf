@@ -12,8 +12,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../front')));
 
+// set default headers
+// app.use(function(req, res, next) {
+// 	res.setHeader("name", "value");
+// 	return next();
+// });
+
 app.use('/', require('./routes/site'));
-app.use('/categories', require('./routes/categories'));
+
+// rest routes
+app.use('/rest/categories', require('./routes/categories'));
+app.use('/rest/locations', require('./routes/locations'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

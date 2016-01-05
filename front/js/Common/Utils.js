@@ -2,6 +2,10 @@
 
 module.exports = {
 
+	get baseUrl() {
+		return window.location.origin;
+	},
+
 	/**
 	 * Tests the object type:
 	 * Utils.is({}, 'object') === true

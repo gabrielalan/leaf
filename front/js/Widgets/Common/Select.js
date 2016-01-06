@@ -16,7 +16,7 @@ var Select = Widget.extends({
 
 	getValue: function() {
 		return this.getEl().querySelector('select').value;
-	},
+	}
 });
 
 module.exports = Select;

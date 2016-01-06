@@ -9,7 +9,11 @@ var Loading = Widget.extends({
 
 	template: template,
 
+	isLoading: false,
+
 	setState: function(loading) {
+		this.isLoading = loading;
+
 		if( loading ) {
 			$(this.getEl()).addClass('loading');
 		} else {

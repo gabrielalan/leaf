@@ -51,7 +51,14 @@ var Widget = Observer.extends({
 	 * Dispatched when the store changes status
 	 */
 	onStoreChange: function() {
-		this.setLoading((typeof this.store.loading !== 'undefined' && this.store.loading));
+		var isLoading = this.loading ? this.loading.isLoading : false,
+			newValue = (typeof this.store.loading !== 'undefined' && this.store.loading);
+
+		this.setLoading(newValue);
+
+		if( newValue === false && isLoading === true ) {
+			this.updateView();
+		}
 	},
 
 	/**
@@ -83,6 +90,16 @@ var Widget = Observer.extends({
 
 	render: function(el) {
 		$(el).append(this.compile());
+
+		this.trigger('after:render');
+	},
+
+	updateView: function() {
+		var el = this.getEl();
+
+		this.compiled = false;
+
+		$(el).replaceWith(this.compile());
 
 		this.trigger('after:render');
 	},

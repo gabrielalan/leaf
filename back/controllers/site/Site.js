@@ -2,6 +2,8 @@
 
 var Controller = require('../Controller'),
 	fs = require('fs'),
+	ProductsStore = require('../../models/store/Products'),
+	CategoriesStore = require('../../models/store/Categories'),
 	handlebars = require('handlebars');
 
 class Site extends Controller {
@@ -34,87 +36,16 @@ class Site extends Controller {
 	home( req, res ) {
 		var home = require('../../templates/site/pages/home');
 
-		var html = home({
-			carousel: [
-				[
-					{
-						img: 'img/cookie.jpg',
-						name: 'Cookie',
-						price: '129,99'
-					},
-					{
-						img: 'img/cookie.jpg',
-						name: 'Cookie',
-						price: '129,99'
-					},
-					{
-						img: 'img/cookie.jpg',
-						name: 'Cookie',
-						price: '129,99'
-					}
-				],
-				[
-					{
-						img: 'img/cookie.jpg',
-						name: 'Cookie',
-						price: '129,99'
-					},
-					{
-						img: 'img/cookie.jpg',
-						name: 'Cookie',
-						price: '129,99'
-					}
-				]
-			],
-			categories: [
-				{
-					id: 'asdasd',
-					name: 'Torradas',
-					desc: 'Lorem ipsum is simply dummy text of the',
-					img: 'img/dropdown.jpg'
-				},
-				{
-					id: 'asdasd',
-					name: 'Grãos',
-					desc: 'Lorem ipsum is simply dummy text of the',
-					img: 'img/dropdown.jpg'
-				},
-				{
-					id: 'asdasd',
-					name: 'Biscoitos',
-					desc: 'Lorem ipsum is simply dummy text of the',
-					img: 'img/dropdown.jpg'
-				},
-				{
-					id: 'asdasd',
-					name: 'Integral',
-					desc: 'Lorem ipsum is simply dummy text of the',
-					img: 'img/dropdown.jpg',
-					childs: [
-						{
-							id: 'asdasd',
-							name: 'Torradas',
-							desc: 'Lorem ipsum is simply dummy text of the',
-							img: 'img/dropdown.jpg'
-						},
-						{
-							id: 'asdasd',
-							name: 'Grãos',
-							desc: 'Lorem ipsum is simply dummy text of the',
-							img: 'img/dropdown.jpg'
-						},
-						{
-							id: 'asdasd',
-							name: 'Biscoitos',
-							desc: 'Lorem ipsum is simply dummy text of the',
-							img: 'img/dropdown.jpg'
-						}
-					]
-				}
-			]
-		});
+		Promise.all([ProductsStore.getHomeProducts(), CategoriesStore.getCategoriesMenu()]).then((results) => {
+			let params = results[0];
 
-		res.send(html);
+			params.categories = results[1];
+
+			var html = home(params);
+			
+			res.send(html);
+		});
+		
 	}
 }
 

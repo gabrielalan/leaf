@@ -211,6 +211,12 @@ $pcItemsSpace: 15px;
 .highlight {
 	display: flex;
 
+	.hg-right-holder {
+		display: flex;
+		width: 494px;
+		flex-direction: column;
+	}
+
 	.hg-left, .hg-right-top, .hg-right-bottom {
 		display: block;
 		background-position: center;
@@ -228,11 +234,13 @@ $pcItemsSpace: 15px;
 		width: 494px;
 		height: 320px;	
 		margin-bottom: 5px;
+		order: 1;
 	}
 
 	.hg-right-bottom {
 		width: 494px;
 		height: 245px;
+		order: 2;
 	}
 
 	.hg-title {

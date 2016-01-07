@@ -1,25 +1,31 @@
 {{#> layout}}
 	{{#*inline "content"}}
 <div class="highlight">
-	<a href="#" class="hg-left" style="background-image:url('img/graos.jpg');">
+	{{#each highlight}}
+		{{#if BIGGER}}
+	<a href="#" class="hg-left" style="background-image:url('{{images.PRODUCT_BIGGER}}');">
 		<span class="hg-title">
-			<strong>Grãos</strong>
-			<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</span>
+			<strong>{{name}}</strong>
+			<span>{{description}}</span>
 		</span>
 	</a>
+		{{/if}}
+	{{/each}}
 	<div class="hg-right-holder">
-		<a href="#" class="hg-right-top" style="background-image:url('img/graos.jpg');">
+		{{#each highlight}}
+		{{#unless BIGGER}}
+			{{#if BIG}}
+		<a href="#" class="hg-right-top" style="background-image:url('{{images.PRODUCT_BIGGER}}');">
+			{{else}}
+		<a href="#" class="hg-right-bottom" style="background-image:url('{{images.PRODUCT_BIGGER}}');">
+			{{/if}}
 			<span class="hg-title">
-				<strong>Torradas</strong>
-				<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</span>
+				<strong>{{name}}</strong>
+				<span>{{description}}</span>
 			</span>
 		</a>
-		<a href="#" class="hg-right-bottom" style="background-image:url('img/graos.jpg');">
-			<span class="hg-title">
-				<strong>Promoções</strong>
-				<span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</span>
-			</span>
-		</a>
+		{{/unless}}
+		{{/each}}
 	</div>
 </div>
 	{{/inline}}

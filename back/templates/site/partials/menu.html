@@ -1,0 +1,49 @@
+<nav class="navbar navbar-default categories">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				{{#each categories}}
+					{{#if childs}}
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<svg class="icon icon-leaf"><use xlink:href="img/iconmoon/symbol-defs.svg#icon-leaf"></use></svg> 
+						<span class="nav-text">{{name}}</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						{{#each childs}}
+						<li class="dropdown-extra">
+							<a href="{{id}}">
+								<img src="{{img}}" alt="sub-category" class="dropdown-image" />
+								<span class="dropdown-title">{{name}}</span>
+								<span class="dropdown-desc">{{desc}}</span>
+								<span class="dropdown-more">Mais detalhes</span>
+							</a>
+						</li>
+						{{/each}}
+						<li><a href="/category/{{id}}">Conheça todos os produtos</a></li>
+					</ul>
+				</li>
+					{{else}}
+				<li>
+					<a href="/category/{{id}}">
+						<svg class="icon icon-leaf"><use xlink:href="img/iconmoon/symbol-defs.svg#icon-leaf"></use></svg> 
+						<span class="nav-text">{{name}}</span>
+					</a>
+				</li>
+					{{/if}}
+				{{/each}}
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>

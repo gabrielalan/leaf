@@ -2,12 +2,12 @@
 
 var express = require('express'),
 	router = express.Router(),
-	index = require('../templates/index');
+	SiteController = require('../controllers/site/Site');
+
+var controller = new SiteController();
 
 router.get('/', (req, res, next) => {
-	var html = index();
-
-	res.send(html);
+	controller.getAction('home')(req, res);
 });
 
 module.exports = router;

@@ -26,9 +26,15 @@ app.use('/rest/locations', require('./routes/locations'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+	var template = require('./templates/error');
+
+	res
+		.status(404)
+		.send(template({
+			success: false,
+			title: 'Página não encontrada',
+			message: 'A página que você está procurando, não pode ser encontrada.'
+		}));
 });
 
 // production error handler

@@ -32,4 +32,4 @@ gulp.task('watch', function () {
 	gulp.watch('front/style/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['handlebars:front']);
+gulp.task('default', ['handlebars:front', 'handlebars:back', 'sass']);

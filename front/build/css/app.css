@@ -3251,6 +3251,43 @@ tbody.collapse.in {
     fieldset[disabled] .navbar-inverse .btn-link:focus {
       color: #444; }
 
+.pager {
+  padding-left: 0;
+  margin: 20px 0;
+  list-style: none;
+  text-align: center; }
+  .pager:before, .pager:after {
+    content: " ";
+    display: table; }
+  .pager:after {
+    clear: both; }
+  .pager li {
+    display: inline; }
+    .pager li > a,
+    .pager li > span {
+      display: inline-block;
+      padding: 5px 14px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 15px; }
+    .pager li > a:hover,
+    .pager li > a:focus {
+      text-decoration: none;
+      background-color: #eeeeee; }
+  .pager .next > a,
+  .pager .next > span {
+    float: right; }
+  .pager .previous > a,
+  .pager .previous > span {
+    float: left; }
+  .pager .disabled > a,
+  .pager .disabled > a:hover,
+  .pager .disabled > a:focus,
+  .pager .disabled > span {
+    color: #777777;
+    background-color: #fff;
+    cursor: not-allowed; }
+
 .jumbotron {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -4029,3 +4066,62 @@ body {
 .copyright p {
   padding: 20px;
   margin-bottom: 0px; }
+
+.product-list nav {
+  clear: both; }
+
+.product-list .title-diviser {
+  margin-bottom: 20px; }
+
+.product-box {
+  width: 270px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  position: relative; }
+  .product-box h3 {
+    font-size: 16px;
+    margin: 10px; }
+    .product-box h3 a {
+      color: #323232; }
+  .product-box p {
+    font-size: 13px;
+    margin: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 93%;
+    overflow: hidden;
+    color: #ef5966; }
+
+.product-box:nth-child(4n+1) {
+  margin-right: 0px; }
+
+.product-box-image {
+  width: 100%;
+  height: 290px;
+  display: block; }
+
+.product-box-buy {
+  display: block;
+  float: left;
+  width: 40%;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  color: #ee2024; }
+
+.product-box-price {
+  display: block;
+  float: right;
+  width: 60%;
+  border-left: 1px solid #ddd;
+  padding: 6px;
+  font-size: 20px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  background: #ef5966;
+  color: white; }
+  .product-box-price sup {
+    top: -7px;
+    margin-right: -4px;
+    font-size: 10px; }

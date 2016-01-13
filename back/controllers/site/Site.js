@@ -33,6 +33,21 @@ class Site extends Controller {
 		handlebars.registerPartial('layout', layout);
 	}
 
+	search( req, res ) {
+		var template = require('../../templates/site/pages/search');
+
+		Promise.all([ProductsStore.getHomeProducts(), CategoriesStore.getCategoriesMenu()]).then((results) => {
+			let params = results[0];
+
+			params.categories = results[1];
+
+			var html = template(params);
+			
+			res.send(html);
+		});
+		
+	}
+
 	home( req, res ) {
 		var home = require('../../templates/site/pages/home');
 

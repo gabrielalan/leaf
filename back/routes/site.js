@@ -10,4 +10,8 @@ router.get('/', (req, res, next) => {
 	controller.getAction('home')(req, res);
 });
 
+router.get('/search', (req, res, next) => {
+	controller.getAction('search')(req, res);
+});
+
 module.exports = router;

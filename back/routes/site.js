@@ -14,4 +14,8 @@ router.get('/search', (req, res, next) => {
 	controller.getAction('search')(req, res);
 });
 
+router.get('/product/:id', (req, res, next) => {
+	controller.getAction('product')(req, res);
+});
+
 module.exports = router;

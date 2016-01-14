@@ -5,7 +5,7 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
 },"2":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "				<li class=\"dropdown\">\n					<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n						<svg class=\"icon icon-leaf\"><use xlink:href=\"img/iconmoon/symbol-defs.svg#icon-leaf\"></use></svg> \n						<span class=\"nav-text\">"
+  return "				<li class=\"dropdown\">\n					<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n						<svg class=\"icon icon-leaf\"><use xlink:href=\"/img/iconmoon/symbol-defs.svg#icon-leaf\"></use></svg> \n						<span class=\"nav-text\">"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "</span>\n						<span class=\"caret\"></span>\n					</a>\n					<ul class=\"dropdown-menu\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.childs : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -29,7 +29,7 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
 
   return "				<li>\n					<a href=\"/category/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\n						<svg class=\"icon icon-leaf\"><use xlink:href=\"img/iconmoon/symbol-defs.svg#icon-leaf\"></use></svg> \n						<span class=\"nav-text\">"
+    + "\">\n						<svg class=\"icon icon-leaf\"><use xlink:href=\"/img/iconmoon/symbol-defs.svg#icon-leaf\"></use></svg> \n						<span class=\"nav-text\">"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "</span>\n					</a>\n				</li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

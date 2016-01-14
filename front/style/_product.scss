@@ -1,0 +1,21 @@
+$borderColor: #ddd;
+
+.product {
+	float: left;
+	width: 100%;
+}
+
+.product-images {
+	float: left;
+	width: 370px;
+}
+
+.product-image-bigger img {
+	width: 100%;
+}
+
+.product-info {
+	float: left;
+	width: 550px;
+	margin-left: 20px;
+}

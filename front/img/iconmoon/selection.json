@@ -4,6 +4,78 @@
 		{
 			"icon": {
 				"paths": [
+					"M512 0q43.333 0 82.833 17t68 45.5 45.5 68 17 82.833v42.667h170.667v640q0 53-37.5 90.5t-90.5 37.5h-512q-53 0-90.5-37.5t-37.5-90.5v-640h170.667v-42.667q0-43.333 17-82.833t45.5-68 68-45.5 82.833-17zM810.667 896v-554.667h-597.333v554.667q0 17.667 12.5 30.167t30.167 12.5h512q17.667 0 30.167-12.5t12.5-30.167zM512 85.333q-53 0-90.5 37.5t-37.5 90.5v42.667h256v-42.667q0-53-37.5-90.5t-90.5-37.5z"
+				],
+				"attrs": [],
+				"isMulticolor": false,
+				"tags": [
+					"bag"
+				],
+				"grid": 0
+			},
+			"attrs": [],
+			"properties": {
+				"order": 1,
+				"id": 0,
+				"prevSize": 24,
+				"name": "bag"
+			},
+			"setIdx": 0,
+			"setId": 4,
+			"iconIdx": 0
+		},
+		{
+			"icon": {
+				"paths": [
+					"M192 384l-192 192 384 384 640-640-192-192-448 448z"
+				],
+				"attrs": [],
+				"isMulticolor": false,
+				"tags": [
+					"checkmark",
+					"tick"
+				],
+				"grid": 0
+			},
+			"attrs": [],
+			"properties": {
+				"order": 1,
+				"id": 1,
+				"prevSize": 24,
+				"name": "checkmark"
+			},
+			"setIdx": 1,
+			"setId": 3,
+			"iconIdx": 0
+		},
+		{
+			"icon": {
+				"paths": [
+					"M960 780.736l-268.992-268.736 268.992-268.736-179.264-179.264-268.736 268.864-268.864-268.864-179.136 179.264 268.736 268.736-268.736 268.736 179.136 179.264 268.864-268.864 268.736 268.864z"
+				],
+				"attrs": [],
+				"isMulticolor": false,
+				"tags": [
+					"x",
+					"cancel",
+					"close"
+				],
+				"grid": 0
+			},
+			"attrs": [],
+			"properties": {
+				"order": 1,
+				"id": 0,
+				"prevSize": 24,
+				"name": "x"
+			},
+			"setIdx": 1,
+			"setId": 3,
+			"iconIdx": 1
+		},
+		{
+			"icon": {
+				"paths": [
 					"M665.6 870.4c0 56.525 45.773 102.4 102.4 102.4 56.525 0 102.4-45.875 102.4-102.4 0-56.627-45.875-102.4-102.4-102.4-56.627 0-102.4 45.773-102.4 102.4zM153.6 870.4c0 56.525 45.824 102.4 102.4 102.4 56.474 0 102.4-45.875 102.4-102.4 0-56.627-45.926-102.4-102.4-102.4-56.576 0-102.4 45.773-102.4 102.4zM335.206 623.206l566.682-161.894c10.803-3.123 19.712-14.797 19.712-26.112v-281.6h-716.8v-81.92c0-11.264-9.267-20.48-20.429-20.48h-163.942c-11.213 0-20.429 9.216-20.429 20.48v81.92h102.4l97.792 458.598 4.608 48.282v84.429c0 11.213 9.216 20.48 20.48 20.48h675.84c11.264 0 20.48-9.318 20.48-20.48v-79.309h-575.898c-58.88 0-60.109-28.211-10.496-42.394z"
 				],
 				"attrs": [],
@@ -15,13 +87,13 @@
 			},
 			"attrs": [],
 			"properties": {
-				"order": 26,
+				"order": 2,
 				"id": 2,
-				"prevSize": 20,
+				"prevSize": 24,
 				"name": "shopping-cart",
 				"code": 59648
 			},
-			"setIdx": 0,
+			"setIdx": 2,
 			"setId": 2,
 			"iconIdx": 0
 		},
@@ -39,13 +111,13 @@
 			},
 			"attrs": [],
 			"properties": {
-				"order": 27,
+				"order": 3,
 				"id": 1,
-				"prevSize": 20,
+				"prevSize": 24,
 				"name": "chevron-thin-right",
 				"code": 59649
 			},
-			"setIdx": 0,
+			"setIdx": 2,
 			"setId": 2,
 			"iconIdx": 1
 		},
@@ -63,13 +135,13 @@
 			},
 			"attrs": [],
 			"properties": {
-				"order": 28,
+				"order": 4,
 				"id": 0,
-				"prevSize": 20,
+				"prevSize": 24,
 				"name": "chevron-thin-left",
 				"code": 59650
 			},
-			"setIdx": 0,
+			"setIdx": 2,
 			"setId": 2,
 			"iconIdx": 2
 		},
@@ -91,12 +163,12 @@
 			},
 			"attrs": [],
 			"properties": {
-				"order": 25,
+				"order": 7,
 				"id": 2,
-				"prevSize": 20,
+				"prevSize": 24,
 				"name": "spinner"
 			},
-			"setIdx": 1,
+			"setIdx": 3,
 			"setId": 1,
 			"iconIdx": 0
 		},
@@ -116,13 +188,13 @@
 			},
 			"attrs": [],
 			"properties": {
-				"order": 24,
+				"order": 1,
 				"id": 0,
-				"prevSize": 20,
+				"prevSize": 24,
 				"name": "facebook",
 				"code": 59651
 			},
-			"setIdx": 1,
+			"setIdx": 3,
 			"setId": 1,
 			"iconIdx": 1
 		},
@@ -142,12 +214,12 @@
 			},
 			"attrs": [],
 			"properties": {
-				"order": 30,
+				"order": 6,
 				"id": 1,
-				"prevSize": 20,
+				"prevSize": 24,
 				"name": "leaf"
 			},
-			"setIdx": 2,
+			"setIdx": 4,
 			"setId": 0,
 			"iconIdx": 0
 		},
@@ -166,13 +238,13 @@
 			},
 			"attrs": [],
 			"properties": {
-				"order": 29,
+				"order": 5,
 				"id": 0,
-				"prevSize": 20,
+				"prevSize": 24,
 				"name": "search",
 				"code": 59653
 			},
-			"setIdx": 2,
+			"setIdx": 4,
 			"setId": 0,
 			"iconIdx": 1
 		}

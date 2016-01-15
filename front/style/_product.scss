@@ -1,8 +1,23 @@
 $borderColor: #ddd;
 
-.product {
-	float: left;
-	width: 100%;
+.product-stock {
+	float: right;
+	margin-top: -5px;
+
+	span {
+		font-size: 22px;
+		position: relative;
+		top: 5px;
+		margin-left: 5px;
+	}
+
+	&.has-stock span {
+		color: $leafCheckGreen;
+	}
+
+	&.has-no-stock span {
+		color: $leafErrorRed;
+	}
 }
 
 .product-images {
@@ -18,4 +33,81 @@ $borderColor: #ddd;
 	float: left;
 	width: 550px;
 	margin-left: 20px;
+
+	hr {
+		width: 90%;
+	}
+
+	h3 {
+		margin-top: 0px;
+	}
+}
+
+.product .product-price {
+	font-size: 22px;
+	color: black;
+}
+
+.product-add-to-cart {
+	width: 200px;
+	font-size: 20px;
+	white-space: initial;
+	text-align: left;
+
+	span {
+		float: right;
+		font-size: 50px;
+		line-height: 83%;
+	}
+}
+
+.product-image-list {
+	text-align: center;
+	padding: 0px;
+
+	li {
+		display: inline-block;
+		margin: 20px 10px;
+
+		a {
+			display: block;
+			width: 70px;
+			height: 110px;
+			overflow: hidden;
+		}
+	}
+}
+
+.product-quantity {
+
+	label {
+		display: block;
+	}
+
+	.product-quantity-less, .product-quantity-more {
+		padding: 5px;
+		font-size: 20px;
+		display: inline-block;
+		line-height: 100%;
+		border-radius: 3px;
+		width: 25px;
+		text-align: center;
+		position: relative;
+		top: 3px;
+		text-decoration: none;
+
+		&:hover {
+			background-color: #eee;
+		}
+	}
+
+	#quantity-input {
+		width: 50px;
+		text-align: center;
+		display: inline-block;
+	}
+}
+
+.similar-products {
+	clear: both;
 }

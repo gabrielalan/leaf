@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="product-info">
-		<span class="product-stock">Disponibilidade <span><svg class="icon"><use xlink:href="/img/iconmoon/symbol-defs.svg#icon-chevron-thin-left"></use></svg></span></span>
+		<span class="product-stock has-stock">Disponibilidade <span><svg class="icon"><use xlink:href="/img/iconmoon/symbol-defs.svg#icon-checkmark"></use></svg></span></span>
 		<h3>Bolacha</h3>
 
 		<span class="product-price">R$ 12,00</span>
@@ -29,23 +29,25 @@
 		<hr />
 
 		<div class="row">
-			<div class="col-lg-4 product-quantity">
+			<div class="col-lg-3 product-quantity">
 				<label for="quantity-input">Quantidade</label>
 				<a href="#" class="product-quantity-less">-</a>
-				<input type="text" id="quantity-input" value="1" />
-				<a href="#" class="product-quantity-more">-</a>
+				<input type="text" id="quantity-input" class="form-control" value="1" />
+				<a href="#" class="product-quantity-more">+</a>
 			</div>
-			<div class="col-lg-4">
-				<button class="btn btn-warning">
+			<div class="col-lg-5">
+				<button class="btn btn-warning btn-block product-add-to-cart">
+					<span><svg class="icon"><use xlink:href="/img/iconmoon/symbol-defs.svg#icon-bag"></use></svg></span>
 					Adicionar ao carrinho
-					<span><svg class="icon"><use xlink:href="/img/iconmoon/symbol-defs.svg#icon-chevron-thin-left"></use></svg></span>
 				</button>
 			</div>
 			<div class="col-lg-4">
-				<a href="#" class="btn btn-link">Comprar</a>
+				<a href="#" class="btn btn-link btn-block">Comprar</a>
 			</div>
 		</div>
 	</div>
+
+	<div class="similar-products"></div>
 </div>
 	{{/inline}}
 {{/layout}}

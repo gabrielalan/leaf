@@ -4,7 +4,33 @@ var Controller = require('../Controller'),
 	fs = require('fs'),
 	ProductsStore = require('../../models/store/Products'),
 	CategoriesStore = require('../../models/store/Categories'),
+	leafCache = require('../../cache/LeafCache'),
 	handlebars = require('handlebars');
+
+function getDefaultData() {
+	let cached = leafCache.get('defaultData'),
+		deferred = Promise.defer();
+
+	if( cached ) {
+		deferred.resolve(cached);
+
+		return deferred.promise;
+	}
+
+	let promises = [ProductsStore.getHomeProducts(), CategoriesStore.getCategoriesMenu()];
+
+	Promise.all(promises).then((results) => {
+		let params = results[0];
+
+		params.categories = results[1];
+
+		leafCache.set('defaultData', params, 60 * 10 * 1000);
+
+		deferred.resolve(params);
+	});
+
+	return deferred.promise;
+}
 
 class Site extends Controller {
 
@@ -36,32 +62,35 @@ class Site extends Controller {
 	product( req, res ) {
 		var template = require('../../templates/site/pages/product');
 
-		var html = template();
-		
-		res.send(html);		
+		getDefaultData()
+			.then((results) => {
+				var html = template(results);
+				
+				res.send(html);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 	search( req, res ) {
 		var template = require('../../templates/site/pages/search');
 
-		var html = template();
-		
-		res.send(html);		
+		getDefaultData().then((results) => {
+			var html = template(results);
+			
+			res.send(html);
+		});	
 	}
 
 	home( req, res ) {
-		var home = require('../../templates/site/pages/home');
+		var template = require('../../templates/site/pages/home');
 
-		Promise.all([ProductsStore.getHomeProducts(), CategoriesStore.getCategoriesMenu()]).then((results) => {
-			let params = results[0];
-
-			params.categories = results[1];
-
-			var html = home(params);
+		getDefaultData().then((results) => {
+			var html = template(results);
 			
 			res.send(html);
 		});
-		
 	}
 }
 

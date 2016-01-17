@@ -10,6 +10,7 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
   return "			<a href=\"#\" class=\"pc-item\">\n				<span class=\"pc-price-bg\"></span>\n				<span class=\"pc-price\"><span class=\"pc-price-icon\"><svg class=\"icon icon-leaf\"><use xlink:href=\"/img/iconmoon/symbol-defs.svg#icon-shopping-cart\"></use></svg></span> <span class=\"pc-price-number\">R$ "
     + alias4(((helper = (helper = helpers.price || (depth0 != null ? depth0.price : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"price","hash":{},"data":data}) : helper)))
     + "</span></span>\n				<img src=\""
+    + alias4(((helper = (helper = helpers.baseUrl || (depth0 != null ? depth0.baseUrl : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"baseUrl","hash":{},"data":data}) : helper)))
     + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.images : depth0)) != null ? stack1.PRODUCT_SMALL : stack1), depth0))
     + "\" alt=\""
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))

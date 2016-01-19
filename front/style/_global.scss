@@ -25,6 +25,10 @@ body {
 	padding: 10px 20px;
 }
 
+.other-menus div {
+	min-height: 150px;
+}
+
 .social {
 	padding-left: 20px;
 
@@ -97,6 +101,9 @@ body {
 		padding: 15px;
 		color: white;
 		margin-left: 1px;
+		-webkit-transition: background-color $midAnimations ease-in-out;
+		-moz-transition: background-color $midAnimations ease-in-out;
+		transition: background-color $midAnimations ease-in-out;
 
 		&:hover {
 			background-color: $leafBlue;
@@ -110,6 +117,14 @@ body {
 	.pc-page-right {
 		float: right;
 	}
+
+	&.carousel-previous-disabled .pc-page-left {
+		background-color: $leafLineGrey;
+	}
+
+	&.carousel-next-disabled .pc-page-right {
+		background-color: $leafLineGrey;
+	}
 }
 
 // products-carousel
@@ -117,99 +132,99 @@ $pcItemsSpace: 15px;
 
 .pc {
 	overflow: hidden;
-}
 
-.pc-walker {
-	width: 100%;
-	display: flex;
-	-webkit-transition: margin-left 300ms ease-in-out;
-	-moz-transition: margin-left 300ms ease-in-out;
-	-ms-transition: margin-left 300ms ease-in-out;
-	transition: margin-left 300ms ease-in-out;
-}
-
-.pc-holder {
-	display: flex;
-	float: left;
-	flex: 1 0 100%;
-	height: 100%;
-	margin-right: $pcItemsSpace;
-}
-
-.pc-item {
-	flex: 1;
-	max-width: 370px;
-	display: block;
-	margin-right: $pcItemsSpace;
-	position: relative;
-
-	img {
+	.pc-walker {
 		width: 100%;
+		display: flex;
+		-webkit-transition: margin-left 300ms ease-in-out;
+		-moz-transition: margin-left 300ms ease-in-out;
+		-ms-transition: margin-left 300ms ease-in-out;
+		transition: margin-left 300ms ease-in-out;
 	}
 
-	&:last-child {
-		margin-right: 0px;
+	.pc-holder {
+		display: flex;
+		float: left;
+		flex: 1 0 100%;
+		height: 100%;
+		margin-right: $pcItemsSpace;
 	}
 
-	&:hover {
-		.pc-price {
-			opacity: 1;
+	.pc-item {
+		flex: 1;
+		max-width: 370px;
+		display: block;
+		margin-right: $pcItemsSpace;
+		position: relative;
+
+		img {
+			width: 100%;
 		}
 
-		.pc-price-bg {
-			opacity: 0.8;
+		&:last-child {
+			margin-right: 0px;
+		}
+
+		&:hover {
+			.pc-price {
+				opacity: 1;
+			}
+
+			.pc-price-bg {
+				opacity: 0.8;
+			}
 		}
 	}
-}
 
-.pc-price {
-	display: block;
-	position: absolute;
-	background-color: $leafDarkGrey;
-	color: white;
-	top: 50%;
-	right: 5%;
-	opacity: 0;
-	-webkit-transition: opacity 200ms ease-in-out;
-	-moz-transition: opacity 200ms ease-in-out;
-	-ms-transition: opacity 200ms ease-in-out;
-	transition: opacity 200ms ease-in-out;
-	-webkit-transform: translate(0, -50%);
-	-moz-transform: translate(0, -50%);
-	-ms-transform: translate(0, -50%);
-	transform: translate(0, -50%);
-}
+	.pc-price {
+		display: block;
+		position: absolute;
+		background-color: $leafDarkGrey;
+		color: white;
+		top: 50%;
+		right: 5%;
+		opacity: 0;
+		-webkit-transition: opacity $slowAnimations ease-in-out;
+		-moz-transition: opacity $slowAnimations ease-in-out;
+		-ms-transition: opacity $slowAnimations ease-in-out;
+		transition: opacity $slowAnimations ease-in-out;
+		-webkit-transform: translate(0, -50%);
+		-moz-transform: translate(0, -50%);
+		-ms-transform: translate(0, -50%);
+		transform: translate(0, -50%);
+	}
 
-.pc-price-icon {
-	display: block;
-	float: left;
-	background-color: $leafGrey;
-	padding: 15px;
-	font-size: 28px;
-	line-height: 20px;
-}
+	.pc-price-icon {
+		display: block;
+		float: left;
+		background-color: $leafGrey;
+		padding: 15px;
+		font-size: 28px;
+		line-height: 20px;
+	}
 
-.pc-price-number {
-	display: block;
-	float: left;
-	padding: 16px 20px;
-	font-size: 25px;
-	line-height: 26px;
-}
+	.pc-price-number {
+		display: block;
+		float: left;
+		padding: 16px 20px;
+		font-size: 25px;
+		line-height: 26px;
+	}
 
-.pc-price-bg {
-	background-color: $leafDarkBlue;
-	width: 100%;
-	height: 100%;
-	display: block;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	opacity: 0;
-	-webkit-transition: opacity 200ms ease-in-out;
-	-moz-transition: opacity 200ms ease-in-out;
-	-ms-transition: opacity 200ms ease-in-out;
-	transition: opacity 200ms ease-in-out;
+	.pc-price-bg {
+		background-color: $leafDarkBlue;
+		width: 100%;
+		height: 100%;
+		display: block;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		opacity: 0;
+		-webkit-transition: opacity 200ms ease-in-out;
+		-moz-transition: opacity 200ms ease-in-out;
+		-ms-transition: opacity 200ms ease-in-out;
+		transition: opacity 200ms ease-in-out;
+	}
 }
 
 //highlight

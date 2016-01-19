@@ -47,6 +47,16 @@ class Site extends Controller {
 			});
 	}
 
+	cart( req, res ) {
+		var template = require('../../templates/site/pages/cart');
+
+		getDefaultData().then((results) => {
+			var html = template(results);
+			
+			res.send(html);
+		});	
+	}
+
 	search( req, res ) {
 		var template = require('../../templates/site/pages/search');
 

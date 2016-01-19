@@ -20,6 +20,8 @@ var ProductsCarousel = Klass.create({
 		this.max = this.carousel.find('.pc-holder').length - 1;
 
 		this.bindEvents();
+
+		this.checkDisabled();
 	},
 
 	bindEvents: function() {
@@ -58,6 +60,18 @@ var ProductsCarousel = Klass.create({
 		var width = this.getHolderWidth(), margin = -(this.page * width);
 
 		this.getWalker().css('margin-left', margin + 'px');
+
+		this.checkDisabled();
+	},
+
+	checkDisabled: function() {
+		if (this.page <= 0) {
+			this.pager.addClass('carousel-previous-disabled');
+			this.pager.removeClass('carousel-next-disabled');
+		} else {
+			this.pager.removeClass('carousel-previous-disabled');
+			this.pager.addClass('carousel-next-disabled');
+		}
 	},
 
 	onPagerClick: function(event) {

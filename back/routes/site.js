@@ -18,4 +18,8 @@ router.get('/product/:id', (req, res, next) => {
 	controller.getAction('product')(req, res);
 });
 
+router.get('/cart', (req, res, next) => {
+	controller.getAction('cart')(req, res);
+});
+
 module.exports = router;

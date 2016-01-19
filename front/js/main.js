@@ -9,5 +9,10 @@ var userLocal = new UserLocation(),
 
 userLocal.render(document.body);
 
+var similar = document.querySelector('.similar-products .similar-pager');
+
+if (similar) 
+	var sim = new ProductsCarousel(similar);
+
 window.userLocal = userLocal;
 window.Flux = Flux;

@@ -23,6 +23,10 @@
 		padding-bottom: 10px;
 	}
 
+	.product:not(:last-child) {
+		border-bottom: 1px solid $leafLineGrey;
+	}
+
 	.product div {
 		padding-top: 10px;
 		padding-bottom: 10px;
@@ -42,5 +46,32 @@
 
 	.column-right {
 		text-align: right;
+	}
+
+	.cart-footer {
+		margin-bottom: 50px;
+	}
+
+	.cart-footer .column-right {
+		padding-right: 20px;
+	}
+
+	.cart-subtotal {
+		padding: 10px 0px;
+		background-color: #eee;
+	}
+
+	.cart-tax {
+		padding: 10px 0px;
+		border-bottom: 1px solid $leafLineGrey;
+	}
+
+	.cart-total {
+		padding: 10px 20px;
+		margin: 0 0 20px;
+
+		.column-right {
+			padding: 0px;
+		}
 	}
 }

@@ -4295,6 +4295,9 @@ body {
   padding-top: 10px;
   padding-bottom: 10px; }
 
+.cart .product:not(:last-child) {
+  border-bottom: 1px solid #dbd9d9; }
+
 .cart .product div {
   padding-top: 10px;
   padding-bottom: 10px; }
@@ -4310,3 +4313,23 @@ body {
 
 .cart .column-right {
   text-align: right; }
+
+.cart .cart-footer {
+  margin-bottom: 50px; }
+
+.cart .cart-footer .column-right {
+  padding-right: 20px; }
+
+.cart .cart-subtotal {
+  padding: 10px 0px;
+  background-color: #eee; }
+
+.cart .cart-tax {
+  padding: 10px 0px;
+  border-bottom: 1px solid #dbd9d9; }
+
+.cart .cart-total {
+  padding: 10px 20px;
+  margin: 0 0 20px; }
+  .cart .cart-total .column-right {
+    padding: 0px; }

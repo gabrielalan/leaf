@@ -10,18 +10,25 @@ let carousel 	= fs.readFileSync('back/templates/site/partials/carousel.html', "u
 	othermenus 	= fs.readFileSync('back/templates/site/partials/othermenus.html', "utf-8"),
 	layout 		= fs.readFileSync('back/templates/site/layout.html', "utf-8");
 
-// static partials
-handlebars.registerPartial('carousel', carousel);
-handlebars.registerPartial('who', who);
-handlebars.registerPartial('header', header);
-handlebars.registerPartial('menu', menu);
-handlebars.registerPartial('othermenus', othermenus);
+class InitialConfiguration {
 
-// layout
-handlebars.registerPartial('layout', layout);
+	getBaseUrl() {
+		return 'http://leafdev.com/';
+	}
 
-handlebars.registerHelper('baseUrl', function(person) {
-  return 'http://localhost/';
-});
+	constructor() {
+		// static partials
+		handlebars.registerPartial('carousel', carousel);
+		handlebars.registerPartial('who', who);
+		handlebars.registerPartial('header', header);
+		handlebars.registerPartial('menu', menu);
+		handlebars.registerPartial('othermenus', othermenus);
 
-module.exports = {};
+		// layout
+		handlebars.registerPartial('layout', layout);
+
+		handlebars.registerHelper('baseUrl', this.getBaseUrl);
+	}
+}
+
+module.exports = new InitialConfiguration();

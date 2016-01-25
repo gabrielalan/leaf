@@ -11,6 +11,10 @@ class Mediator {
 	notification(data) {
 		return API.notification(data);
 	}
+
+	getConfig() {
+		return API.getConfiguration();
+	}
 }
 
 module.exports = new Mediator();

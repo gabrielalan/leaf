@@ -8,6 +8,10 @@ var config = require('./pagseguro/Config');
 
 class PagSeguro {
 
+	getConfiguration() {
+		return config;
+	}
+
 	checkout(data) {
 		let postData = builder.buildObject(data),
 			options = config.getCheckoutOptions();

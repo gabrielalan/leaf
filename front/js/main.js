@@ -2,6 +2,7 @@
 
 var Flux = require("Flux"),
 	ProductsCarousel = require('Widgets/Site/ProductsCarousel'),
+	BuyButton = require('Widgets/Site/BuyButton'),
 	UserLocation = require('Widgets/Site/UserLocation');
 
 var userLocal = new UserLocation(),
@@ -9,10 +10,14 @@ var userLocal = new UserLocation(),
 
 userLocal.render(document.body);
 
-var similar = document.querySelector('.similar-products .similar-pager');
+var similar = document.querySelector('.similar-products .similar-pager'),
+	buyFinishButton = document.querySelectorAll('.cart .cart-finish');
 
 if (similar) 
 	var sim = new ProductsCarousel(similar);
+
+if (buyFinishButton)
+	new BuyButton(buyFinishButton);
 
 window.userLocal = userLocal;
 window.Flux = Flux;

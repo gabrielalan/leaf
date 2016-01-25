@@ -1,0 +1,33 @@
+.success {
+	overflow: hidden;
+	margin-bottom: 40px;
+	padding: 20px;
+
+	p {
+		font-size: 20px;
+		margin-bottom: 30px;
+	}
+}
+
+.resume {
+	border-radius: 5px;
+	float: right;
+	margin-left: 20px;
+	background-color: lighten($leafLineGrey, 10%);
+	padding: 20px;
+
+	td, th {
+		vertical-align: bottom;
+		padding: 10px;
+	}
+
+	h4 {
+		font-size: 14px;
+		margin: 0px;
+	}
+
+	p, strong {
+		font-size: 12px;
+		margin: 0px;
+	}
+}

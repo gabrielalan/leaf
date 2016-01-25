@@ -14,8 +14,4 @@ router.post('/notification', (req, res, next) => {
 	controller.getAction('notification')(req, res);
 });
 
-router.get('/redirect', (req, res, next) => {
-	controller.getAction('redirect')(req, res);
-});
-
 module.exports = router;

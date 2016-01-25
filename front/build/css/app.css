@@ -3934,23 +3934,6 @@ body {
   .highlight .hg-left:hover .hg-title, .highlight .hg-right-top:hover .hg-title, .highlight .hg-right-bottom:hover .hg-title {
     background-color: #362a4f; }
 
-.load-mask {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out; }
-  .load-mask.loading {
-    visibility: visible;
-    opacity: 0.9; }
-
 .spined {
   font-size: 30px;
   line-height: 23px;
@@ -3988,6 +3971,26 @@ body {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+
+.load-mask {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out; }
+  .load-mask.loading {
+    visibility: visible;
+    opacity: 0.9; }
+
+.load-fixed {
+  position: fixed; }
 
 .header h1 {
   display: block;
@@ -4282,6 +4285,8 @@ body {
   border-radius: 0px;
   border-bottom: 3px solid #2C982C;
   margin-right: -20px; }
+  .cart .cart-finish .load-mask {
+    background-color: #05aecd; }
 
 .cart .title-diviser .cart-finish {
   margin-right: 0px;
@@ -4333,3 +4338,27 @@ body {
   margin: 0 0 20px; }
   .cart .cart-total .column-right {
     padding: 0px; }
+
+.success {
+  overflow: hidden;
+  margin-bottom: 40px;
+  padding: 20px; }
+  .success p {
+    font-size: 20px;
+    margin-bottom: 30px; }
+
+.resume {
+  border-radius: 5px;
+  float: right;
+  margin-left: 20px;
+  background-color: #f4f3f3;
+  padding: 20px; }
+  .resume td, .resume th {
+    vertical-align: bottom;
+    padding: 10px; }
+  .resume h4 {
+    font-size: 14px;
+    margin: 0px; }
+  .resume p, .resume strong {
+    font-size: 12px;
+    margin: 0px; }

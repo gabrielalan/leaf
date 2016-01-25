@@ -7,6 +7,10 @@
 		border-radius: 0px;
 		border-bottom: 3px solid #2C982C;
 		margin-right: -20px;
+
+		.load-mask {
+			background-color: $leafBlue;
+		}
 	}
 
 	.title-diviser .cart-finish {

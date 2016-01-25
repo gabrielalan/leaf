@@ -11,14 +11,14 @@ var Loading = Widget.extends({
 
 	isLoading: false,
 
+	setFixed: function(fixed) {
+		$(this.getEl()).toggleClass('load-fixed', Boolean(fixed));
+	},
+
 	setState: function(loading) {
 		this.isLoading = loading;
 
-		if( loading ) {
-			$(this.getEl()).addClass('loading');
-		} else {
-			$(this.getEl()).removeClass('loading');
-		}
+		$(this.getEl()).toggleClass('loading', Boolean(loading));
 	}
 });
 

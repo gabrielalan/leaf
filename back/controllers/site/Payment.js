@@ -6,10 +6,6 @@ var Controller = require('../Controller'),
 
 class Payment extends Controller {
 
-	redirect( req, res ) {
-		res.send({});
-	}
-
 	notification( req, res ) {
 		PaymentAPI.notification(req.body.notificationCode)
 			.then((result) => {
@@ -27,7 +23,6 @@ class Payment extends Controller {
 				currency: 'BRL',
 				reference: 123123,
 				notificationURL: GeneralConfig.getBaseUrl() + 'rest/payment/notification',
-				//redirectURL: GeneralConfig.getBaseUrl() + 'rest/payment/redirect',
 				items: {
 					item: [
 						{
@@ -51,7 +46,12 @@ class Payment extends Controller {
 
 		PaymentAPI.checkout(data)
 			.then((result) => {
-				res.send(result);
+				let code = result.checkout.code[0];
+
+				res.send({
+					success: true,
+					url: PaymentAPI.getConfig().getCheckoutUrl(code)
+				});
 			})
 			.catch((error) => {
 				res.send(error);

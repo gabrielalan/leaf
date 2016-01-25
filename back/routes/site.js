@@ -22,4 +22,8 @@ router.get('/cart', (req, res, next) => {
 	controller.getAction('cart')(req, res);
 });
 
+router.get('/success', (req, res, next) => {
+	controller.getAction('success')(req, res);
+});
+
 module.exports = router;

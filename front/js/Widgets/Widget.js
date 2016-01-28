@@ -52,11 +52,12 @@ var Widget = Observer.extends({
 	 */
 	onStoreChange: function() {
 		var isLoading = this.loading ? this.loading.isLoading : false,
+			usingLoading = this.hasLoadingWidget(),
 			newValue = (typeof this.store.loading !== 'undefined' && this.store.loading);
 
 		this.setLoading(newValue);
 
-		if( newValue === false && isLoading === true ) {
+		if( newValue === false && ( isLoading === true || !usingLoading ) ) {
 			this.updateView();
 		}
 	},
@@ -67,6 +68,10 @@ var Widget = Observer.extends({
 	setLoading: function(loading) {
 		if( this.loading )
 			this.loading.setState(loading);
+	},
+
+	hasLoadingWidget: function() {
+		return this.widgets.indexOf['loading'] >= 0;
 	},
 
 	getEl: function() {

@@ -26,6 +26,7 @@ app.use('/', require('./routes/site'));
 app.use('/rest/categories', require('./routes/categories'));
 app.use('/rest/locations', require('./routes/locations'));
 app.use('/rest/payment', require('./routes/payment'));
+app.use('/rest/cart', require('./routes/cart'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

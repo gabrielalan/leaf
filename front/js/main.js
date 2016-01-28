@@ -2,22 +2,16 @@
 
 var Flux = require("Flux"),
 	ProductsCarousel = require('Widgets/Site/ProductsCarousel'),
-	BuyButton = require('Widgets/Site/BuyButton'),
-	UserLocation = require('Widgets/Site/UserLocation');
+	UserLocation = require('Widgets/Site/UserLocation'),
+	SiteRouteActions = require('Controllers/Site'),
+	RouteManager = require('Routes/Manager');
 
-var userLocal = new UserLocation(),
-	pc = new ProductsCarousel(document.querySelector('.our-products .pc-pager'));
-
+var userLocal = new UserLocation();
 userLocal.render(document.body);
 
-var similar = document.querySelector('.similar-products .similar-pager'),
-	buyFinishButton = document.querySelectorAll('.cart .cart-finish');
+new ProductsCarousel(document.querySelector('.our-products .pc-pager'));
 
-if (similar) 
-	var sim = new ProductsCarousel(similar);
-
-if (buyFinishButton)
-	new BuyButton(buyFinishButton);
+new RouteManager(SiteRouteActions, true);
 
 window.userLocal = userLocal;
 window.Flux = Flux;

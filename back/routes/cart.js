@@ -10,4 +10,8 @@ router.get('/total', (req, res, next) => {
 	controller.getAction('total')(req, res);
 });
 
+router.post('/add', (req, res, next) => {
+	controller.getAction('add')(req, res);
+});
+
 module.exports = router;

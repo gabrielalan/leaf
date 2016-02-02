@@ -1,6 +1,7 @@
 'use strict';
 
 var ProductsCarousel = require('Widgets/Site/ProductsCarousel'),
+	AddToCart = require('Widgets/Site/AddToCart'),
 	BuyButton = require('Widgets/Site/BuyButton');
 
 module.exports = {
@@ -10,10 +11,11 @@ module.exports = {
 	},
 
 	"product/:id": function() {
-		var similar = document.querySelector('.similar-products .similar-pager');
+		var similar = document.querySelector('.similar-products .similar-pager'),
+			addToCart = document.querySelector('.product-add-to-cart');
 
-		if (similar)
-			var sim = new ProductsCarousel(similar);
+		new ProductsCarousel(similar);
+		new AddToCart(addToCart);
 	},
 
 	"cart": function() {

@@ -3954,6 +3954,10 @@ body {
   animation-iteration-count: infinite;
   animation-timing-function: linear; }
 
+.product-add-to-cart .loading .spined {
+  color: #05aecd;
+  font-size: 30px; }
+
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg); }

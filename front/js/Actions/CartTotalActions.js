@@ -1,6 +1,8 @@
 'use strict';
 
-var CartTotalClient = require('Clients/CartTotalClient');
+var CartTotalModel = require('Models/CartTotal');
+
+var model = new CartTotalModel();
 
 var constants = {
 	LOAD_CART_TOTAL: "LOAD_CART_TOTAL",
@@ -14,10 +16,13 @@ var actions = {
 
 		me.dispatch(constants.LOAD_CART_TOTAL);
 
-		CartTotalClient.load(function(data){
-			me.dispatch(constants.LOAD_CART_TOTAL_SUCCESS, data.result);
-		}, function(data){
-			me.dispatch(constants.LOAD_CART_TOTAL_FAIL, data);
+		model.fetch({
+			success: function(){
+				me.dispatch(constants.LOAD_CART_TOTAL_SUCCESS, model.attributes);
+			},
+			error: function(collection, response){
+				me.dispatch(constants.LOAD_CART_TOTAL_FAIL, response);
+			}
 		});
 	}
 };

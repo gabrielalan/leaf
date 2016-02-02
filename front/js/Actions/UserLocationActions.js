@@ -1,6 +1,6 @@
 'use strict';
 
-var UserLocationClient = require('Clients/UserLocationClient');
+var UserLocationCollection = require('Collections/UserLocation');
 
 var constants = {
 	LOAD_LOCATION: "LOAD_LOCATION",
@@ -8,21 +8,22 @@ var constants = {
 	LOAD_LOCATION_FAIL: "LOAD_LOCATION_FAIL"
 };
 
+var collection = new UserLocationCollection();
+
 var actions = {
 	loadLocations: function() {
 		var me = this;
 
 		me.dispatch(constants.LOAD_LOCATION);
 
-		UserLocationClient.on('success', function(data){
-			me.dispatch(constants.LOAD_LOCATION_SUCCESS, data.result);
+		collection.fetch({
+			success: function(collection){
+				me.dispatch(constants.LOAD_LOCATION_SUCCESS, collection.models);
+			},
+			error: function(collection, response){
+				me.dispatch(constants.LOAD_LOCATION_FAIL, response);
+			}
 		});
-
-		UserLocationClient.on('fail', function(data){
-			me.dispatch(constants.LOAD_LOCATION_FAIL, data);
-		});
-
-		UserLocationClient.load();
 	}
 };
 

@@ -8,10 +8,7 @@ class Payment extends Controller {
 
 	total( req, res ) {
 		res.send({
-			success: true,
-			result: {
-				total: Math.round(Math.random() * 10)
-			}
+			total: Math.round(Math.random() * 10)
 		});
 	}
 

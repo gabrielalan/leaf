@@ -1,5 +1,10 @@
 'use strict';
 
+//Load common used libs
+require('jquery');
+require('bootstrap');
+
+// Initiate all common widgets and classes
 var Flux = require("Flux"),
 	ProductsCarousel = require('Widgets/Site/ProductsCarousel'),
 	UserLocation = require('Widgets/Site/UserLocation'),

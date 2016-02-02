@@ -32,7 +32,7 @@ var UserLocation = Widget.extends({
 		$(this.getEl()).modal({
 			'backdrop': 'static',
 			'keyboard': false,
-			'show': true,
+			'show': true
 		});
 	},
 

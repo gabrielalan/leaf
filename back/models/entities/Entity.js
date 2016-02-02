@@ -8,7 +8,7 @@ class Entity {
 
 		this.map = {
 			table: 'table_name',
-			pk: 'id',
+			primaries: ['id'],
 			fields: {
 				'id': Number,
 				'name': String
@@ -38,12 +38,6 @@ class Entity {
 
 		if (!type)
 			throw new Error('Field not found: ' + field);
-
-		//let name = type.toString(),
-		//	quoted = value;
-		//
-		//if( /String/.test(name) )
-		//	quoted = JSON.stringify(value);
 
 		return type(value);
 	}
@@ -78,6 +72,29 @@ class Entity {
 		return {query, values};
 	}
 
+	mountUpdateQuery() {
+		let query = 'UPDATE ' + this.map.table + ' SET ', sets = [], values = [], value, primaries = [], pkValues = [];
+
+		for( var field in this.values ) {
+			value = this.values[field];
+
+			values.push(value);
+			sets.push(field + '=?');
+
+			if (this.map.primaries.indexOf(field) >= 0) {
+				pkValues.push(value);
+				primaries.push(field + '=?');
+			}
+		}
+
+		query += sets.join(', ');
+		query += ' WHERE ' + primaries.join(' AND ');
+
+		values = values.concat(pkValues);
+
+		return {query, values};
+	}
+
 	insert() {
 		let data = this.mountInsertQuery();
 
@@ -85,7 +102,9 @@ class Entity {
 	}
 
 	update() {
-		throw new Error('Not implemented');
+		let data = this.mountUpdateQuery();
+
+		throw new Error(data.query);
 	}
 
 	delete() {

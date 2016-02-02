@@ -33,17 +33,16 @@ var AddToCart = Klass.create({
 		this.button.on('click', this.onClick.bind(this));
 	},
 
-	doCheckout: function() {
+	add: function() {
 		var me = this;
 
 		$.ajax({
 			url: '/rest/cart/add',
+			method: 'post',
 			complete: function(result) {
-				var url = result.responseJSON.url;
+				me.loading.setState(false);
 
-				me.loading.setState(true);
-
-				window.location = url;
+				Flux.actions.loadCartTotal();
 			}
 		});
 	},
@@ -54,9 +53,7 @@ var AddToCart = Klass.create({
 
 		this.loading.setState(true);
 
-		Flux.actions.loadCartTotal();
-
-		//this.doCheckout();
+		this.add();
 		return false;
 	}
 });

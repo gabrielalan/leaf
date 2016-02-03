@@ -1,7 +1,6 @@
 'use strict';
 
 var RLite = require('RLite'),
-	RouteManager = RLite(),
 	Klass = require('Klass');
 
 var RouteManager = Klass.create({

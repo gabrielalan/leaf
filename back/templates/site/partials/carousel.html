@@ -3,7 +3,7 @@
 		{{#each news}}
 		<div class="pc-holder">
 			{{#each .}}
-			<a href="#" class="pc-item">
+			<a href="{{baseUrl}}product/{{id}}" class="pc-item">
 				<span class="pc-price-bg"></span>
 				<span class="pc-price"><span class="pc-price-icon"><svg class="icon icon-leaf"><use xlink:href="/img/iconmoon/symbol-defs.svg#icon-shopping-cart"></use></svg></span> <span class="pc-price-number">R$ {{price}}</span></span>
 				<img src="{{baseUrl}}{{images.PRODUCT_SMALL}}" alt="{{name}}" />

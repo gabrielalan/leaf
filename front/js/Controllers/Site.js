@@ -6,9 +6,7 @@ var ProductsCarousel = require('Widgets/Site/ProductsCarousel'),
 
 module.exports = {
 
-	"": function() {
-		debugger;
-	},
+	"": function() {},
 
 	"product/:id": function() {
 		var similar = document.querySelector('.similar-products .similar-pager'),

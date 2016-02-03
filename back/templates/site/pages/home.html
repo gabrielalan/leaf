@@ -3,7 +3,7 @@
 <div class="highlight">
 	{{#each highlight}}
 		{{#if BIGGER}}
-	<a href="#" class="hg-left" style="background-image:url('{{images.PRODUCT_BIGGER}}');">
+	<a href="{{baseUrl}}product/{{id}}" class="hg-left" style="background-image:url('{{images.PRODUCT_BIGGER}}');">
 		<span class="hg-title">
 			<strong>{{name}}</strong>
 			<span>{{description}}</span>
@@ -15,9 +15,9 @@
 		{{#each highlight}}
 		{{#unless BIGGER}}
 			{{#if BIG}}
-		<a href="#" class="hg-right-top" style="background-image:url('{{images.PRODUCT_BIGGER}}');">
+		<a href="{{baseUrl}}product/{{id}}" class="hg-right-top" style="background-image:url('{{images.PRODUCT_BIGGER}}');">
 			{{else}}
-		<a href="#" class="hg-right-bottom" style="background-image:url('{{images.PRODUCT_BIGGER}}');">
+		<a href="{{baseUrl}}product/{{id}}" class="hg-right-bottom" style="background-image:url('{{images.PRODUCT_BIGGER}}');">
 			{{/if}}
 			<span class="hg-title">
 				<strong>{{name}}</strong>

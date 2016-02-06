@@ -8,7 +8,7 @@ var constants = {
 	LOAD_LOCATION_FAIL: "LOAD_LOCATION_FAIL"
 };
 
-var collection = new UserLocationCollection();
+var collection = UserLocationCollection;
 
 var actions = {
 	loadLocations: function() {

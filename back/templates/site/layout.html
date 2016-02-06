@@ -17,8 +17,8 @@
 			<h2 class="title-diviser">
 				Novos produtos
 				<div class="pc-pager" data-pc-pager="our-products">
-					<a href="#" class="pc-page-left"><svg class="icon icon-leaf"><use xlink:href="/img/iconmoon/symbol-defs.svg#icon-chevron-thin-left"></use></svg></a>
-					<a href="#" class="pc-page-right"><svg class="icon icon-leaf"><use xlink:href="/img/iconmoon/symbol-defs.svg#icon-chevron-thin-right"></use></svg></a>
+					<a href="#" class="pc-page-left"><span class="icon icon-chevron-thin-left"></span></a>
+					<a href="#" class="pc-page-right"><span class="icon icon-chevron-thin-right"></span></a>
 				</div>
 			</h2>
 			
@@ -35,25 +35,10 @@
 			<address>Copyright &copy; 2015 Leaf, All right reserved</address>
 		</div>
 	</div>
+
+	<div class="temporary-place"></div>
 	
 	<script type="text/javascript" src="/vendor/system.js/dist/system.js"></script>
-	<script type="text/javascript">
-		System.config({
-			baseURL: '/js',
-			defaultJSExtensions: true,
-			format: 'cjs',
-			map: {
-				'Fluxxor': '/vendor/fluxxor/build/fluxxor.min.js',
-				'RLite': '/vendor/rlite/rlite.min.js',
-				'handlebars': '/vendor/handlebars/handlebars.runtime.min.js',
-				'jquery': '/vendor/jquery/dist/jquery.min.js',
-				'bootstrap': '/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-				'underscore': '/vendor/underscore/underscore-min.js',
-				'Backbone': '/vendor/backbone/backbone-min.js'
-			}
-		});
-
-		System.import('main.js');
-	</script>
+	<script type="text/javascript" src="/js/start.js"></script>
 </body>
 </html>

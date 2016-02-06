@@ -23,7 +23,9 @@
     "xml2js": "^0.4.16"
   },
   "devDependencies": {
+    "babel-preset-react": "^6.3.13",
     "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.0",
     "gulp-declare": "^0.3.0",
     "gulp-define-module": "^0.1.4",

@@ -14,5 +14,3 @@ System.config({
 		'Backbone': '/vendor/backbone/backbone-min.js'
 	}
 });
-
-System.import('main.js');

@@ -2,11 +2,11 @@
 
 @font-face {
     font-family: 'latoregular';
-    src: url('lato-regular-font.eot');
-    src: url('lato-regular-font.eot?#iefix') format('embedded-opentype'),
-         url('lato-regular-font.woff2') format('woff2'),
-         url('lato-regular-font.woff') format('woff'),
-         url('lato-regular-font.ttf') format('truetype');
+    src: url('/style/lato/lato-regular-font.eot');
+    src: url('/style/lato/lato-regular-font.eot?#iefix') format('embedded-opentype'),
+         url('/style/lato/lato-regular-font.woff2') format('woff2'),
+         url('/style/lato/lato-regular-font.woff') format('woff'),
+         url('/style/lato/lato-regular-font.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 

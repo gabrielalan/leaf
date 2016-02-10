@@ -49,6 +49,7 @@ class Manager {
 			let deletePromises, persistPromises;
 
 			try {
+				console.log(this.executions.persists.length);
 				deletePromises = this.flushDelete(connection);
 				persistPromises = this.flushPersist(connection);
 			} catch(error) {

@@ -1,0 +1,3 @@
+var Handlebars = require("handlebars");module.exports = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<!DOCTYPE html>\n<html>\n<head>\n	<title>Leaf Admin Login</title>\n	<link rel=\"stylesheet\" type=\"text/css\" href=\"/build/css/admin.css\" />\n</head>\n<body class=\"login-body\">\n	<div id=\"wrapper\"></div>\n\n	<script type=\"text/javascript\" src=\"/vendor/system.js/dist/system.js\"></script>\n	<script type=\"text/javascript\" src=\"/js/loaderConfiguration.js\"></script>\n	<script type=\"text/javascript\">\n		System.import('login.js');\n	</script>\n</body>\n</html>";
+},"useData":true});

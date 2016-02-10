@@ -3,7 +3,7 @@
 let connPool = require('../../db/ConnectionPool');
 
 class Entity {
-	constructor() {
+	constructor(data) {
 		this.values = {};
 
 		this.map = {
@@ -46,6 +46,10 @@ class Entity {
 		for( var name in obj ) {
 			this.set(name, obj[name]);
 		}
+	}
+
+	getAllData() {
+		return this.values;
 	}
 
 	set(field, value) {
@@ -104,7 +108,7 @@ class Entity {
 	update() {
 		let data = this.mountUpdateQuery();
 
-		throw new Error(data.query);
+		return this.execute(data);
 	}
 
 	delete() {
@@ -113,8 +117,6 @@ class Entity {
 
 	execute(data) {
 		let defer = Promise.defer();
-
-		console.log(data);
 
 		this.getConnection().then((connection) => {
 			connection.query(data.query, data.values, (err, result) => {

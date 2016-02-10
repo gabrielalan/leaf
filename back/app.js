@@ -7,24 +7,36 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var middlewares = require('./middlewares');
+var routes = require('./routes');
+var session = require('express-session');
+var LeafStore = require('./session/Store');
 
 var app = express();
 
+var sessionCfg = {
+	//genid: function(req) {
+	//	return genuuid() // use UUIDs for session IDs
+	//},
+	store: new LeafStore(),
+	secret: 'fi49fm2490twg90rgm309wekdfwth29403iw',
+	saveUninitialized: false,
+	name: 'fo40rfm0e30e39dirf9r0kkd94igk0',
+	resave: false,
+	unset: 'destroy',
+	cookie: { maxAge: 60 * 60 * 1000 } //one hour
+};
+
+app.use(session(sessionCfg));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../front')));
 
 app.use(middlewares.setDefaultHeaders);
-app.use(middlewares.handleAuthorization);
 
-app.use('/', require('./routes/site'));
-
-// rest routes
-app.use('/rest/categories', require('./routes/categories'));
-app.use('/rest/locations', require('./routes/locations'));
-app.use('/rest/payment', require('./routes/payment'));
-app.use('/rest/cart', require('./routes/cart'));
+for (var path in routes) {
+	app.use(path, routes[path]);
+}
 
 // catch 404 and forward to error handler
 app.use(middlewares.error404);

@@ -1,16 +1,13 @@
 'use strict';
 
+
+
 module.exports = {
 
 	setDefaultHeaders(req, res, next) {
 		res.setHeader("Access-Control-Allow-Origin", "https://sandbox.pagseguro.uol.com.br");
 		res.setHeader("Cache-Control", "no-cache");
 		res.setHeader("Pragma", "no-cache");
-		return next();
-	},
-
-	handleAuthorization(req, res, next) {
-		//res.end();
 		return next();
 	},
 

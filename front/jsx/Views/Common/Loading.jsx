@@ -16,7 +16,7 @@ var Loading = React.createClass({
 
 		if (this.props.loading)
 			className += ' loading';
-//<svg className="icon"><use xlink:href="/img/iconmoon/symbol-defs.svg#icon-spinner"></use></svg>
+
 		return (
 			<div className={className} ref="container">
 				<span className="spined icon icon-spinner"></span>

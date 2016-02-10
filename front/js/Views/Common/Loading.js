@@ -15,7 +15,7 @@ var Loading = React.createClass({
 		if (this.props.fixed) className += ' load-fixed';
 
 		if (this.props.loading) className += ' loading';
-		//<svg className="icon"><use xlink:href="/img/iconmoon/symbol-defs.svg#icon-spinner"></use></svg>
+
 		return React.createElement(
 			'div',
 			{ className: className, ref: 'container' },

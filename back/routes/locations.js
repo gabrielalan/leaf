@@ -8,12 +8,10 @@ var router = express.Router();
 
 router.get('/', (req, res, next) => {
 
-	setTimeout(function(){
-		res.json([
-			{'id': 'di82jew98ejd92', name: 'Santa Catarina', value: 'sc'},
-			{'id': 'r848jj83ww3939', name: 'São Paulo', value: 'sp'}
-		]);
-	}, 3000);
+	res.json([
+		{'id': 'di82jew98ejd92', name: 'Santa Catarina', value: 'sc'},
+		{'id': 'r848jj83ww3939', name: 'São Paulo', value: 'sp'}
+	]);
 });
 
 module.exports = router;

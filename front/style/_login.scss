@@ -1,0 +1,51 @@
+$ligthenBlue: lighten($loginBlue, 15%);
+$darkenBlue: darken($loginBlue, 10%);
+
+html, body {
+	height: 100%;
+}
+
+.login-body {
+	background: $darkenBlue;
+	background: -moz-linear-gradient(45deg,  $darkenBlue 0%, $ligthenBlue 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(45deg,  $darkenBlue 0%,$ligthenBlue 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(45deg,  $darkenBlue 0%,$ligthenBlue 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.login-form-container {
+	background-color: darken($loginBlue, 10%);
+	width: 500px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 5px;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	box-shadow: 0px 15px 70px darken($loginBlue, 25%);
+
+	h1 {
+		background-color: darken($loginBlue, 15%);
+		color: white;
+		font-weight: bold;
+		font-size: 30px;
+		padding: 15px 0px;
+		margin: 0px;
+		text-align: center;
+		border-radius: 5px 5px 0px 0px;
+	}
+
+	.form {
+		padding: 20px;
+
+		.input-group {
+			margin-bottom: 20px;
+		}
+
+		input {
+			background-color: darken($loginBlue, 20%);
+			color: lighten($loginBlue, 50%);
+			border: none;
+		}
+	}
+}

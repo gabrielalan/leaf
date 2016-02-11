@@ -3,12 +3,10 @@
 var session = require('express-session'),
 	Store = (session.session) ? session.session.Store : session.Store,
 	SessionStore = require('../models/store/Sessions'),
-	SessionEntity = require('../models/entities/Session'),
-	EntityManager = require('../models/entities/Manager');
+	SessionEntity = require('../models/entities/Session');
 
 var MEMORY = {},
-	DEFAULT_MAX_AGE = 60 * 60 * 1000,
-	LAST_TOUCH = 0;
+	DEFAULT_MAX_AGE = 60 * 60 * 1000;
 
 class LeafStore extends Store {
 
@@ -29,6 +27,8 @@ class LeafStore extends Store {
 				return callback();
 
 			callback(null, JSON.parse(result.session));
+		}).catch((err) => {
+			callback(err);
 		});
 	}
 
@@ -59,6 +59,8 @@ class LeafStore extends Store {
 			entity.delete();
 
 			callback(null, true);
+		}).catch((err) => {
+			callback(err);
 		});
 	}
 
@@ -90,6 +92,8 @@ class LeafStore extends Store {
 			}).catch((error) => {
 				callback(error);
 			});
+		}).catch((err) => {
+			callback(err);
 		});
 	}
 

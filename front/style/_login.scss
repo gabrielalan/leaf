@@ -14,6 +14,7 @@ html, body {
 
 .login-form-container {
 	background-color: darken($loginBlue, 10%);
+	overflow: hidden;
 	width: 500px;
 	position: absolute;
 	top: 50%;

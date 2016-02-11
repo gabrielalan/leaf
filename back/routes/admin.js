@@ -2,9 +2,25 @@
 
 var express = require('express'),
 	router = express.Router(),
+	Validator = require('../session/Validator'),
 	Authenticator = require('../session/Authenticator'),
-	authValidator = new Authenticator(),
+	authValidator = new Validator(),
 	loginTemplate = require('../templates/admin/login');
+
+router.post('/login', (req, res, next) => {
+	authValidator.setRequest(req);
+	authValidator.setResponse(res);
+
+	if (authValidator.isValid()) {
+		return next();
+	}
+
+	authValidator.createSession(new Authenticator(req)).then(() => {
+		res.sendStatus(200);
+	}).catch((err) => {
+		res.status(403).send(err.message);
+	});
+});
 
 router.get('/', (req, res, next) => {
 	authValidator.setRequest(req);

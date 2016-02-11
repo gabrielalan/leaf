@@ -2,21 +2,22 @@
 
 let Entity = require('./Entity');
 
-class Session extends Entity {
+class User extends Entity {
 	constructor() {
 		super();
 
 		this.map = {
-			table: 'sessions',
+			table: 'users',
 			primaries: ['id'],
 			fields: {
 				'id': Number,
-				'sid': String,
-				'session': String,
-				'expire': Number
+				'name': String,
+				'user': String,
+				'password': String,
+				'email': String
 			}
 		};
 	}
 }
 
-module.exports = Session;
+module.exports = User;

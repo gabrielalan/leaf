@@ -14,9 +14,6 @@ var LeafStore = require('./session/Store');
 var app = express();
 
 var sessionCfg = {
-	//genid: function(req) {
-	//	return genuuid() // use UUIDs for session IDs
-	//},
 	store: new LeafStore(),
 	secret: 'fi49fm2490twg90rgm309wekdfwth29403iw',
 	saveUninitialized: false,

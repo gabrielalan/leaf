@@ -9,12 +9,14 @@ var bodyParser = require('body-parser');
 var middlewares = require('./middlewares');
 var routes = require('./routes');
 var session = require('express-session');
-var LeafStore = require('./session/Store');
+//var LeafStore = require('./session/Store');
+var KnexSessionStore = require('connect-session-knex')(session);
+var Knex = require('./db/Knex');
 
 var app = express();
 
 var sessionCfg = {
-	store: new LeafStore(),
+	store: new KnexSessionStore({ knex: Knex }),
 	secret: 'fi49fm2490twg90rgm309wekdfwth29403iw',
 	saveUninitialized: false,
 	name: 'fo40rfm0e30e39dirf9r0kkd94igk0',

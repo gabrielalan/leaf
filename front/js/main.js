@@ -22,6 +22,6 @@ counter.render(document.querySelector('.cart-button'));
 
 new ProductsCarousel(document.querySelector('.our-products .pc-pager'));
 
-new RouteManager(SiteRouteActions, true);
+RouteManager.setRoutes(SiteRouteActions, true);
 
 window.Flux = Flux;

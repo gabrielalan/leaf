@@ -1,6 +1,6 @@
 'use strict';
 
-let connPool = require('../../db/ConnectionPool');
+let knex = require('../../db/Knex');
 
 class Entity {
 	constructor(data) {
@@ -16,21 +16,8 @@ class Entity {
 		};
 	}
 
-	setConnection(connection) {
-		this.connection = connection;
-	}
-
-	getConnection() {
-		let defer = Promise.defer();
-
-		if (this.connection)
-			defer.resolve(this.connection);
-		else
-			connPool.get().then((connection) => {
-				defer.resolve(connection);
-			});
-
-		return defer.promise;
+	setTransactionObject(trx) {
+		this.transaction = trx;
 	}
 
 	getCastedValue(field, value) {
@@ -63,71 +50,44 @@ class Entity {
 		return this.update();
 	}
 
-	mountInsertQuery() {
-		let query = 'INSERT INTO ' + this.map.table + ' SET ', sets = [], values = [];
-
-		for( var field in this.values ) {
-			values.push(this.values[field]);
-			sets.push(field + '=?');
-		}
-
-		query += sets.join(', ');
-
-		return {query, values};
-	}
-
-	mountUpdateQuery() {
-		let query = 'UPDATE ' + this.map.table + ' SET ', sets = [], values = [], value, primaries = [], pkValues = [];
-
-		for( var field in this.values ) {
-			value = this.values[field];
-
-			values.push(value);
-			sets.push(field + '=?');
-
-			if (this.map.primaries.indexOf(field) >= 0) {
-				pkValues.push(value);
-				primaries.push(field + '=?');
-			}
-		}
-
-		query += sets.join(', ');
-		query += ' WHERE ' + primaries.join(' AND ');
-
-		values = values.concat(pkValues);
-
-		return {query, values};
-	}
-
 	insert() {
-		let data = this.mountInsertQuery();
+		let query = knex
+			.insert(this.values);
 
-		return this.execute(data);
+		if (this.transaction)
+			query.transacting(this.transaction);
+
+		return query.into(this.map.table);
 	}
 
 	update() {
-		let data = this.mountUpdateQuery();
+		let query = knex(this.map.table)
+			.where(this.getPrimaryKeyValues());
 
-		return this.execute(data);
+		if (this.transaction)
+			query.transacting(this.transaction);
+
+		return query.update(this.values);
 	}
 
 	delete() {
-		throw new Error('Not implemented');
+		let query = knex(this.map.table)
+			.where(this.getPrimaryKeyValues());
+
+		if (this.transaction)
+			query.transacting(this.transaction);
+
+		return query.del();
 	}
 
-	execute(data) {
-		let defer = Promise.defer();
+	getPrimaryKeyValues() {
+		let values = {};
 
-		this.getConnection().then((connection) => {
-			connection.query(data.query, data.values, (err, result) => {
-				if (err)
-					defer.reject(err);
-
-				defer.resolve(result);
-			});
+		this.map.primaries.forEach((current) => {
+			values[current] = this.values[current];
 		});
 
-		return defer.promise;
+		return values;
 	}
 }
 

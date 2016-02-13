@@ -11,6 +11,6 @@ System.config({
 		'jquery': '/vendor/jquery/dist/jquery.min.js',
 		'bootstrap': '/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js',
 		'underscore': '/vendor/underscore/underscore-min.js',
-		'Backbone': '/vendor/backbone/backbone-min.js'
+		'Backbone': '/vendor/backbone/backbone.js'
 	}
 });

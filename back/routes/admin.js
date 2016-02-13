@@ -22,7 +22,13 @@ router.post('/login', (req, res, next) => {
 	});
 });
 
-router.get('/', (req, res, next) => {
+router.post('/logout', (req, res, next) => {
+	req.session.destroy();
+
+	res.sendStatus(200);
+});
+
+router.use((req, res, next) => {
 	authValidator.setRequest(req);
 	authValidator.setResponse(res);
 
@@ -39,5 +45,7 @@ router.get('/', (req, res, next) => {
 
 	res.send(template());
 });
+
+router.use('/rest/categories', require('./admin/categories'));
 
 module.exports = router;

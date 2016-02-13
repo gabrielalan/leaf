@@ -2,7 +2,6 @@
 
 var React = require('react'),
     Modal = require('Views/Common/Modal'),
-    Loading = require('Views/Common/Loading'),
     Storage = require('Common/UserLocationStorage'),
     UserLocationCollection = require('Collections/UserLocation'),
     Select = require('Views/Common/Select');
@@ -11,27 +10,9 @@ var UserLocation = React.createClass({
 	displayName: 'UserLocation',
 
 	getInitialState: function () {
-		UserLocationCollection.on('sync', this.onCollectionChange);
-		UserLocationCollection.on('request', this.onStartsRequest);
-
 		return {
-			show: false,
-			items: [],
-			loading: false
+			show: false
 		};
-	},
-
-	onStartsRequest: function () {
-		this.setState({
-			loading: true
-		});
-	},
-
-	onCollectionChange: function (collection) {
-		this.setState({
-			items: collection.normalize(),
-			loading: false
-		});
 	},
 
 	componentDidMount: function () {
@@ -79,10 +60,9 @@ var UserLocation = React.createClass({
 				'div',
 				{ className: 'modal-body' },
 				React.createElement(
-					'div',
-					{ className: 'form-group' },
-					React.createElement(Loading, { loading: this.state.loading }),
-					React.createElement(Select, { ref: 'select', items: this.state.items })
+					'form',
+					{ className: 'form-horizontal' },
+					React.createElement(Select, { ref: 'select', collection: UserLocationCollection, id: 'id', name: 'name', value: 'value' })
 				)
 			),
 			React.createElement(

@@ -1,20 +1,15 @@
 'use strict';
 
 var Backbone = require('Backbone'),
+	Base = require('Collections/BaseCollection'),
 	UserLocationModel = require('Models/UserLocation'),
 	Utils = require('Common/Utils');
 
-var UserLocation = Backbone.Collection.extend({
+var UserLocation = Base.extend({
 
 	url: Utils.baseUrl + '/rest/locations',
 
-	model: UserLocationModel,
-
-	normalize: function() {
-		return this.models.map(function(current){
-			return current.attributes;
-		});
-	}
+	model: UserLocationModel
 });
 
 module.exports = new UserLocation();

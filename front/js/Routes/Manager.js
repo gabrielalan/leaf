@@ -11,7 +11,7 @@ var RouteManager = Klass.create({
 
 	usePathname: false,
 
-	construct: function(actions, usePathname) {
+	setRoutes: function(actions, usePathname) {
 		this.usePathname = usePathname || false;
 
 		for( var route in actions ) {
@@ -19,6 +19,10 @@ var RouteManager = Klass.create({
 		}
 
 		this.initManager();
+	},
+
+	dispatch: function(path) {
+		window.location.hash = path;
 	},
 
 	initManager: function() {
@@ -34,4 +38,4 @@ var RouteManager = Klass.create({
 	}
 });
 
-module.exports = RouteManager;
+module.exports = new RouteManager();

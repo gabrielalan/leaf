@@ -2,7 +2,6 @@
 
 var React = require('react'),
 	Modal = require('Views/Common/Modal'),
-	Loading = require('Views/Common/Loading'),
 	Storage = require('Common/UserLocationStorage'),
 	UserLocationCollection = require('Collections/UserLocation'),
 	Select = require('Views/Common/Select');
@@ -10,27 +9,9 @@ var React = require('react'),
 var UserLocation = React.createClass({
 
 	getInitialState: function() {
-		UserLocationCollection.on('sync', this.onCollectionChange);
-		UserLocationCollection.on('request', this.onStartsRequest);
-
 		return {
-			show: false,
-			items: [],
-			loading: false
+			show: false
 		};
-	},
-
-	onStartsRequest: function() {
-		this.setState({
-			loading: true
-		});
-	},
-
-	onCollectionChange: function(collection) {
-		this.setState({
-			items: collection.normalize(),
-			loading: false
-		});
 	},
 
 	componentDidMount: function() {
@@ -69,10 +50,9 @@ var UserLocation = React.createClass({
 					<h4 className="modal-title">Escolha sua região</h4>
 				</div>
 				<div className="modal-body">
-					<div className="form-group">
-						<Loading loading={this.state.loading} />
-						<Select ref="select" items={this.state.items} />
-					</div>
+					<form className="form-horizontal">
+						<Select ref="select" collection={UserLocationCollection} id="id" name="name" value="value" />
+					</form>
 				</div>
 				<div className="modal-footer">
 					<button type="button" className="btn btn-primary save-location" onClick={this.onButtonClick}>Salvar</button>

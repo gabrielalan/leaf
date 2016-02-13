@@ -21,7 +21,9 @@ class Authenticator {
 
 			UserSessionsStore.getCurrentSession(data.id).then((row) => {
 				if (row)
-					return defer.reject(new Error('Já existe uma sessão com este usuário'));
+					return UserSessionsStore.removeUserSession(data.id).then(() => {
+						this.insertUserSession(data, defer);
+					});
 
 				this.insertUserSession(data, defer);
 			}).catch((err) => {

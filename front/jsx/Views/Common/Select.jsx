@@ -1,11 +1,58 @@
 'use strict';
 
-var React = require('react');
+var React = require('react'),
+	Loading = require('Views/Common/Loading');
 
 var Select = React.createClass({
 
+	getInitialState: function() {
+		this.props.collection.on('sync', this.onCollectionChange);
+		this.props.collection.on('request', this.onStartsRequest);
+
+		return {
+			items: [],
+			loading: false
+		};
+	},
+
+	onStartsRequest: function() {
+		this.setState({
+			loading: true
+		});
+	},
+
+	onCollectionChange: function() {
+		this.setState({
+			items: this.getItems(),
+			loading: false
+		});
+	},
+
+	getItems: function() {
+		var items = this.props.collection.normalize(this.props.filter);
+
+		if (this.props.empty) {
+			var empty = {};
+
+			empty[this.props.name] = '';
+			empty[this.props.value] = '';
+			empty[this.props.id] = '';
+
+			items = [empty].concat(items);
+		}
+
+		return items;
+	},
+
+	componentWillUnmount: function() {
+		this.props.collection.off('sync', this.onCollectionChange);
+		this.props.collection.off('request', this.onStartsRequest);
+	},
+
 	createItem: function(item) {
-		return <option key={item.id} value={item.value}>{item.name}</option>
+		var value = item[this.props.value], name = item[this.props.name], id = item[this.props.id];
+
+		return <option key={id} value={value}>{name}</option>
 	},
 
 	getValue: function() {
@@ -13,8 +60,21 @@ var Select = React.createClass({
 	},
 
 	render: function(){
+		var column = 12, labelColumn = this.props.labelColumn || 2, labelColumnClass = 'col-sm-' + labelColumn, label;
+
+		if (this.props.label) {
+			column = column - labelColumn;
+			label = <label className={labelColumnClass + " control-label"}>{this.props.label}</label>;
+		}
+
 		return (
-			<select ref="el" className="form-control">{this.props.items.map(this.createItem)}</select>
+			<div className="form-group">
+				<Loading loading={this.state.loading} />
+				{label}
+				<div className={"col-sm-" + column}>
+					<select ref="el" className="form-control">{this.state.items.map(this.createItem)}</select>
+				</div>
+			</div>
 		)
 	}
 });

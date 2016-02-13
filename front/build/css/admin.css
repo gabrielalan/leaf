@@ -4228,3 +4228,29 @@ html, body {
       background-color: #0e1627;
       color: #b5c4e5;
       border: none; }
+
+#content.container {
+  padding-top: 50px; }
+
+.header-holder {
+  width: 100%;
+  height: 50px;
+  position: relative; }
+  .header-holder .header-message-bar {
+    position: fixed;
+    z-index: 1030;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out; }
+    .header-holder .header-message-bar.messaging {
+      top: 25px;
+      opacity: 1;
+      visibility: visible; }
+
+.grid-wrapper {
+  position: relative; }

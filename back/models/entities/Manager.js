@@ -1,6 +1,6 @@
 'use strict';
 
-let connPool = require('../../db/ConnectionPool');
+let knex = require('../../db/Knex');
 
 class Manager {
 	constructor() {
@@ -18,11 +18,11 @@ class Manager {
 		this.executions.deletes.push(entity);
 	}
 
-	flushDelete(connection) {
+	flushDelete(trx) {
 		let promises = [];
 
 		this.executions.deletes.forEach((current) => {
-			current.setConnection(connection);
+			current.setTransactionObject(trx);
 
 			promises.push(current.delete());
 		});
@@ -30,11 +30,11 @@ class Manager {
 		return promises;
 	}
 
-	flushPersist(connection) {
+	flushPersist(trx) {
 		let promises = [];
 
 		this.executions.persists.forEach((current) => {
-			current.setConnection(connection);
+			current.setTransactionObject(trx);
 
 			promises.push(current.save());
 		});
@@ -45,22 +45,21 @@ class Manager {
 	flush() {
 		let defer = Promise.defer();
 
-		connPool.get().then((connection) => {
+		knex.transaction((trx) => {
 			let deletePromises, persistPromises;
 
 			try {
-				console.log(this.executions.persists.length);
-				deletePromises = this.flushDelete(connection);
-				persistPromises = this.flushPersist(connection);
+				deletePromises = this.flushDelete(trx);
+				persistPromises = this.flushPersist(trx);
 			} catch(error) {
-				defer.reject(error);
+				return defer.reject(error);
 			}
 
-			Promise.all(persistPromises).then((result) => {
-				defer.resolve(result);
-			}).catch((err) => {
-				defer.reject(err);
-			});
+			return Promise.all([persistPromises, deletePromises]);
+		}).then(function(results) {
+			defer.resolve(results);
+		}).catch(function(error) {
+			defer.reject(error);
 		});
 
 		return defer.promise;

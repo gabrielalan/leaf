@@ -1,31 +1,28 @@
 'use strict';
 
-var connPool = require('../../db/ConnectionPool'),
-	Store = require('./Store');
+let knex = require('../../db/Knex');
 
-class UserSessions extends Store {
+class UserSessions {
 
-	deleteOldUserSessions(sid) {
-		let SQL = 'DELETE user_sessions FROM user_sessions us INNER JOIN sessions s ON s.sid = us.sid WHERE us.sid = ? AND s.expire > ?',
-			values = [sid, Date.now()];
+	//'DELETE user_sessions FROM user_sessions us INNER JOIN sessions s ON s.sid = us.sid WHERE us.sid = ? AND s.expire > ?'
 
-		return this.execute(SQL, values);
+	removeUserSession(user_id) {
+		return knex('user_sessions')
+			.where({user_id})
+			.delete();
 	}
 
 	getCurrentSession(user_id) {
-		let deferred = Promise.defer(),
-			SQL = 'SELECT us.* FROM user_sessions us ' +
-					'INNER JOIN sessions s ON s.sid = us.sid ' +
-					'WHERE us.user_id = ? AND s.expire > ?',
-			values = [user_id, Date.now()];
+		let now = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-		this.execute(SQL, values).then((rows) => {
-			deferred.resolve(rows[0]);
-		}).catch((err) => {
-			deferred.reject(err);
-		});
-
-		return deferred.promise;
+		return knex('user_sessions')
+			.innerJoin('sessions', 'sessions.sid', 'user_sessions.sid')
+			.where('user_sessions.user_id', '=', user_id)
+			.andWhereRaw('CAST(? as DATETIME) <= expired', now)
+			.select('*')
+			.then((results) => {
+				return results[0];
+			});
 	}
 }
 

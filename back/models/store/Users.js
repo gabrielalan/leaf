@@ -1,22 +1,16 @@
 'use strict';
 
-var connPool = require('../../db/ConnectionPool'),
-	Store = require('./Store');
+let knex = require('../../db/Knex');
 
-class User extends Store {
+class User {
 
 	getUser(user, password) {
-		let deferred = Promise.defer(),
-			SQL = 'SELECT * FROM users WHERE user = ? AND password = ?',
-			values = [user, password];
-
-		this.execute(SQL, values).then((rows) => {
-			deferred.resolve(rows ? rows[0] : null);
-		}).catch((err) => {
-			deferred.reject(err);
-		});
-
-		return deferred.promise;
+		return knex('users')
+			.where({ user, password })
+			.select('*')
+			.then((results) => {
+				return results[0];
+			});
 	}
 }
 

@@ -5,6 +5,7 @@ var React = require('react'),
 	CategoriesCollection = require('Collections/Categories'),
 	MessageBarCentral = require('Widgets/MessageBarCentral'),
 	CategoryModel = require('Models/Category'),
+	Loading = require('Views/Common/Loading'),
 	Select = require('Views/Common/Select');
 
 var Category = React.createClass({
@@ -12,13 +13,49 @@ var Category = React.createClass({
 	model: null,
 
 	getInitialState: function() {
+		this.initModel();
+
+		return {
+			loading: false
+		};
+	},
+
+	initModel: function() {
 		this.model = new CategoryModel();
 
-		return {};
+		this.model.on('sync', this.onModelSync);
+		this.model.on('request', this.onStartsRequest);
+	},
+
+	onStartsRequest: function() {
+		this.setState({
+			loading: true
+		});
+	},
+
+	onModelSync: function() {
+		var attr = this.model.attributes, refs = this.refs;
+
+		refs.name.value = attr.name;
+		refs.description.value = attr.description;
+		refs.parent.setValue(attr.category_id);
+
+		this.setState({
+			loading: false
+		});
 	},
 
 	componentDidMount: function() {
 		CategoriesCollection.fetch();
+
+		if (!this.props.id)
+			return false;
+
+		this.model.set({
+			id: this.props.id
+		});
+
+		this.model.fetch();
 	},
 
 	onFormSubmit: function(evt) {
@@ -61,9 +98,19 @@ var Category = React.createClass({
 		};
 	},
 
+	getSelectMap: function() {
+		return {
+			id: 'id',
+			name: 'name',
+			value: 'id'
+		}
+	},
+
 	render: function() {
 		return (
 			<div className="form-container">
+				<Loading loading={this.state.loading} />
+
 				<h2>Adicionar categoria</h2>
 
 				<form action="#" method="POST" className="form-horizontal" onSubmit={this.onFormSubmit}>
@@ -84,7 +131,7 @@ var Category = React.createClass({
 					</fieldset>
 					<fieldset>
 						<legend>Categoria Pai</legend>
-						<Select ref="parent" label="Categoia" collection={CategoriesCollection} filter={this.getCategoriesSelectFilter()} id="id" name="name" value="id" empty={true} />
+						<Select ref="parent" label="Categoia" collection={CategoriesCollection} filter={this.getCategoriesSelectFilter()} map={this.getSelectMap()} empty={true} />
 					</fieldset>
 					<div className="form-group">
 						<div className="col-sm-offset-2 col-sm-10">

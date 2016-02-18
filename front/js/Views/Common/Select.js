@@ -35,9 +35,9 @@ var Select = React.createClass({
 		if (this.props.empty) {
 			var empty = {};
 
-			empty[this.props.name] = '';
-			empty[this.props.value] = '';
-			empty[this.props.id] = '';
+			empty[this.props.map.name] = '';
+			empty[this.props.map.value] = '';
+			empty[this.props.map.id] = '';
 
 			items = [empty].concat(items);
 		}
@@ -51,9 +51,9 @@ var Select = React.createClass({
 	},
 
 	createItem: function (item) {
-		var value = item[this.props.value],
-		    name = item[this.props.name],
-		    id = item[this.props.id];
+		var value = item[this.props.map.value],
+		    name = item[this.props.map.name],
+		    id = item[this.props.map.id];
 
 		return React.createElement(
 			'option',
@@ -64,6 +64,10 @@ var Select = React.createClass({
 
 	getValue: function () {
 		return this.refs.el.value;
+	},
+
+	setValue: function (value) {
+		this.refs.el.value = value;
 	},
 
 	render: function () {
@@ -83,7 +87,7 @@ var Select = React.createClass({
 
 		return React.createElement(
 			'div',
-			{ className: 'form-group' },
+			{ className: 'form-group select' },
 			React.createElement(Loading, { loading: this.state.loading }),
 			label,
 			React.createElement(

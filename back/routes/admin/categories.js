@@ -2,11 +2,10 @@
 
 var express = require('express'),
 	router = express.Router(),
+	store = require('../../models/store/Categories'),
 	CategoryEntity = require('../../models/entities/Category');
 
 router.get('/', (req, res, next) => {
-	let store = require('../../models/store/Categories');
-
 	store.getAllCategories().then((results) => {
 		res.send(results);
 	}).catch((err) => {
@@ -31,6 +30,40 @@ router.post('/', (req, res, next) => {
 		res.send(entity.getAllData());
 	}).catch((err) => {
 		let message = 'Desculpe, ocorreu um erro na aplicação, tente novamente mais tarde.';
+
+		res.status(500).send(message);
+	});
+});
+
+router.get('/:id', (req, res, next) => {
+	store.getCategory(req.params.id).then((results) => {
+		res.send(results[0] || {});
+	}).catch((err) => {
+		res.send({});
+	});
+});
+
+router.put('/:id', (req, res, next) => {
+	let entity = new CategoryEntity(),
+		data = req.body;
+
+	entity.override({
+		id: data.id,
+		name: data.name,
+		description: data.description,
+		image_id: data.image_id
+	});
+
+	if (data.category_id !== '' && data.category_id !== null && data.category_id)
+		entity.set('category_id', data.category_id);
+
+	entity.save().then(() => {
+		res.send({});
+	}).catch((err) => {
+		let message = 'Desculpe, ocorreu um erro na aplicação, tente novamente mais tarde.';
+
+		if (err.code === 'ER_ROW_IS_REFERENCED_2')
+			message = 'Esta categoria é referenciada em outra categoria. Por favor apague primeiro os registros filhos.';
 
 		res.status(500).send(message);
 	});

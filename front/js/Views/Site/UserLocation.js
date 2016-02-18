@@ -43,6 +43,14 @@ var UserLocation = React.createClass({
 		};
 	},
 
+	getSelectMap: function () {
+		return {
+			id: 'id',
+			name: 'name',
+			value: 'id'
+		};
+	},
+
 	render: function () {
 		return React.createElement(
 			Modal,
@@ -62,7 +70,7 @@ var UserLocation = React.createClass({
 				React.createElement(
 					'form',
 					{ className: 'form-horizontal' },
-					React.createElement(Select, { ref: 'select', collection: UserLocationCollection, id: 'id', name: 'name', value: 'value' })
+					React.createElement(Select, { ref: 'select', collection: UserLocationCollection, map: this.getSelectMap() })
 				)
 			),
 			React.createElement(

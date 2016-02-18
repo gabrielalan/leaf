@@ -34,6 +34,17 @@ var Categories = React.createClass({
 					modelAttr: 'parent'
 				},
 				{
+					id: 'edit',
+					label: 'Editar',
+					type: ButtonCell,
+					props: {
+						type: 'warning',
+						onClick: function() {
+							RouteManager.dispatch('/categories/' + this.props.row.id);
+						}
+					}
+				},
+				{
 					id: 'delete',
 					label: 'Remover',
 					type: ButtonCell,

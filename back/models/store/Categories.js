@@ -5,7 +5,11 @@ var connPool = require('../../db/ConnectionPool'),
 
 module.exports = {
 
-	getAllCategories: function() {
+	getCategory(id) {
+		return knex.from('categories').where({ id }).select('*');
+	},
+
+	getAllCategories() {
 		return knex.raw('SELECT c.*, c2.name AS parent FROM categories c LEFT JOIN categories c2 ON c2.id = c.category_id ORDER BY c.category_id, c.id').then((results) => {
 			return results[0];
 		});

@@ -19,5 +19,11 @@ module.exports = {
 
 	"categories/add": function() {
 		ReactDOM.render(React.createElement(Category, null), _getContentEl());
+	},
+
+	"categories/:id": function(req) {
+		ReactDOM.render(React.createElement(Category, {
+			id: req.params.id
+		}), _getContentEl());
 	}
 };

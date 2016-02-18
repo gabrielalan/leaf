@@ -43,6 +43,14 @@ var UserLocation = React.createClass({
 		};
 	},
 
+	getSelectMap: function() {
+		return {
+			id: 'id',
+			name: 'name',
+			value: 'id'
+		}
+	},
+
 	render: function(){
 		return (
 			<Modal ref="modal" className="userLocation" show={this.state.show} options={this.getModalOptions()}>
@@ -51,7 +59,7 @@ var UserLocation = React.createClass({
 				</div>
 				<div className="modal-body">
 					<form className="form-horizontal">
-						<Select ref="select" collection={UserLocationCollection} id="id" name="name" value="value" />
+						<Select ref="select" collection={UserLocationCollection} map={this.getSelectMap()} />
 					</form>
 				</div>
 				<div className="modal-footer">

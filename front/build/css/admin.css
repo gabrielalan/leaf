@@ -4257,3 +4257,64 @@ html, body {
 
 .grid-wrapper {
   position: relative; }
+
+.dropzone {
+  width: 100%;
+  height: 100px;
+  border: 2px solid black; }
+
+.marching-ants {
+  background-size: 20px 2px, 20px 2px, 2px 20px, 2px 20px;
+  background-position: 0 0,  0 100%,  0 0,  100% 0;
+  background-repeat: repeat-x,  repeat-x,  repeat-y,  repeat-y;
+  -webkit-animation: marching-ants-1 1s;
+  animation: marching-ants-1 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused; }
+
+.marching {
+  border: none;
+  padding: 2px;
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
+  background-image: linear-gradient(to right, #fff 50%, #444 50%), linear-gradient(to right, #fff 50%, #444 50%), linear-gradient(to bottom, #fff 50%, #444 50%), linear-gradient(to bottom, #fff 50%, #444 50%); }
+
+@-webkit-keyframes marching-ants-1 {
+  0% {
+    background-position: 0 0,  0 100%,  0 0,  100% 0; }
+  100% {
+    background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px; } }
+
+@keyframes marching-ants-1 {
+  0% {
+    background-position: 0 0,  0 100%,  0 0,  100% 0; }
+  100% {
+    background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px; } }
+
+@-webkit-keyframes marching-ants-2 {
+  0% {
+    background-position: 0 0,  0 100%,  0 0,  100% 0; }
+  100% {
+    background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px; } }
+
+@keyframes marching-ants-2 {
+  0% {
+    background-position: 0 0,  0 100%,  0 0,  100% 0; }
+  100% {
+    background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px; } }
+
+@-webkit-keyframes marching-ants-3 {
+  0% {
+    background-position: 0 0,  0 100%,  0 0,  100% 0; }
+  100% {
+    background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px; } }
+
+@keyframes marching-ants-3 {
+  0% {
+    background-position: 0 0,  0 100%,  0 0,  100% 0; }
+  100% {
+    background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px; } }

@@ -5,6 +5,7 @@ var React = require('react'),
 	CategoriesCollection = require('Collections/Categories'),
 	MessageBarCentral = require('Widgets/MessageBarCentral'),
 	CategoryModel = require('Models/Category'),
+	Dropzone = require('Views/Common/Dropzone'),
 	Loading = require('Views/Common/Loading'),
 	Select = require('Views/Common/Select');
 
@@ -16,7 +17,8 @@ var Category = React.createClass({
 		this.initModel();
 
 		return {
-			loading: false
+			loading: false,
+			images: []
 		};
 	},
 
@@ -106,6 +108,20 @@ var Category = React.createClass({
 		}
 	},
 
+	onDrop: function(files) {
+		this.setState({
+			images: files.map(function(file){
+				return file.preview;
+			})
+		});
+	},
+
+	mountImages: function() {
+		return this.state.images.map(function(url) {
+			return <img src={url} />
+		});
+	},
+
 	render: function() {
 		return (
 			<div className="form-container">
@@ -131,7 +147,12 @@ var Category = React.createClass({
 					</fieldset>
 					<fieldset>
 						<legend>Categoria Pai</legend>
-						<Select ref="parent" label="Categoia" collection={CategoriesCollection} filter={this.getCategoriesSelectFilter()} map={this.getSelectMap()} empty={true} />
+						<Select ref="parent" label="Categoria" collection={CategoriesCollection} filter={this.getCategoriesSelectFilter()} map={this.getSelectMap()} empty={true} />
+					</fieldset>
+					<fieldset>
+						<legend>Imagem da categoria</legend>
+						<Dropzone onDrop={this.onDrop} />
+						{this.mountImages()}
 					</fieldset>
 					<div className="form-group">
 						<div className="col-sm-offset-2 col-sm-10">

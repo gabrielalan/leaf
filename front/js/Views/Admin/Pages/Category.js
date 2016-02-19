@@ -5,6 +5,7 @@ var React = require('react'),
     CategoriesCollection = require('Collections/Categories'),
     MessageBarCentral = require('Widgets/MessageBarCentral'),
     CategoryModel = require('Models/Category'),
+    Dropzone = require('Views/Common/Dropzone'),
     Loading = require('Views/Common/Loading'),
     Select = require('Views/Common/Select');
 
@@ -17,7 +18,8 @@ var Category = React.createClass({
 		this.initModel();
 
 		return {
-			loading: false
+			loading: false,
+			images: []
 		};
 	},
 
@@ -106,6 +108,20 @@ var Category = React.createClass({
 		};
 	},
 
+	onDrop: function (files) {
+		this.setState({
+			images: files.map(function (file) {
+				return file.preview;
+			})
+		});
+	},
+
+	mountImages: function () {
+		return this.state.images.map(function (url) {
+			return React.createElement('img', { src: url });
+		});
+	},
+
 	render: function () {
 		return React.createElement(
 			'div',
@@ -164,7 +180,18 @@ var Category = React.createClass({
 						null,
 						'Categoria Pai'
 					),
-					React.createElement(Select, { ref: 'parent', label: 'Categoia', collection: CategoriesCollection, filter: this.getCategoriesSelectFilter(), map: this.getSelectMap(), empty: true })
+					React.createElement(Select, { ref: 'parent', label: 'Categoria', collection: CategoriesCollection, filter: this.getCategoriesSelectFilter(), map: this.getSelectMap(), empty: true })
+				),
+				React.createElement(
+					'fieldset',
+					null,
+					React.createElement(
+						'legend',
+						null,
+						'Imagem da categoria'
+					),
+					React.createElement(Dropzone, { onDrop: this.onDrop }),
+					this.mountImages()
 				),
 				React.createElement(
 					'div',

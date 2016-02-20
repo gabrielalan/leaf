@@ -1,0 +1,35 @@
+.image-uploader {
+	width: 100%;
+	display: flex;
+	margin-bottom: 10px;
+
+	.loaded-images {
+		flex: 1 0 auto;
+		margin-right: 10px;
+		background-color: #F5F5F5;
+		position: relative;
+	}
+
+	.dropzone {
+		flex: 1 0 auto;
+		width: auto;
+		background-color: #eee;
+		position: relative;
+	}
+
+	span.legend {
+		font-size: 18px;
+		text-transform: uppercase;
+		font-weight: bold;
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: #ccc;
+		pointer-events: none;
+		-webkit-user-select: none; /* Chrome/Safari */
+		-moz-user-select: none; /* Firefox */
+		-ms-user-select: none;
+	}
+}

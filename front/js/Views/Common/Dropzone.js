@@ -8,8 +8,8 @@ var impureCreateObject = function (file) {
 	return window.URL.createObjectURL(file);
 };
 
-var Select = React.createClass({
-	displayName: 'Select',
+var Dropzone = React.createClass({
+	displayName: 'Dropzone',
 
 	getInitialState: function () {
 		return {
@@ -72,8 +72,12 @@ var Select = React.createClass({
 	},
 
 	render: function () {
-		return React.createElement('div', { className: "dropzone marching-ants " + (this.state.isDragging ? 'marching' : ''), onDragOver: this.preventDefault, onDragEnter: this.onDragEnter, onDragLeave: this.onDragLeave, onDrop: this.onDrop });
+		return React.createElement(
+			'div',
+			{ className: "dropzone marching-ants " + (this.state.isDragging ? 'marching' : ''), onDragOver: this.preventDefault, onDragEnter: this.onDragEnter, onDragLeave: this.onDragLeave, onDrop: this.onDrop },
+			this.props.children
+		);
 	}
 });
 
-module.exports = Select;
+module.exports = Dropzone;

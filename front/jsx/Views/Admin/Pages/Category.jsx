@@ -5,7 +5,7 @@ var React = require('react'),
 	CategoriesCollection = require('Collections/Categories'),
 	MessageBarCentral = require('Widgets/MessageBarCentral'),
 	CategoryModel = require('Models/Category'),
-	Dropzone = require('Views/Common/Dropzone'),
+	ImageUploader = require('Views/Common/ImageUploader'),
 	Loading = require('Views/Common/Loading'),
 	Select = require('Views/Common/Select');
 
@@ -108,20 +108,6 @@ var Category = React.createClass({
 		}
 	},
 
-	onDrop: function(files) {
-		this.setState({
-			images: files.map(function(file){
-				return file.preview;
-			})
-		});
-	},
-
-	mountImages: function() {
-		return this.state.images.map(function(url) {
-			return <img src={url} />
-		});
-	},
-
 	render: function() {
 		return (
 			<div className="form-container">
@@ -151,8 +137,7 @@ var Category = React.createClass({
 					</fieldset>
 					<fieldset>
 						<legend>Imagem da categoria</legend>
-						<Dropzone onDrop={this.onDrop} />
-						{this.mountImages()}
+						<ImageUploader />
 					</fieldset>
 					<div className="form-group">
 						<div className="col-sm-offset-2 col-sm-10">

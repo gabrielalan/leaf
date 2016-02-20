@@ -8,7 +8,7 @@ var impureCreateObject = function(file) {
 	return window.URL.createObjectURL(file);
 };
 
-var Select = React.createClass({
+var Dropzone = React.createClass({
 
 	getInitialState: function() {
 		return {
@@ -73,9 +73,9 @@ var Select = React.createClass({
 
 	render: function(){
 		return (
-			<div className={"dropzone marching-ants " + (this.state.isDragging ? 'marching' : '')} onDragOver={this.preventDefault} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave} onDrop={this.onDrop}></div>
+			<div className={"dropzone marching-ants " + (this.state.isDragging ? 'marching' : '')} onDragOver={this.preventDefault} onDragEnter={this.onDragEnter} onDragLeave={this.onDragLeave} onDrop={this.onDrop}>{this.props.children}</div>
 		)
 	}
 });
 
-module.exports = Select;
+module.exports = Dropzone;

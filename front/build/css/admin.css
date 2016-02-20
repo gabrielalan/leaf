@@ -4261,7 +4261,8 @@ html, body {
 .dropzone {
   width: 100%;
   height: 100px;
-  border: 2px solid black; }
+  border: 2px solid #D2D2D2;
+  border-radius: 5px; }
 
 .marching-ants {
   background-size: 20px 2px, 20px 2px, 2px 20px, 2px 20px;
@@ -4318,3 +4319,34 @@ html, body {
     background-position: 0 0,  0 100%,  0 0,  100% 0; }
   100% {
     background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px; } }
+
+.image-uploader {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px; }
+  .image-uploader .loaded-images {
+    flex: 1 0 auto;
+    margin-right: 10px;
+    background-color: #F5F5F5;
+    position: relative; }
+  .image-uploader .dropzone {
+    flex: 1 0 auto;
+    width: auto;
+    background-color: #eee;
+    position: relative; }
+  .image-uploader span.legend {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ccc;
+    pointer-events: none;
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none; }

@@ -2,6 +2,7 @@
 
 var React = require('react'),
     Dropzone = require('Views/Common/Dropzone'),
+    Image = require('Views/Common/ImageUploader/Image'),
     Loading = require('Views/Common/Loading');
 
 var ImageUploader = React.createClass({
@@ -9,19 +10,23 @@ var ImageUploader = React.createClass({
 
 	getInitialState: function () {
 		return {
-			sending: false
+			sending: false,
+			images: []
 		};
 	},
 
-	handleSavedImages: function () {
-		this.setState({ sending: false });
+	handleSavedImages: function (response) {
+		this.setState({
+			sending: false,
+			images: response.responseJSON.data
+		});
 	},
 
 	makeData: function (files) {
 		var data = new FormData();
 
 		files.forEach(function (file) {
-			data.append(file.name, file);
+			data.append('image', file);
 		});
 
 		return data;
@@ -29,7 +34,7 @@ var ImageUploader = React.createClass({
 
 	upload: function (files) {
 		$.ajax({
-			url: '/admin/rest/upload',
+			url: '/admin/rest/images',
 			method: 'POST',
 			data: this.makeData(files),
 			processData: false,
@@ -44,6 +49,18 @@ var ImageUploader = React.createClass({
 		this.upload(files);
 	},
 
+	onImageClick: function () {
+		debugger;
+	},
+
+	createImages: function () {
+		var me = this;
+
+		return this.state.images.map(function (image) {
+			return React.createElement(Image, { key: image.id, path: image.path, onClick: me.onImageClick });
+		});
+	},
+
 	render: function () {
 		return React.createElement(
 			'div',
@@ -55,7 +72,8 @@ var ImageUploader = React.createClass({
 					'span',
 					{ className: 'legend' },
 					'Imagens carregadas'
-				)
+				),
+				this.createImages()
 			),
 			React.createElement(
 				Dropzone,

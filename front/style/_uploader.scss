@@ -4,14 +4,32 @@
 	margin-bottom: 10px;
 
 	.loaded-images {
-		flex: 1 0 auto;
+		flex: 2 0 70%;
 		margin-right: 10px;
 		background-color: #F5F5F5;
 		position: relative;
+		border-radius: 5px;
+		display: flex;
+		flex-wrap: wrap;
+
+		.record-image {
+			flex: 1 0 150px;
+			max-width: 150px;
+			margin: 5px;
+		}
+
+		.record-image a {
+			display: block;
+		}
+
+		.record-image img {
+			width: 100%;
+			border-radius: 5px;
+		}
 	}
 
 	.dropzone {
-		flex: 1 0 auto;
+		flex: 1 0 30%;
 		width: auto;
 		background-color: #eee;
 		position: relative;

@@ -16,6 +16,11 @@ var Image = React.createClass({
 			React.createElement(
 				'a',
 				{ href: '#', onClick: this.onClick },
+				React.createElement(
+					'span',
+					null,
+					'Remover?'
+				),
 				React.createElement('img', { src: this.props.path })
 			)
 		);

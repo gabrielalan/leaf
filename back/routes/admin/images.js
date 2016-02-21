@@ -7,7 +7,7 @@ var express = require('express'),
 	store = require('../../models/store/Categories'),
 	CategoryEntity = require('../../models/entities/Category');
 
-router.post('/', upload.any(), (req, res, next) => {
+router.post('/categories', upload.any(), (req, res, next) => {
 	res.send({
 		data: [{
 			id: 1,

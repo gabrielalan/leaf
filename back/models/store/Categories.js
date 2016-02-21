@@ -6,7 +6,11 @@ var connPool = require('../../db/ConnectionPool'),
 module.exports = {
 
 	getCategory(id) {
-		return knex.from('categories').where({ id }).select('*');
+		return knex
+			.select('*')
+			.from('categories')
+			.leftJoin('images', 'images.id', 'categories.image_id')
+			.where({ 'categories.id': id });
 	},
 
 	getAllCategories() {

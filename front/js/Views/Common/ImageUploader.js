@@ -1,6 +1,8 @@
 'use strict';
 
 var React = require('react'),
+    _ = require('underscore'),
+    MessageBarCentral = require('Widgets/MessageBarCentral'),
     Dropzone = require('Views/Common/Dropzone'),
     Image = require('Views/Common/ImageUploader/Image'),
     Loading = require('Views/Common/Loading');
@@ -13,6 +15,16 @@ var ImageUploader = React.createClass({
 			sending: false,
 			images: []
 		};
+	},
+
+	setValue: function (images) {
+		this.setState({
+			images: images
+		});
+	},
+
+	getValue: function () {
+		return this.state.images;
 	},
 
 	handleSavedImages: function (response) {
@@ -34,19 +46,36 @@ var ImageUploader = React.createClass({
 
 	upload: function (files) {
 		$.ajax({
-			url: '/admin/rest/images',
+			url: this.props.url,
 			method: 'POST',
-			data: this.makeData(files),
+			data: files,
 			processData: false,
 			contentType: false,
 			complete: this.handleSavedImages
 		});
 	},
 
+	verifyLimit: function (files) {
+		var limit = this.props.limit || 0,
+		    current = this.state.images.length;
+
+		if (limit === 0 || limit <= current) throw new Error('Você já atingiu o limite de imagens enviadas: ' + limit);
+
+		return files;
+	},
+
 	onDrop: function (files) {
 		this.setState({ sending: true });
 
-		this.upload(files);
+		var processFiles = _.compose(this.upload, this.makeData, this.verifyLimit);
+
+		try {
+			processFiles(files);
+		} catch (err) {
+			this.setState({ sending: false });
+
+			MessageBarCentral.setMessage(err.message);
+		}
 	},
 
 	onImageClick: function () {
@@ -61,20 +90,28 @@ var ImageUploader = React.createClass({
 		});
 	},
 
+	createLoadedImages: function () {
+		var images = this.createImages();
+
+		if (!images.length) return false;
+
+		return React.createElement(
+			'div',
+			{ className: 'loaded-images' },
+			React.createElement(
+				'span',
+				{ className: 'legend' },
+				'Imagens carregadas'
+			),
+			images
+		);
+	},
+
 	render: function () {
 		return React.createElement(
 			'div',
 			{ className: 'image-uploader' },
-			React.createElement(
-				'div',
-				{ className: 'loaded-images' },
-				React.createElement(
-					'span',
-					{ className: 'legend' },
-					'Imagens carregadas'
-				),
-				this.createImages()
-			),
+			this.createLoadedImages(),
 			React.createElement(
 				Dropzone,
 				{ onDrop: this.onDrop },

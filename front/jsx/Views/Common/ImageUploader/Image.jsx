@@ -13,6 +13,7 @@ var Image = React.createClass({
 		return (
 			<div key={this.props.key} className="record-image">
 				<a href="#" onClick={this.onClick}>
+					<span>Remover?</span>
 					<img src={this.props.path} />
 				</a>
 			</div>

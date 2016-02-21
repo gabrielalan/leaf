@@ -41,6 +41,10 @@ var Category = React.createClass({
 		refs.name.value = attr.name;
 		refs.description.value = attr.description;
 		refs.parent.setValue(attr.category_id);
+		refs.image.setValue([{
+			id: attr.image_id,
+			path: attr.path
+		}]);
 
 		this.setState({
 			loading: false
@@ -69,12 +73,21 @@ var Category = React.createClass({
 		return false;
 	},
 
+	getImageId: function() {
+		var images = this.refs.image.getValue();
+
+		if (!images.length)
+			return null;
+
+		return images[0].id;
+	},
+
 	save: function() {
 		this.model.set({
 			name: this.refs.name.value,
 			description: this.refs.description.value,
 			category_id: this.refs.parent.getValue(),
-			image_id: 1
+			image_id: this.getImageId()
 		});
 
 		if (!this.model.isValid())
@@ -137,7 +150,7 @@ var Category = React.createClass({
 					</fieldset>
 					<fieldset>
 						<legend>Imagem da categoria</legend>
-						<ImageUploader />
+						<ImageUploader ref="image" limit={1} url="/admin/rest/images/categories" />
 					</fieldset>
 					<div className="form-group">
 						<div className="col-sm-offset-2 col-sm-10">

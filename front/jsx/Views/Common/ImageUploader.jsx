@@ -29,7 +29,15 @@ var ImageUploader = React.createClass({
 	handleSavedImages: function(response) {
 		this.setState({
 			sending: false,
-			images: response.responseJSON.data
+			images: response.data
+		});
+	},
+
+	handleUploadError: function(response) {
+		MessageBarCentral.setMessage(response.responseJSON.message);
+
+		this.setState({
+			sending: false
 		});
 	},
 
@@ -50,7 +58,8 @@ var ImageUploader = React.createClass({
 			data: files,
 			processData: false,
 			contentType: false,
-			complete: this.handleSavedImages
+			success: this.handleSavedImages,
+			error: this.handleUploadError
 		});
 	},
 
@@ -77,15 +86,25 @@ var ImageUploader = React.createClass({
 		}
 	},
 
-	onImageClick: function() {
-		debugger;
+	onImageClick: function(image) {
+		this.remove(image.id);
 	},
 
 	createImages: function() {
 		var me = this;
 
 		return this.state.images.map(function(image){
-			return <Image key={image.id} path={image.path} onClick={me.onImageClick} />
+			return <Image key={image.id} id={image.id} path={image.path} onClick={me.onImageClick} />
+		});
+	},
+
+	remove: function (id) {
+		var filtered = this.state.images.filter(function (current) {
+			return current.id !== id;
+		});
+
+		this.setState({
+			images: filtered
 		});
 	},
 

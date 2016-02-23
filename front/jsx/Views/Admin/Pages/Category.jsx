@@ -150,7 +150,7 @@ var Category = React.createClass({
 					</fieldset>
 					<fieldset>
 						<legend>Imagem da categoria</legend>
-						<ImageUploader ref="image" limit={1} url="/admin/rest/images/categories" />
+						<ImageUploader ref="image" limit={1} delete="local" url="/admin/rest/images/categories" />
 					</fieldset>
 					<div className="form-group">
 						<div className="col-sm-offset-2 col-sm-10">

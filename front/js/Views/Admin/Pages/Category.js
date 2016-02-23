@@ -188,7 +188,7 @@ var Category = React.createClass({
 						null,
 						'Imagem da categoria'
 					),
-					React.createElement(ImageUploader, { ref: 'image', limit: 1, url: '/admin/rest/images/categories' })
+					React.createElement(ImageUploader, { ref: 'image', limit: 1, 'delete': 'local', url: '/admin/rest/images/categories' })
 				),
 				React.createElement(
 					'div',

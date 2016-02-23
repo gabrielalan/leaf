@@ -5,8 +5,12 @@ var React = require('react');
 var Image = React.createClass({
 	displayName: 'Image',
 
-	onClick: function () {
+	onClick: function (evt) {
+		evt.preventDefault();
+
 		if (this.props.onClick) this.props.onClick(this.props);
+
+		return false;
 	},
 
 	render: function () {

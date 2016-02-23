@@ -7,7 +7,7 @@ module.exports = {
 
 	getCategory(id) {
 		return knex
-			.select('*')
+			.select('categories.*', 'images.path')
 			.from('categories')
 			.leftJoin('images', 'images.id', 'categories.image_id')
 			.where({ 'categories.id': id });

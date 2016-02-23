@@ -57,7 +57,11 @@ class Entity {
 		if (this.transaction)
 			query.transacting(this.transaction);
 
-		return query.into(this.map.table);
+		return query.into(this.map.table).then((id) => {
+			this.set('id', id);
+
+			return this.values;
+		});
 	}
 
 	update() {

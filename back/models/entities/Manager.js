@@ -46,20 +46,22 @@ class Manager {
 		let defer = Promise.defer();
 
 		knex.transaction((trx) => {
-			let deletePromises, persistPromises;
+			let deletePromises, persistPromises, promises;
 
 			try {
 				deletePromises = this.flushDelete(trx);
 				persistPromises = this.flushPersist(trx);
+
+				promises = persistPromises.concat(deletePromises);
 			} catch(error) {
 				return defer.reject(error);
 			}
 
-			return Promise.all([persistPromises, deletePromises]);
-		}).then(function(results) {
-			defer.resolve(results);
-		}).catch(function(error) {
-			defer.reject(error);
+			return Promise.all(promises).then(function(results) {
+				defer.resolve(results);
+			}).catch(function(error) {
+				defer.reject(error);
+			});
 		});
 
 		return defer.promise;

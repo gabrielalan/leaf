@@ -1,5 +1,6 @@
 .idea
 node_modules
 front/vendor
+front/img/uploads/*
 *.mwb
 *.mwb.bak

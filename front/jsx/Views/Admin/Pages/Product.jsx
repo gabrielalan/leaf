@@ -3,7 +3,7 @@
 var React = require('react'),
 	RouteManager = require('Routes/Manager'),
 	MessageBarCentral = require('Widgets/MessageBarCentral'),
-	CategoryModel = require('Models/Category'),
+	Model = require('Models/Product'),
 	ImageUploader = require('Views/Common/ImageUploader'),
 	Loading = require('Views/Common/Loading'),
 	Select = require('Views/Common/Select');
@@ -22,7 +22,7 @@ var Product = React.createClass({
 	},
 
 	initModel: function() {
-		this.model = new CategoryModel();
+		this.model = new Model();
 
 		this.model.on('sync', this.onModelSync);
 		this.model.on('request', this.onStartsRequest);
@@ -37,8 +37,8 @@ var Product = React.createClass({
 	onModelSync: function() {
 		var attr = this.model.attributes, refs = this.refs;
 
-		//refs.name.value = attr.name;
-		//refs.description.value = attr.description;
+		refs.name.value = attr.name;
+		refs.description.value = attr.description;
 		//refs.parent.setValue(attr.category_id);
 		//refs.image.setValue([{
 		//	id: attr.image_id,

@@ -23,6 +23,12 @@ module.exports = {
 		ReactDOM.render(React.createElement(Product, null), _getContentEl());
 	},
 
+	"products/:id": function(req) {
+		ReactDOM.render(React.createElement(Product, {
+			id: req.params.id
+		}), _getContentEl());
+	},
+
 	"categories": function() {
 		ReactDOM.render(React.createElement(Categories, null), _getContentEl());
 	},

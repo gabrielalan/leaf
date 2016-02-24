@@ -41,19 +41,24 @@ function normalizeProductImages(products) {
 	return objectToArray(normalized);
 }
 
+function getProductQuery() {
+	return knex
+		.select('products.*', 'categories.name AS category', 'images.id AS image_id', 'images.path', 'images.sizename')
+		.from('products')
+		.leftJoin('categories', 'categories.id', 'products.category_id')
+		.leftJoin('products_images', 'products_images.product_id', 'products.id')
+		.joinRaw("LEFT JOIN images ON images.id = products_images.image_id AND images.sizename = 'PRODUCT_SMALL'")
+}
+
 module.exports = {
 
 	admin: {
+		getProduct(id) {
+			return getProductQuery().where({ 'products.id': id }).then(normalizeProductImages);
+		},
 
 		getAllProducts() {
-			return knex
-				.select('products.*', 'categories.name AS category', 'images.id AS image_id', 'images.path', 'images.sizename')
-				.from('products')
-				.leftJoin('categories', 'categories.id', 'products.category_id')
-				.leftJoin('products_images', 'products_images.product_id', 'products.id')
-				.joinRaw("LEFT JOIN images ON images.id = products_images.image_id AND images.sizename = 'PRODUCT_SMALL'")
-				.then(normalizeProductImages)
-				;
+			return getProductQuery().then(normalizeProductImages);
 		}
 
 	},

@@ -13,4 +13,12 @@ router.get('/', (req, res, next) => {
 	});
 });
 
+router.get('/:id', (req, res, next) => {
+	store.getProduct(req.params.id).then((results) => {
+		res.send(results[0] || {});
+	}).catch((err) => {
+		res.send({});
+	});
+});
+
 module.exports = router;

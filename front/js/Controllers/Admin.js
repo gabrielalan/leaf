@@ -3,6 +3,8 @@
 var React = require('react'),
 	ReactDOM = require('ReactDOM'),
 	Category = require('Views/Admin/Pages/Category'),
+	Product = require('Views/Admin/Pages/Product'),
+	Products = require('Views/Admin/Pages/Products'),
 	Categories = require('Views/Admin/Pages/Categories');
 
 function _getContentEl() {
@@ -12,6 +14,14 @@ function _getContentEl() {
 module.exports = {
 
 	"": function() {},
+
+	"products": function() {
+		ReactDOM.render(React.createElement(Products, null), _getContentEl());
+	},
+
+	"products/add": function() {
+		ReactDOM.render(React.createElement(Product, null), _getContentEl());
+	},
 
 	"categories": function() {
 		ReactDOM.render(React.createElement(Categories, null), _getContentEl());

@@ -41,7 +41,7 @@ var Login = React.createClass({
 					error: false
 				});
 
-				window.location.reload();
+				window.location.href = '/admin/';
 			},
 			error: function (response) {
 				me.setState({

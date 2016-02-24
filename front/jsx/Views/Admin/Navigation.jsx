@@ -19,6 +19,11 @@ var Navigation = React.createClass({
 					id: 'categories',
 					label: 'Categorias',
 					path: 'categories'
+				},
+				{
+					id: 'products',
+					label: 'Produtos',
+					path: 'products'
 				}
 			]
 		}

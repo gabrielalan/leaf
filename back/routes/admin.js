@@ -47,6 +47,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.use('/rest/categories', require('./admin/categories'));
+router.use('/rest/products', require('./admin/products'));
 router.use('/rest/images', require('./admin/images'));
 
 module.exports = router;

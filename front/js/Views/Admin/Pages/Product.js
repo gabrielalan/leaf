@@ -2,6 +2,8 @@
 
 var React = require('react'),
     RouteManager = require('Routes/Manager'),
+    numeral = require('Common/NumeralInstance'),
+    CategoriesCollection = require('Collections/Categories'),
     MessageBarCentral = require('Widgets/MessageBarCentral'),
     Model = require('Models/Product'),
     ImageUploader = require('Views/Common/ImageUploader'),
@@ -41,7 +43,9 @@ var Product = React.createClass({
 
 		refs.name.value = attr.name;
 		refs.description.value = attr.description;
-		//refs.parent.setValue(attr.category_id);
+		refs.category.setValue(attr.category_id);
+		refs.value.value = numeral(attr.value).format('0.00');
+		refs.highlight.checked = attr.highlight;
 		//refs.image.setValue([{
 		//	id: attr.image_id,
 		//	path: attr.path
@@ -53,6 +57,8 @@ var Product = React.createClass({
 	},
 
 	componentDidMount: function () {
+		CategoriesCollection.fetch();
+
 		if (!this.props.id) return false;
 
 		this.model.set({
@@ -90,6 +96,14 @@ var Product = React.createClass({
 		//		MessageBarCentral.setMessage(xhr.responseText);
 		//	}
 		//});
+	},
+
+	getSelectMap: function () {
+		return {
+			id: 'id',
+			name: 'name',
+			value: 'id'
+		};
 	},
 
 	render: function () {
@@ -139,6 +153,39 @@ var Product = React.createClass({
 							'div',
 							{ className: 'col-sm-10' },
 							React.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descrição', ref: 'description' })
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'form-group' },
+						React.createElement(
+							'label',
+							{ htmlFor: 'value', className: 'col-sm-2 control-label' },
+							'Valor R$'
+						),
+						React.createElement(
+							'div',
+							{ className: 'col-sm-10' },
+							React.createElement('input', { type: 'text', className: 'form-control', id: 'value', placeholder: '0.00', ref: 'value' })
+						)
+					),
+					React.createElement(Select, { ref: 'category', label: 'Categoria', collection: CategoriesCollection, map: this.getSelectMap() }),
+					React.createElement(
+						'div',
+						{ className: 'form-group' },
+						React.createElement(
+							'div',
+							{ className: 'col-sm-offset-2 col-sm-10' },
+							React.createElement(
+								'div',
+								{ className: 'checkbox' },
+								React.createElement(
+									'label',
+									null,
+									React.createElement('input', { htmlFor: 'highlight', type: 'checkbox', ref: 'highlight' }),
+									' Destaque?'
+								)
+							)
 						)
 					)
 				),

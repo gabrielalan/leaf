@@ -5,6 +5,7 @@ var React = require('react'),
     Collection = require('Collections/Products'),
     RouteManager = require('Routes/Manager'),
     ButtonCell = require('Views/Common/Grid/Cells/Button'),
+    CurrencyFormatter = require('Views/Common/Grid/Cells/Currency'),
     Navigation = require('Views/Admin/Navigation'),
     MessageBarCentral = require('Widgets/MessageBarCentral');
 
@@ -29,6 +30,11 @@ var Categories = React.createClass({
 				id: 'quantity',
 				label: 'Estoque',
 				modelAttr: 'quantity'
+			}, {
+				id: 'value',
+				label: 'R$',
+				modelAttr: 'value',
+				type: CurrencyFormatter
 			}, {
 				id: 'edit',
 				label: 'Editar',

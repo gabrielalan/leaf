@@ -2,6 +2,8 @@
 
 var React = require('react'),
 	RouteManager = require('Routes/Manager'),
+	numeral = require('Common/NumeralInstance'),
+	CategoriesCollection = require('Collections/Categories'),
 	MessageBarCentral = require('Widgets/MessageBarCentral'),
 	Model = require('Models/Product'),
 	ImageUploader = require('Views/Common/ImageUploader'),
@@ -39,7 +41,9 @@ var Product = React.createClass({
 
 		refs.name.value = attr.name;
 		refs.description.value = attr.description;
-		//refs.parent.setValue(attr.category_id);
+		refs.category.setValue(attr.category_id);
+		refs.value.value = numeral(attr.value).format('0.00');
+		refs.highlight.checked = attr.highlight;
 		//refs.image.setValue([{
 		//	id: attr.image_id,
 		//	path: attr.path
@@ -51,6 +55,8 @@ var Product = React.createClass({
 	},
 
 	componentDidMount: function() {
+		CategoriesCollection.fetch();
+
 		if (!this.props.id)
 			return false;
 
@@ -91,6 +97,14 @@ var Product = React.createClass({
 		//});
 	},
 
+	getSelectMap: function() {
+		return {
+			id: 'id',
+			name: 'name',
+			value: 'id'
+		}
+	},
+
 	render: function() {
 		return (
 			<div className="form-container">
@@ -111,6 +125,22 @@ var Product = React.createClass({
 							<label htmlFor="description" className="col-sm-2 control-label">Descrição</label>
 							<div className="col-sm-10">
 								<input type="text" className="form-control" id="description" placeholder="Descrição" ref="description" />
+							</div>
+						</div>
+						<div className="form-group">
+							<label htmlFor="value" className="col-sm-2 control-label">Valor R$</label>
+							<div className="col-sm-10">
+								<input type="text" className="form-control" id="value" placeholder="0.00" ref="value" />
+							</div>
+						</div>
+						<Select ref="category" label="Categoria" collection={CategoriesCollection} map={this.getSelectMap()} />
+						<div className="form-group">
+							<div className="col-sm-offset-2 col-sm-10">
+								<div className="checkbox">
+									<label>
+										<input htmlFor="highlight" type="checkbox" ref="highlight" /> Destaque?
+									</label>
+								</div>
 							</div>
 						</div>
 					</fieldset>

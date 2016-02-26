@@ -41,6 +41,7 @@ var Product = React.createClass({
 
 		refs.name.value = attr.name;
 		refs.description.value = attr.description;
+		refs.quantity.value = attr.quantity;
 		refs.category.setValue(attr.category_id);
 		refs.value.value = numeral(attr.value).format('0.00');
 		refs.highlight.checked = attr.highlight;
@@ -76,25 +77,41 @@ var Product = React.createClass({
 		return false;
 	},
 
+	getPrice: function() {
+		var value = this.refs.value.value;
+
+		return numeral().unformat(value);
+	},
+
 	save: function() {
-		//this.model.set({
-		//	name: this.refs.name.value,
-		//	description: this.refs.description.value,
-		//	category_id: this.refs.parent.getValue(),
-		//	image_id: this.getImageId()
-		//});
-		//
-		//if (!this.model.isValid())
-		//	return this.handleError(this.model.validationError);
-		//
-		//this.model.save(null, {
-		//	success: function() {
-		//		RouteManager.dispatch('/categories');
-		//	},
-		//	error: function(model, xhr) {
-		//		MessageBarCentral.setMessage(xhr.responseText);
-		//	}
-		//});
+		this.model.set({
+			name: this.refs.name.value,
+			description: this.refs.description.value,
+			category_id: this.refs.category.getValue(),
+			quantity: this.refs.quantity.value,
+			value: this.getPrice(),
+			highlight: this.refs.highlight.checked ? true : false
+		});
+
+		if (!this.model.isValid())
+			return this.handleError(this.model.validationError);
+
+		this.model.save(null, {
+			success: function() {
+				RouteManager.dispatch('/products');
+			},
+			error: function(model, xhr) {
+				MessageBarCentral.setMessage(xhr.responseText);
+			}
+		});
+	},
+
+	handleError: function(error) {
+		this.setState({
+			loading: false
+		});
+
+		MessageBarCentral.setMessage(error.message);
 	},
 
 	getSelectMap: function() {
@@ -129,8 +146,14 @@ var Product = React.createClass({
 						</div>
 						<div className="form-group">
 							<label htmlFor="value" className="col-sm-2 control-label">Valor R$</label>
-							<div className="col-sm-10">
+							<div className="col-sm-2">
 								<input type="text" className="form-control" id="value" placeholder="0.00" ref="value" />
+							</div>
+						</div>
+						<div className="form-group">
+							<label htmlFor="quantity" className="col-sm-2 control-label">Estoque</label>
+							<div className="col-sm-2">
+								<input type="number" className="form-control" id="quantity" placeholder="0.00" ref="quantity" />
 							</div>
 						</div>
 						<Select ref="category" label="Categoria" collection={CategoriesCollection} map={this.getSelectMap()} />

@@ -62,9 +62,6 @@ router.put('/:id', (req, res, next) => {
 	}).catch((err) => {
 		let message = 'Desculpe, ocorreu um erro na aplicação, tente novamente mais tarde.';
 
-		if (err.code === 'ER_ROW_IS_REFERENCED_2')
-			message = 'Esta categoria é referenciada em outra categoria. Por favor apague primeiro os registros filhos.';
-
 		res.status(500).send(message);
 	});
 });

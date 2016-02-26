@@ -6,6 +6,7 @@ var React = require('react'),
     RouteManager = require('Routes/Manager'),
     ButtonCell = require('Views/Common/Grid/Cells/Button'),
     CurrencyFormatter = require('Views/Common/Grid/Cells/Currency'),
+    BooleanFormatter = require('Views/Common/Grid/Cells/Boolean'),
     Navigation = require('Views/Admin/Navigation'),
     MessageBarCentral = require('Widgets/MessageBarCentral');
 
@@ -36,6 +37,11 @@ var Categories = React.createClass({
 				modelAttr: 'value',
 				type: CurrencyFormatter
 			}, {
+				id: 'highlight',
+				label: 'Destaque',
+				modelAttr: 'highlight',
+				type: BooleanFormatter
+			}, {
 				id: 'edit',
 				label: 'Editar',
 				type: ButtonCell,
@@ -43,6 +49,31 @@ var Categories = React.createClass({
 					type: 'warning',
 					onClick: function () {
 						RouteManager.dispatch('/products/' + this.props.row.id);
+					}
+				}
+			}, {
+				id: 'delete',
+				label: 'Remover',
+				type: ButtonCell,
+				props: {
+					type: 'danger',
+					onClick: function () {
+						var model = Collection.findWhere({
+							id: this.props.row.id
+						});
+
+						if (model) {
+							model.destroy({
+								success: function () {
+									Collection.fetch();
+								},
+								error: function (model, xhr) {
+									Collection.fetch();
+
+									MessageBarCentral.setMessage(xhr.responseText);
+								}
+							});
+						}
 					}
 				}
 			}]

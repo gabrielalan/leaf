@@ -1,6 +1,7 @@
 'use strict';
 
-var React = require('react');
+var React = require('react'),
+	Utils = require('Common/Utils');
 
 var Image = React.createClass({
 
@@ -18,7 +19,7 @@ var Image = React.createClass({
 			<div key={this.props.key} className="record-image">
 				<a href="#" onClick={this.onClick}>
 					<span>Remover?</span>
-					<img src={this.props.path} />
+					<img src={Utils.baseUrl + '/' + this.props.path} />
 				</a>
 			</div>
 		)

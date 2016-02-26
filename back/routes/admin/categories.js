@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express'),
+	logger = require('../../logger/Logger'),
 	router = express.Router(),
 	store = require('../../models/store/Categories'),
 	CategoryEntity = require('../../models/entities/Category');
@@ -9,6 +10,8 @@ router.get('/', (req, res, next) => {
 	store.getAllCategories().then((results) => {
 		res.send(results);
 	}).catch((err) => {
+		logger.log('error', err);
+
 		res.status(500).send(err.message);
 	});
 });
@@ -29,6 +32,8 @@ router.post('/', (req, res, next) => {
 	entity.insert().then(() => {
 		res.send(entity.getAllData());
 	}).catch((err) => {
+		logger.log('error', err);
+
 		let message = 'Desculpe, ocorreu um erro na aplicação, tente novamente mais tarde.';
 
 		res.status(500).send(message);
@@ -39,6 +44,8 @@ router.get('/:id', (req, res, next) => {
 	store.getCategory(req.params.id).then((results) => {
 		res.send(results[0] || {});
 	}).catch((err) => {
+		logger.log('error', err);
+
 		res.send({});
 	});
 });
@@ -60,6 +67,8 @@ router.put('/:id', (req, res, next) => {
 	entity.save().then(() => {
 		res.send({});
 	}).catch((err) => {
+		logger.log('error', err);
+
 		let message = 'Desculpe, ocorreu um erro na aplicação, tente novamente mais tarde.';
 
 		res.status(500).send(message);
@@ -74,6 +83,8 @@ router.delete('/:id', (req, res, next) => {
 	entity.delete().then(() => {
 		res.send({});
 	}).catch((err) => {
+		logger.log('error', err);
+
 		let message = 'Desculpe, ocorreu um erro na aplicação, tente novamente mais tarde.';
 
 		if (err.code === 'ER_ROW_IS_REFERENCED_2')

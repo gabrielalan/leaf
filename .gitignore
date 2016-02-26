@@ -2,5 +2,7 @@
 node_modules
 front/vendor
 front/img/uploads/*
+errors.log
+exceptions.log
 *.mwb
 *.mwb.bak

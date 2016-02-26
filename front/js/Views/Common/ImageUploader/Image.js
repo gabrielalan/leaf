@@ -1,6 +1,7 @@
 'use strict';
 
-var React = require('react');
+var React = require('react'),
+    Utils = require('Common/Utils');
 
 var Image = React.createClass({
 	displayName: 'Image',
@@ -25,7 +26,7 @@ var Image = React.createClass({
 					null,
 					'Remover?'
 				),
-				React.createElement('img', { src: this.props.path })
+				React.createElement('img', { src: Utils.baseUrl + '/' + this.props.path })
 			)
 		);
 	}

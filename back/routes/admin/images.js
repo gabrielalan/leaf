@@ -12,10 +12,17 @@ var express = require('express'),
 
 var PRODUCTS_SIZES = [
 	{
+		name: 'PRODUCT_MEDIUM_V',
+		width: 640,
+		height:450
+		//width: 270,
+		//height: 290
+	}
+	/*{
 		name: 'PRODUCT_BIGGER',
 		width: 670,
 		height: 570
-	}/*,
+	},
 	{
 		name: 'PRODUCT_BIG',
 		width: 494,
@@ -28,7 +35,7 @@ var PRODUCTS_SIZES = [
 	},
 	{
 		name: 'PRODUCT_MEDIUM_V',
-		width: Jimp.AUTO,
+		width: 270,
 		height: 290
 	},
 	{
@@ -53,6 +60,12 @@ var PRODUCTS_SIZES = [
 	}*/
 ];
 
+function remove(filename) {
+	let tempFile = fs.openSync(filename, 'r');
+	fs.closeSync(tempFile);
+	fs.unlinkSync(filename);
+}
+
 function rename(oldPath, newPath, processPath) {
 	let deferred = Promise.defer();
 
@@ -70,8 +83,8 @@ function getExtension(name) {
 	return name.split('.').slice(-1);
 }
 
-function saveImages(files, res) {
-	Promise.all(files).then((files) => {
+function saveImages(promises, res) {
+	Promise.all(promises).then((files) => {
 		let manager = new EntityManager();
 
 		files.forEach((file) => {
@@ -88,22 +101,27 @@ function saveImages(files, res) {
 			});
 		}).catch((err) => {
 			res.status(500).send({
-				message: 'Um erro ocorreu ao enviar a imagem, por favor tenta mais tarde!',
+				//message: 'Um erro ocorreu ao enviar a imagem, por favor tente mais tarde!',
+				message: err.message,
 				error: err
 			});
 		});
 	}).catch((err) => {
 		res.status(500).send({
-			message: 'Um erro ocorreu ao enviar a imagem, por favor tenta mais tarde!',
+			message: 'Um erro ocorreu ao enviar a imagem, por favor tente mais tarde!',
 			error: err
 		});
 	});
 }
 
-function normalizeName(file) {
-	let name = file.filename + '.' + getExtension(file.originalname);
+function normalizeName(file, prefix) {
+	let name = (prefix || '') + file.filename + '.' + getExtension(file.originalname);
 
 	return [file.destination, name].join('/');
+}
+
+function getFrontPath(path) {
+	return path.replace(/front\/?/, '');
 }
 
 function manipulateCategoryFiles(files) {
@@ -117,7 +135,7 @@ function manipulateCategoryFiles(files) {
 function manipulateProductFiles(files) {
 	let promises = [];
 
-	return files.map((file) => {
+	files.map((file) => {
 		PRODUCTS_SIZES.forEach((size) => {
 			promises.push(saveImageSize(size, file));
 		});
@@ -126,17 +144,41 @@ function manipulateProductFiles(files) {
 	return promises;
 }
 
-function saveImageSize(size, file) {
-	let defer = Promise.defer(), name = size.name + '_' + normalizeName(file);
+function getImageProportions(size, image) {
+	let width = image.bitmap.width, height = image.bitmap.height;
 
-	Jimp.read(file.path).then(function (lenna) {
-		lenna.resize(256, 256)
-			.quality(60)
-			.greyscale()
+	let sizeIsVertical = size.width <= size.height,
+		imageIsVertical = width <= height;
+
+	let useWidth = !sizeIsVertical;
+
+	console.log(width);
+	console.log(height);
+
+	return {
+		width: useWidth ? size.width : Jimp.AUTO,
+		height: !useWidth ? size.height : Jimp.AUTO,
+		x: useWidth ? 0 : Math.floor((((size.height / height) * width) - size.width ) / 2),
+		y: !useWidth ? 0 : Math.floor((((size.width / width) * height) - size.height ) / 2)
+	};
+}
+
+function saveImageSize(size, file) {
+	let defer = Promise.defer(), name = normalizeName(file, size.name + '_');
+
+	Jimp.read(file.path).then(function (image) {
+
+		let proportions = getImageProportions(size, image);
+console.log(proportions);
+		image.resize(proportions.width, proportions.height)
+			.crop(proportions.x, proportions.y, size.width, size.height)
+			.quality(70)
 			.write(name);
 
+		remove(file.path);
+
 		defer.resolve({
-			path: name,
+			path: getFrontPath(name),
 			sizename: size.name
 		});
 	}).catch(function (err) {

@@ -21,6 +21,7 @@
     "express": "^4.13.3",
     "express-session": "^1.13.0",
     "handlebars": "^4.0.5",
+    "jimp": "git+https://github.com/gabrielalan/jimp2.git",
     "knex": "^0.9.0",
     "multer": "^1.1.0",
     "mysql": "^2.10.0",

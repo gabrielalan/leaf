@@ -11,6 +11,7 @@ class Category extends Entity {
 			primaries: ['id'],
 			fields: {
 				'id': Number,
+				'name': String,
 				'path': String,
 				'sizename': String
 			}

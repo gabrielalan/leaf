@@ -30,11 +30,13 @@ function normalizeProductImages(products) {
 		product.images.push({
 			id: current.image_id,
 			path: current.path,
+			name: current.image_name,
 			sizename: current.sizename
 		});
 
 		delete product.image_id;
 		delete product.path;
+		delete product.image_name;
 		delete product.sizename;
 	});
 
@@ -43,24 +45,34 @@ function normalizeProductImages(products) {
 
 function getProductQuery() {
 	return knex
-		.select('products.*', 'categories.name AS category', 'images.id AS image_id', 'images.path', 'images.sizename')
+		.select('products.*', 'categories.name AS category', 'images.id AS image_id', 'images.path', 'images.sizename', 'images.name AS image_name')
 		.from('products')
 		.leftJoin('categories', 'categories.id', 'products.category_id')
 		.leftJoin('products_images', 'products_images.product_id', 'products.id')
-		.joinRaw("LEFT JOIN images ON images.id = products_images.image_id AND images.sizename = 'PRODUCT_SMALL'")
+		.joinRaw("LEFT JOIN images ON images.id = products_images.image_id")
+}
+
+function getAllProductQuery() {
+	return knex
+		.select('products.*', 'categories.name AS category')
+		.from('products')
+		.leftJoin('categories', 'categories.id', 'products.category_id');
 }
 
 module.exports = {
 
 	admin: {
+		removeAllImages(id) {
+			return knex('products_images').where('product_id', id).del();
+		},
+
 		getProduct(id) {
 			return getProductQuery().where({ 'products.id': id }).then(normalizeProductImages);
 		},
 
 		getAllProducts() {
-			return getProductQuery().then(normalizeProductImages);
+			return getAllProductQuery();
 		}
-
 	},
 
 

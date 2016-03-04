@@ -10,6 +10,14 @@ class Manager {
 		};
 	}
 
+	persistAll(entities) {
+		entities.forEach(current => this.persist(current));
+	}
+
+	deleteAll(entities) {
+		entities.forEach(current => this.delete(current));
+	}
+
 	persist(entity) {
 		this.executions.persists.push(entity);
 	}

@@ -34,9 +34,9 @@ var Product = Backbone.Model.extend({
 			return new Error('Uma categoria deve ser setada para o produto', 'category_id');
 		}
 
-		//if (typeof attrs.images !== 'array' || attrs.images.length <= 0) {
-		//	return new Error('O produto deve ter uma ou mais imagens', 'images');
-		//}
+		if (attrs.images.length <= 0) {
+			return new Error('O produto deve ter uma ou mais imagens (no máximo 3)', 'images');
+		}
 	}
 });
 

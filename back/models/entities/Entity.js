@@ -58,7 +58,7 @@ class Entity {
 			query.transacting(this.transaction);
 
 		return query.into(this.map.table).then((id) => {
-			this.set('id', id);
+			this.set(this.map.primaries[0], id);
 
 			return this.values;
 		});

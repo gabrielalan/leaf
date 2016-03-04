@@ -45,14 +45,32 @@ var Product = React.createClass({
 		refs.category.setValue(attr.category_id);
 		refs.value.value = numeral(attr.value).format('0.00');
 		refs.highlight.checked = attr.highlight;
-		//refs.image.setValue([{
-		//	id: attr.image_id,
-		//	path: attr.path
-		//}]);
+		refs.image.setValue(this.mountImageValue(attr.images));
 
 		this.setState({
 			loading: false
 		});
+	},
+
+	mountImageValue: function(images) {
+		var cache = {}, real = [];
+
+		images.forEach(function(current) {
+			if (!cache[current.name]) {
+				cache[current.name] = {
+					id: current.id,
+					images: [current.id],
+					path: current.path
+				}
+			} else {
+				cache[current.name].images.push(current.id);
+			}
+		});
+
+		for (var index in cache)
+			real.push(cache[index]);
+
+		return real;
 	},
 
 	componentDidMount: function() {
@@ -90,7 +108,8 @@ var Product = React.createClass({
 			category_id: this.refs.category.getValue(),
 			quantity: this.refs.quantity.value,
 			value: this.getPrice(),
-			highlight: this.refs.highlight.checked ? true : false
+			highlight: this.refs.highlight.checked ? true : false,
+			images: this.refs.image.getValue().map(current => current.images)
 		});
 
 		if (!this.model.isValid())
@@ -169,7 +188,7 @@ var Product = React.createClass({
 					</fieldset>
 					<fieldset>
 						<legend>Imagem da categoria</legend>
-						<ImageUploader ref="image" limit={1} delete="local" url="/admin/rest/images/products" />
+						<ImageUploader ref="image" limit={3} delete="local" url="/admin/rest/images/products" />
 					</fieldset>
 					<div className="form-group">
 						<div className="col-sm-offset-2 col-sm-10">

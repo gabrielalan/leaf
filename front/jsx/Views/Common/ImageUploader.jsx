@@ -23,13 +23,15 @@ var ImageUploader = React.createClass({
 	},
 
 	getValue: function() {
-		return this.state.images;
+		return _.isArray(this.state.images) ? this.state.images : [];
 	},
 
 	handleSavedImages: function(response) {
+		var images = this.state.images.concat(response.data);
+
 		this.setState({
 			sending: false,
-			images: response.data
+			images: images
 		});
 	},
 
@@ -86,7 +88,7 @@ var ImageUploader = React.createClass({
 		}
 	},
 
-	onImageClick: function(image) {
+	onImageRemove: function(image) {
 		this.remove(image.id);
 	},
 
@@ -94,7 +96,7 @@ var ImageUploader = React.createClass({
 		var me = this;
 
 		return this.state.images.map(function(image){
-			return <Image key={image.id} id={image.id} path={image.path} onClick={me.onImageClick} />
+			return <Image key={image.id} id={image.id} path={image.path} onRemove={me.onImageRemove} />
 		});
 	},
 

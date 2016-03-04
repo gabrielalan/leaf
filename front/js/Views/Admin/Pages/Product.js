@@ -47,14 +47,32 @@ var Product = React.createClass({
 		refs.category.setValue(attr.category_id);
 		refs.value.value = numeral(attr.value).format('0.00');
 		refs.highlight.checked = attr.highlight;
-		//refs.image.setValue([{
-		//	id: attr.image_id,
-		//	path: attr.path
-		//}]);
+		refs.image.setValue(this.mountImageValue(attr.images));
 
 		this.setState({
 			loading: false
 		});
+	},
+
+	mountImageValue: function (images) {
+		var cache = {},
+		    real = [];
+
+		images.forEach(function (current) {
+			if (!cache[current.name]) {
+				cache[current.name] = {
+					id: current.id,
+					images: [current.id],
+					path: current.path
+				};
+			} else {
+				cache[current.name].images.push(current.id);
+			}
+		});
+
+		for (var index in cache) real.push(cache[index]);
+
+		return real;
 	},
 
 	componentDidMount: function () {
@@ -91,7 +109,8 @@ var Product = React.createClass({
 			category_id: this.refs.category.getValue(),
 			quantity: this.refs.quantity.value,
 			value: this.getPrice(),
-			highlight: this.refs.highlight.checked ? true : false
+			highlight: this.refs.highlight.checked ? true : false,
+			images: this.refs.image.getValue().map(current => current.images)
 		});
 
 		if (!this.model.isValid()) return this.handleError(this.model.validationError);
@@ -227,7 +246,7 @@ var Product = React.createClass({
 						null,
 						'Imagem da categoria'
 					),
-					React.createElement(ImageUploader, { ref: 'image', limit: 1, 'delete': 'local', url: '/admin/rest/images/products' })
+					React.createElement(ImageUploader, { ref: 'image', limit: 3, 'delete': 'local', url: '/admin/rest/images/products' })
 				),
 				React.createElement(
 					'div',

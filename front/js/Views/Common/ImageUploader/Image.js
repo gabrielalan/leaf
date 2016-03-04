@@ -6,10 +6,10 @@ var React = require('react'),
 var Image = React.createClass({
 	displayName: 'Image',
 
-	onClick: function (evt) {
+	onRemove: function (evt) {
 		evt.preventDefault();
 
-		if (this.props.onClick) this.props.onClick(this.props);
+		if (this.props.onRemove) this.props.onRemove(this.props);
 
 		return false;
 	},
@@ -20,7 +20,7 @@ var Image = React.createClass({
 			{ key: this.props.key, className: 'record-image' },
 			React.createElement(
 				'a',
-				{ href: '#', onClick: this.onClick },
+				{ href: '#', onClick: this.onRemove },
 				React.createElement(
 					'span',
 					null,

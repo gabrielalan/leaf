@@ -90,15 +90,15 @@ var ImageUploader = React.createClass({
 	},
 
 	onImageRemove: function (image) {
-		this.remove(image.id);
+		this.remoteRemove(image.id);
 	},
 
-	createImages: function () {
-		var me = this;
-
-		return this.state.images.map(function (image) {
-			return React.createElement(Image, { key: image.id, id: image.id, path: image.path, onRemove: me.onImageRemove });
+	remoteRemove: function (id) {
+		if (this.props.onRemove) return this.props.onRemove(id).done(this.remove.bind(this, id)).fail(function () {
+			alert('Erro ao deletar imagem');
 		});
+
+		this.remove(id);
 	},
 
 	remove: function (id) {
@@ -108,6 +108,14 @@ var ImageUploader = React.createClass({
 
 		this.setState({
 			images: filtered
+		});
+	},
+
+	createImages: function () {
+		var me = this;
+
+		return this.state.images.map(function (image) {
+			return React.createElement(Image, { key: image.id, id: image.id, path: image.path, onRemove: me.onImageRemove });
 		});
 	},
 

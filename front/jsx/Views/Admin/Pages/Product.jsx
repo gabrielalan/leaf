@@ -141,6 +141,15 @@ var Product = React.createClass({
 		}
 	},
 
+	onRemoveImage: function(id) {
+		return $.ajax({
+			url: '/admin/images/product/remove/' + id + '/' + this.model.get('id'),
+			method: 'DELETE',
+			processData: false,
+			contentType: false
+		});
+	},
+
 	render: function() {
 		return (
 			<div className="form-container">
@@ -188,7 +197,7 @@ var Product = React.createClass({
 					</fieldset>
 					<fieldset>
 						<legend>Imagem da categoria</legend>
-						<ImageUploader ref="image" limit={3} delete="local" url="/admin/rest/images/products" />
+						<ImageUploader ref="image" limit={3} url="/admin/rest/images/products" onRemove={this.onRemoveImage} />
 					</fieldset>
 					<div className="form-group">
 						<div className="col-sm-offset-2 col-sm-10">

@@ -141,6 +141,15 @@ var Product = React.createClass({
 		};
 	},
 
+	onRemoveImage: function (id) {
+		return $.ajax({
+			url: '/admin/images/product/remove/' + id + '/' + this.model.get('id'),
+			method: 'DELETE',
+			processData: false,
+			contentType: false
+		});
+	},
+
 	render: function () {
 		return React.createElement(
 			'div',
@@ -246,7 +255,7 @@ var Product = React.createClass({
 						null,
 						'Imagem da categoria'
 					),
-					React.createElement(ImageUploader, { ref: 'image', limit: 3, 'delete': 'local', url: '/admin/rest/images/products' })
+					React.createElement(ImageUploader, { ref: 'image', limit: 3, url: '/admin/rest/images/products', onRemove: this.onRemoveImage })
 				),
 				React.createElement(
 					'div',

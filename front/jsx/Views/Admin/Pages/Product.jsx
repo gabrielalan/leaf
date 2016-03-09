@@ -143,7 +143,7 @@ var Product = React.createClass({
 
 	onRemoveImage: function(id) {
 		return $.ajax({
-			url: '/admin/images/product/remove/' + id + '/' + this.model.get('id'),
+			url: '/admin/rest/products/'  + this.model.get('id') + '/images/' + id,
 			method: 'DELETE',
 			processData: false,
 			contentType: false

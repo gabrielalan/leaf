@@ -62,8 +62,16 @@ function getAllProductQuery() {
 module.exports = {
 
 	admin: {
-		removeAllImages(id) {
+		removeAllProductImages(id) {
 			return knex('products_images').where('product_id', id).del();
+		},
+
+		removeAllImages(product_id) {
+			return knex.select('image_id').from('products_images').where({ product_id }).then(results => {
+				let ids = results.map(current => current.image_id);
+
+				return knex('products_images').where({ product_id }).del().then(result => knex('images').whereIn('id', ids).del());
+			});
 		},
 
 		getProduct(id) {
@@ -72,6 +80,23 @@ module.exports = {
 
 		getAllProducts() {
 			return getAllProductQuery();
+		},
+
+		removeImage(product, image) {
+			return knex.select('*').from('images').where('id', image).then(result => {
+				if (!result.length)
+					return false;
+
+				let name = result[0].name, subquery = knex.select('id').from('images').where('name', name);
+
+				return knex('products_images')
+					.whereIn('image_id', subquery)
+					.andWhere({ product_id: product })
+					.del()
+					.then(result => {
+						return knex('images').where('name', name).del();
+					});
+			});
 		}
 	},
 

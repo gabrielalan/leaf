@@ -100,55 +100,63 @@ module.exports = {
 		}
 	},
 
+	searchProduct(term) {
+		return knex.select('products.id', 'products.name', 'products.description', 'products.value')
+			.max('images.path as path')
+			.from('products')
+			.innerJoin('products_images', 'products_images.product_id', 'products.id')
+			.joinRaw("INNER JOIN images ON images.id = products_images.image_id AND images.sizename = 'PRODUCT_MEDIUM_V'")
+			.where('products.name', 'LIKE', '%' + term + '%')
+			.groupBy('products.id', 'products.name', 'products.description', 'products.value')
+			.orderByRaw('products.id DESC');
+	},
 
+	normalizeImageObject(data, where, extraDataFn) {
+		let current = where[data.id];
 
-	/* old querys to public site */
+		if( !current ) {
+			where[data.id] = data;
 
-	homeProductsQuery: {
-		sql: 'SELECT p.*, i.path, i.sizename FROM products p INNER JOIN products_images pi ON p.id = pi.product_id INNER JOIN images i ON pi.image_id = i.id ORDER BY highlight DESC, id DESC LIMIT 12',
-		nestedTables: true
+			current = where[data.id];
+
+			(extraDataFn || function(){})(current);
+
+			current.images = {};
+		}
+
+		current.images[data.sizename] = data.path;
 	},
 
 	/* mount the object that will be used by the front */
-	mountHomeProducts( rows ) {
-		let highlight = {}, news = {}, hgCount = 0, hgNames = ['BIGGER', 'BIG', 'SMALL'];
-
-		let add = (data, where) => {
-			let current = where[data.id];
-
-			if( !current ) {
-				where[data.id] = data;
-
-				current = where[data.id];
-
-				if( data.highlight === 1 ) {
-					current[hgNames[hgCount]] = true;
-				}
-
-				current.images = {};
-			}
-
-			current.images[data.sizename] = data.path;
-		};
+	normalizeHighlight( rows ) {
+		let highlight = {}, hgCount = 0, hgNames = ['BIGGER', 'BIG', 'SMALL'];
 
 		rows.map((current) => {
-			var exists = current.id in highlight;
+			let exists = current.id in highlight;
 
-			if( current.highlight === 1  && hgCount < 3 ) {
-				add(current, highlight);
+			this.normalizeImageObject(current, highlight, data => {
+				data[hgNames[hgCount]] = true;
+			});
 
-				if( !exists )
-					hgCount++;
-			} else {
-				add(current, news);
-			}
+			if (!exists)
+				hgCount++;
 		});
 
-		return {highlight, news: this.normalizeNews(news)};
+		return highlight;
+	},
+
+	normalizeNews(rows) {
+		let news = {};
+
+		rows.map((current) => {
+			this.normalizeImageObject(current, news);
+		});
+
+		return this.createNewsArray(news);
 	},
 
 	/* unfortunately view only accepts this format to carousel */
-	normalizeNews(news) {
+	createNewsArray(news) {
 		let toView = [], current = [];
 
 		toView.push(current);
@@ -166,20 +174,39 @@ module.exports = {
 		return toView;
 	},
 
-	getHomeProducts() {
-		let deferred = Promise.defer();
+	getHomeHighlights() {
+		let defer = Promise.defer();
 
-		connPool.get().then((connection) => {
-			connection.query(this.homeProductsQuery, (err, rows) => {
-				if( err )
-					throw err;
+		knex.raw("SELECT p.*, i.sizename, i.path " +
+			"FROM products p " +
+			"INNER JOIN products_images pi ON p.id = pi.product_id " +
+			"INNER JOIN images i ON pi.image_id = i.id  AND i.sizename IN('PRODUCT_BIGGER', 'PRODUCT_BIG', 'PRODUCT_MEDIUM') " +
+			"WHERE p.highlight = 1 " +
+			"ORDER BY p.id DESC " +
+			"LIMIT 9")
+			.then(results => {
+				let highlights = results[0],
+					ids = highlights.map(current => current.id);
 
-				deferred.resolve(this.mountHomeProducts(rows));
+				return knex.select('products.*', 'images.sizename', 'images.path')
+					.from('products')
+					.innerJoin('products_images', 'products_images.product_id', 'products.id')
+					.joinRaw("INNER JOIN images ON images.id = products_images.image_id AND images.sizename = 'PRODUCT_CAROUSEL_H'")
+					.whereNotIn('products.id', ids)
+					.orderByRaw('products.id DESC')
+					.limit(10)
+					.then(carousel => {
+						let highlight = this.normalizeHighlight(highlights),
+							news = this.normalizeNews(carousel);
 
-				connection.release();
+						return defer.resolve({highlight, news});
+					}).catch(error => {
+						defer.reject(error);
+					});
+			}).catch(error => {
+				defer.reject(error);
 			});
-		});
 
-		return deferred.promise;
+		return defer.promise;
 	}
 };

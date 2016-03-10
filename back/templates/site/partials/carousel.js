@@ -12,10 +12,10 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
     + "product/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" class=\"pc-item\">\n				<span class=\"pc-price-bg\"></span>\n				<span class=\"pc-price\"><span class=\"pc-price-icon\"><span class=\"icon icon-shopping-cart\"></span></span> <span class=\"pc-price-number\">R$ "
-    + alias4(((helper = (helper = helpers.price || (depth0 != null ? depth0.price : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"price","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data}) : helper)))
     + "</span></span>\n				<img src=\""
     + alias4(((helper = (helper = helpers.baseUrl || (depth0 != null ? depth0.baseUrl : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"baseUrl","hash":{},"data":data}) : helper)))
-    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.images : depth0)) != null ? stack1.PRODUCT_SMALL : stack1), depth0))
+    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.images : depth0)) != null ? stack1.PRODUCT_CAROUSEL_H : stack1), depth0))
     + "\" alt=\""
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "\" />\n			</a>\n";

@@ -17,8 +17,6 @@ module.exports = {
 
 			let filtered = files.filter(name => paths.indexOf(name) < 0);
 
-			console.log(filtered);
-
 			filtered.forEach(current => imageUtils.remove(fspath.join(base, current)));
 		});
 	}

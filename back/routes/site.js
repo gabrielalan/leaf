@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/search', (req, res, next) => {
-	controller.getAction('search')(req, res);
+	controller.getAction('search')(req, res, next);
 });
 
 router.get('/product/:id', (req, res, next) => {

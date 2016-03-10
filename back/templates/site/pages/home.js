@@ -47,7 +47,7 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
     + "product/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" class=\"hg-right-top\" style=\"background-image:url('"
-    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.images : depth0)) != null ? stack1.PRODUCT_BIGGER : stack1), depth0))
+    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.images : depth0)) != null ? stack1.PRODUCT_BIG : stack1), depth0))
     + "');\">\n";
 },"10":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -57,7 +57,7 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
     + "product/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" class=\"hg-right-bottom\" style=\"background-image:url('"
-    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.images : depth0)) != null ? stack1.PRODUCT_BIGGER : stack1), depth0))
+    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.images : depth0)) != null ? stack1.PRODUCT_MEDIUM : stack1), depth0))
     + "');\">\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;

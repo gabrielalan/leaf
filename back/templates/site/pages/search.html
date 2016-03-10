@@ -1,55 +1,30 @@
 {{#> layout}}
 	{{#*inline "content"}}
 <div class="product-list">
-	<h2 class="title-diviser">Resultado da pesquisa</h2>
+	<h2 class="title-diviser">Resultado da pesquisa {{#if term}}para: {{term}}{{/if}}</h2>
 
+{{#if products.length}}
+	{{#each products}}
 	<div class="product-box">
-		<a class="product-box-image" href="/product/1" style="background-image: url(/img/listagem.jpg);"></a>
-		<h3><a href="/product/1">Produto</a></h3>
-		<p>Lorem loaemapda das mdaso dask do koak daos dasod</p>
-		<a href="/product/1" class="product-box-buy"><span><span class="icon icon-chevron-thin-left"></span></span> Comprar</a>
-		<span class="product-box-price"><sup>R$</sup> 12,90</span>
+		<a class="product-box-image" href="/product/{{id}}" style="background-image: url({{baseUrl}}{{path}});"></a>
+		<h3><a href="/product/{{id}}">{{name}}</a></h3>
+		<p>{{description}}</p>
+		<a href="/product/{{id}}" class="product-box-buy"><span><span class="icon icon-chevron-thin-left"></span></span> Comprar</a>
+		<span class="product-box-price"><sup>R$</sup> {{value}}</span>
 	</div>
-	<div class="product-box">
-		<a class="product-box-image" href="/product/1" style="background-image: url(/img/listagem.jpg);"></a>
-		<h3><a href="/product/1">Produto</a></h3>
-		<p>Lorem loaemapda das mdaso dask do koak daos dasod</p>
-		<a href="/product/1" class="product-box-buy"><span><span class="icon icon-chevron-thin-left"></span></span> Comprar</a>
-		<span class="product-box-price"><sup>R$</sup> 12,90</span>
+	{{/each}}
+{{else}}
+
+	<div class="product-empty">
+		<p>Nenhum produto encontrado, por que não tenta outra palavra?</p>
 	</div>
-	<div class="product-box">
-		<a class="product-box-image" href="/product/1" style="background-image: url(/img/listagem.jpg);"></a>
-		<h3><a href="/product/1">Produto</a></h3>
-		<p>Lorem loaemapda das mdaso dask do koak daos dasod</p>
-		<a href="/product/1" class="product-box-buy"><span><span class="icon icon-chevron-thin-left"></span></span> Comprar</a>
-		<span class="product-box-price"><sup>R$</sup> 12,90</span>
-	</div>
-	<div class="product-box">
-		<a class="product-box-image" href="/product/1" style="background-image: url(/img/listagem.jpg);"></a>
-		<h3><a href="/product/1">Produto</a></h3>
-		<p>Lorem loaemapda das mdaso dask do koak daos dasod</p>
-		<a href="/product/1" class="product-box-buy"><span><span class="icon icon-chevron-thin-left"></span></span> Comprar</a>
-		<span class="product-box-price"><sup>R$</sup> 12,90</span>
-	</div>
-	<div class="product-box">
-		<a class="product-box-image" href="/product/1" style="background-image: url(/img/listagem.jpg);"></a>
-		<h3><a href="/product/1">Produto</a></h3>
-		<p>Lorem loaemapda das mdaso dask do koak daos dasod</p>
-		<a href="/product/1" class="product-box-buy"><span><span class="icon icon-chevron-thin-left"></span></span> Comprar</a>
-		<span class="product-box-price"><sup>R$</sup> 12,90</span>
-	</div>
-	<div class="product-box">
-		<a class="product-box-image" href="/product/1" style="background-image: url(/img/listagem.jpg);"></a>
-		<h3><a href="/product/1">Produto</a></h3>
-		<p>Lorem loaemapda das mdaso dask do koak daos dasod</p>
-		<a href="/product/1" class="product-box-buy"><span><span class="icon icon-chevron-thin-left"></span></span> Comprar</a>
-		<span class="product-box-price"><sup>R$</sup> 12,90</span>
-	</div>
+
+{{/if}}
 
 	<nav>
 		<ul class="pager">
-			<li><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
-			<li><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+			{{!<li><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+			<li><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>}}
 		</ul>
 	</nav>
 </div>

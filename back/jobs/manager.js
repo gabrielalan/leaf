@@ -10,7 +10,11 @@ function register(job, delay) {
 				return false;
 
 			return setTimeout(call, delay);
-		}).catch(error => logger.log('error', error));
+		}).catch(error => {
+			logger.log('error', error)
+
+			return setTimeout(call, delay);
+		});
 	};
 
 	return call();

@@ -1,9 +1,13 @@
 'use strict';
 
+const EventEmitter = require('events');
+
 let knex = require('../../db/Knex');
 
-class Entity {
+class Entity extends EventEmitter {
 	constructor(data) {
+		super();
+
 		this.values = {};
 
 		this.map = {
@@ -58,6 +62,9 @@ class Entity {
 			query.transacting(this.transaction);
 
 		return query.into(this.map.table).then((id) => {
+			this.emit('after:save');
+			this.emit('after:insert');
+
 			this.set(this.map.primaries[0], id);
 
 			return this.values;
@@ -71,7 +78,12 @@ class Entity {
 		if (this.transaction)
 			query.transacting(this.transaction);
 
-		return query.update(this.values);
+		return query.update(this.values).then(results => {
+			this.emit('after:save');
+			this.emit('after:update');
+
+			return results;
+		});
 	}
 
 	delete() {
@@ -81,7 +93,11 @@ class Entity {
 		if (this.transaction)
 			query.transacting(this.transaction);
 
-		return query.del();
+		return query.del().then(results => {
+			this.emit('after:delete');
+
+			return results;
+		});
 	}
 
 	getPrimaryKeyValues() {

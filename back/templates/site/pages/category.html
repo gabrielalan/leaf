@@ -1,0 +1,44 @@
+{{#> layout}}
+	{{#*inline "content"}}
+<div class="product-list">
+{{#if category}}
+	<h2 class="title-diviser">Categoria: {{category.name}}</h2>
+
+	{{#if products.length}}
+		{{#each products}}
+	<div class="product-box">
+		<a class="product-box-image" href="/product/{{id}}" style="background-image: url({{baseUrl}}{{path}});"></a>
+		<h3><a href="/product/{{id}}">{{name}}</a></h3>
+		<p>{{description}}</p>
+		<a href="/product/{{id}}" class="product-box-buy"><span><span class="icon icon-chevron-thin-left"></span></span> Comprar</a>
+		<span class="product-box-price"><sup>R$</sup> {{value}}</span>
+	</div>
+		{{/each}}
+	{{else}}
+
+	<div class="product-empty">
+		<p>Nenhum produto encontrado, talvez em outra categoria?</p>
+
+		<a href="{{baseUrl}}" class="btn btn-primary btn-lg">Voltar à página inicial</a>
+	</div>
+
+	{{/if}}
+{{else}}
+	<h2 class="title-diviser">Categoria não encontrada</h2>
+
+	<div class="product-empty">
+		<p>A categoria que você solicitou não existe</p>
+
+		<a href="{{baseUrl}}" class="btn btn-primary btn-lg">Voltar à página inicial</a>
+	</div>
+{{/if}}
+
+	<nav>
+		<ul class="pager">
+			{{!<li><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+			<li><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>}}
+		</ul>
+	</nav>
+</div>
+	{{/inline}}
+{{/layout}}

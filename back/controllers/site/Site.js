@@ -94,6 +94,23 @@ class Site extends Controller {
 		});
 	}
 
+	category( req, res, next ) {
+		var template = require('../../templates/site/pages/category');
+
+		Promise.all([getDefaultData(), CategoriesStore.getCategory(req.params.id), ProductsStore.getByCategory(req.params.id)]).then((results) => {
+			let data = results[0];
+
+			data.category = results[1];
+			data.products = results[2];
+
+			var html = template(data);
+
+			res.send(html);
+		}).catch(error => {
+			next(error);
+		});
+	}
+
 	home( req, res ) {
 		var template = require('../../templates/site/pages/home');
 

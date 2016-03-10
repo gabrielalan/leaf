@@ -14,6 +14,10 @@ router.get('/search', (req, res, next) => {
 	controller.getAction('search')(req, res, next);
 });
 
+router.get('/category/:id', (req, res, next) => {
+	controller.getAction('category')(req, res, next);
+});
+
 router.get('/product/:id', (req, res, next) => {
 	controller.getAction('product')(req, res);
 });

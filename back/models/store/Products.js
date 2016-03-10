@@ -59,6 +59,16 @@ function getAllProductQuery() {
 		.leftJoin('categories', 'categories.id', 'products.category_id');
 }
 
+function getListProductsQuery() {
+	return knex.select('products.id', 'products.name', 'products.description', 'products.value')
+		.max('images.path as path')
+		.from('products')
+		.innerJoin('products_images', 'products_images.product_id', 'products.id')
+		.joinRaw("INNER JOIN images ON images.id = products_images.image_id AND images.sizename = 'PRODUCT_MEDIUM_V'")
+		.groupBy('products.id', 'products.name', 'products.description', 'products.value')
+		.orderByRaw('products.id DESC');
+}
+
 module.exports = {
 
 	admin: {
@@ -100,15 +110,16 @@ module.exports = {
 		}
 	},
 
+	getByCategory(id) {
+		return getListProductsQuery()
+			.whereIn('category_id', function() {
+				this.select('id').from('categories').where('category_id', id);
+			})
+			.orWhere('category_id', id);
+	},
+
 	searchProduct(term) {
-		return knex.select('products.id', 'products.name', 'products.description', 'products.value')
-			.max('images.path as path')
-			.from('products')
-			.innerJoin('products_images', 'products_images.product_id', 'products.id')
-			.joinRaw("INNER JOIN images ON images.id = products_images.image_id AND images.sizename = 'PRODUCT_MEDIUM_V'")
-			.where('products.name', 'LIKE', '%' + term + '%')
-			.groupBy('products.id', 'products.name', 'products.description', 'products.value')
-			.orderByRaw('products.id DESC');
+		return getListProductsQuery().where('products.name', 'LIKE', '%' + term + '%');
 	},
 
 	normalizeImageObject(data, where, extraDataFn) {

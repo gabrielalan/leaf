@@ -1,6 +1,7 @@
 'use strict';
 
-let Entity = require('./Entity');
+let Entity = require('./Entity'),
+	leafCache = require('../../cache/LeafCache');
 
 class Product extends Entity {
 	constructor() {
@@ -19,6 +20,12 @@ class Product extends Entity {
 				'category_id': Number
 			}
 		};
+
+		this.on('after:save', this.afterSave);
+	}
+
+	afterSave() {
+		leafCache.remove('defaultData');
 	}
 }
 

@@ -73,3 +73,21 @@ $borderColor: #ddd;
 		font-size: 10px;
 	}
 }
+
+.product-empty {
+	width: 70%;
+	margin: 100px auto;
+	text-align: center;
+
+	p {
+		font-size: 20px;
+	}
+
+	.top-search {
+		background-color: inherit;
+
+		.top-search-button .icon {
+			color: $leafCheckGreen;
+		}
+	}
+}

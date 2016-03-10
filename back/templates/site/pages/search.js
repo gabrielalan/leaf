@@ -37,7 +37,11 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
     + alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data}) : helper)))
     + "</span>\n	</div>\n";
 },"8":function(container,depth0,helpers,partials,data) {
-    return "\n	<div class=\"product-empty\">\n		<p>Nenhum produto encontrado, por que não tenta outra palavra?</p>\n	</div>\n\n";
+    var stack1;
+
+  return "\n	<div class=\"product-empty\">\n		<p>Nenhum produto encontrado, por que não tenta outra palavra?</p>\n\n"
+    + ((stack1 = container.invokePartial(partials.search,depth0,{"name":"search","data":data,"indent":"\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + "	</div>\n\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 

@@ -3,14 +3,7 @@
 		<h1><a href="{{baseUrl}}"><img src="/img/logo.svg" alt="Leaf" /></a></h1>
 	</div>
 	<div class="col-lg-8 col-md-8 col-sm-6">
-		<form class="top-search row" action="/search" id="search-form">
-			<div class="top-search-input col-lg-10 col-md-10 col-sm-8 col-xs-10">
-				<input type="text" name="term" id="term" class="form-control" value="{{term}}" placeholder="Procure seu produto (ex: biscoito de chocolate)" />
-			</div>
-			<div class="top-search-button col-lg-2 col-md-2 col-sm-4 col-xs-2">
-				<button type="submit" class="btn btn-link btn-block"><span class="icon icon-search"></span></button>
-			</div>
-		</form>
+		{{> search}}
 	</div>
 	<div class="col-lg-2 col-md-2 col-sm-6">
 		<ul class="nav nav-pills pull-right top-menu">

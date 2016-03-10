@@ -85,7 +85,7 @@ class Site extends Controller {
 			data.term = req.query.term;
 
 			data.products = results[1];
-			
+
 			var html = template(data);
 			
 			res.send(html);

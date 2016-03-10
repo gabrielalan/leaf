@@ -4473,6 +4473,17 @@ body {
     margin-right: -4px;
     font-size: 10px; }
 
+.product-empty {
+  width: 70%;
+  margin: 100px auto;
+  text-align: center; }
+  .product-empty p {
+    font-size: 20px; }
+  .product-empty .top-search {
+    background-color: inherit; }
+    .product-empty .top-search .top-search-button .icon {
+      color: #279d4b; }
+
 .cart-button {
   position: relative; }
   .cart-button .counter {

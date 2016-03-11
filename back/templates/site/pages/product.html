@@ -3,27 +3,27 @@
 <div class="product">
 	<div class="product-images">
 		<div class="product-image-bigger">
-			<img src="{{baseUrl}}img/graos.jpg" alt="" />
+			<img src="{{baseUrl}}{{product.images.0.PRODUCT_VIEW.path}}" alt="" />
 		</div>
 
 		<ul class="product-image-list">
-			<li><a href="#"><img src="{{baseUrl}}img/listagem.jpg" /></a></li>
-			<li><a href="#"><img src="{{baseUrl}}img/listagem.jpg" /></a></li>
-			<li><a href="#"><img src="{{baseUrl}}img/listagem.jpg" /></a></li>
+			{{#each product.images}}
+			<li><a href="{{baseUrl}}{{PRODUCT_VIEW.path}}"><img src="{{baseUrl}}{{PRODUCT_SMALLEST.path}}" /></a></li>
+			{{/each}}
 		</ul>
 	</div>
 
 	<div class="product-info">
-		<span class="product-stock has-stock">Disponibilidade <span><span class="icon icon-checkmark"></span></span></span>
+		<span class="product-stock has-stock">Disponibilidade <span><span class="icon icon-{{#if product.available}}checkmark{{else}}x{{/if}}"></span></span></span>
 		<h3>Bolacha</h3>
 
-		<span class="product-price">R$ 12,00</span>
+		<span class="product-price">R$ {{product.value}}</span>
 
 		<hr />
 
 		<p class="product-description">
 			<strong>Descrição:</strong>
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. When an unknown printer took a galley of type.
+			{{product.description}}
 		</p>
 
 		<hr />

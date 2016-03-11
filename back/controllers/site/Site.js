@@ -42,18 +42,22 @@ function getDefaultData() {
 
 class Site extends Controller {
 
-	product( req, res ) {
+	product( req, res, next ) {
 		var template = require('../../templates/site/pages/product');
 
-		getDefaultData()
-			.then((results) => {
-				var html = template(results);
-				
-				res.send(html);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		Promise.all([getDefaultData(), ProductsStore.get(req.params.id)]).then((results) => {
+			let data = results[0];
+
+			data.product = results[1];
+
+			data.product.available = data.product.quantity > 0;
+
+			var html = template(data);
+
+			res.send(html);
+		}).catch((err) => {
+			next(error);
+		});
 	}
 
 	success( req, res ) {
@@ -100,7 +104,7 @@ class Site extends Controller {
 		Promise.all([getDefaultData(), CategoriesStore.getCategory(req.params.id), ProductsStore.getByCategory(req.params.id)]).then((results) => {
 			let data = results[0];
 
-			data.category = results[1];
+			data.category = results[1][0];
 			data.products = results[2];
 
 			var html = template(data);

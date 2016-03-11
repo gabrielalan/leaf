@@ -43,13 +43,31 @@ function normalizeProductImages(products) {
 	return objectToArray(normalized);
 }
 
+function srhinkImages(rows) {
+	return rows.map(product => {
+		let images = {};
+
+		product.images.forEach(image => {
+			if (!(image.name in images)) {
+				images[image.name] = {};
+			}
+
+			images[image.name][image.sizename] = image;
+		});
+
+		product.images = objectToArray(images);
+
+		return product;
+	});
+}
+
 function getProductQuery() {
 	return knex
 		.select('products.*', 'categories.name AS category', 'images.id AS image_id', 'images.path', 'images.sizename', 'images.name AS image_name')
 		.from('products')
 		.leftJoin('categories', 'categories.id', 'products.category_id')
 		.leftJoin('products_images', 'products_images.product_id', 'products.id')
-		.joinRaw("LEFT JOIN images ON images.id = products_images.image_id")
+		.joinRaw("LEFT JOIN images ON images.id = products_images.image_id");
 }
 
 function getAllProductQuery() {
@@ -108,6 +126,20 @@ module.exports = {
 					});
 			});
 		}
+	},
+
+	get(id) {
+		return knex
+			.select('products.*', 'images.id AS image_id', 'images.path', 'images.sizename', 'images.name AS image_name')
+			.from('products')
+			.innerJoin('products_images', 'products_images.product_id', 'products.id')
+			.joinRaw("INNER JOIN images ON images.id = products_images.image_id AND images.sizename IN('PRODUCT_VIEW', 'PRODUCT_SMALLEST')")
+			.where({ 'products.id': id })
+			.then(result => {
+				let normalized = srhinkImages(normalizeProductImages(result));
+
+				return normalized[0];
+			});
 	},
 
 	getByCategory(id) {

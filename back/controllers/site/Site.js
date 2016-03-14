@@ -45,7 +45,7 @@ class Site extends Controller {
 	product( req, res, next ) {
 		var template = require('../../templates/site/pages/product');
 
-		Promise.all([getDefaultData(), ProductsStore.get(req.params.id)]).then((results) => {
+		Promise.all([getDefaultData(), ProductsStore.get(req.params.id, true)]).then((results) => {
 			let data = results[0];
 
 			data.product = results[1];

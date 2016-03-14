@@ -7,7 +7,7 @@ $borderColor: #ddd;
 	span {
 		font-size: 22px;
 		position: relative;
-		top: 5px;
+		top: 2px;
 		margin-left: 5px;
 	}
 
@@ -24,6 +24,10 @@ $borderColor: #ddd;
 	float: left;
 	width: 370px;
 	margin-bottom: 50px;
+}
+
+.product-image-bigger {
+	position: relative;
 }
 
 .product-image-bigger img {
@@ -110,6 +114,10 @@ $borderColor: #ddd;
 	}
 }
 
+.product-unavailable {
+	text-align: center;
+}
+
 .similar-products {
 	clear: both;
 	margin-top: 50px;
@@ -128,6 +136,12 @@ $borderColor: #ddd;
 		padding: 10px;
 		font-size: 12px;
 		text-transform: uppercase;
+	}
+
+	h2 {
+		margin: 10px 0;
+		text-align: center;
+		color: #B3B3B3;
 	}
 
 	.similar-container {

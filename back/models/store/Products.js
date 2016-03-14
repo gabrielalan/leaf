@@ -1,6 +1,7 @@
 'use strict';
 
 var knex = require('../../db/Knex'),
+	logger = require('../../logger/Logger'),
 	connPool = require('../../db/ConnectionPool');
 
 function objectToArray(obj) {
@@ -77,12 +78,12 @@ function getAllProductQuery() {
 		.leftJoin('categories', 'categories.id', 'products.category_id');
 }
 
-function getListProductsQuery() {
+function getListProductsQuery(size) {
 	return knex.select('products.id', 'products.name', 'products.description', 'products.value')
 		.max('images.path as path')
 		.from('products')
 		.innerJoin('products_images', 'products_images.product_id', 'products.id')
-		.joinRaw("INNER JOIN images ON images.id = products_images.image_id AND images.sizename = 'PRODUCT_MEDIUM_V'")
+		.joinRaw("INNER JOIN images ON images.id = products_images.image_id AND images.sizename = '" + size + "'")
 		.groupBy('products.id', 'products.name', 'products.description', 'products.value')
 		.orderByRaw('products.id DESC');
 }
@@ -128,7 +129,7 @@ module.exports = {
 		}
 	},
 
-	get(id) {
+	get(id, similar) {
 		return knex
 			.select('products.*', 'images.id AS image_id', 'images.path', 'images.sizename', 'images.name AS image_name')
 			.from('products')
@@ -138,12 +139,27 @@ module.exports = {
 			.then(result => {
 				let normalized = srhinkImages(normalizeProductImages(result));
 
-				return normalized[0];
+				return !similar ? normalized[0] : this.getSimilar(normalized[0]);
+			}).catch(error => {
+				logger.log('error', error);
+			});
+	},
+
+	getSimilar(product) {
+		return getListProductsQuery('PRODUCT_CAROUSEL_V')
+			.whereNot('products.id', product.id)
+			.andWhere('products.category_id', product.category_id)
+			.then(results => {
+				product.similars = results.length ? this.createNewsArray(results, 5) : false;
+
+				return product;
+			}).catch(error => {
+				logger.log('error', error);
 			});
 	},
 
 	getByCategory(id) {
-		return getListProductsQuery()
+		return getListProductsQuery('PRODUCT_MEDIUM_V')
 			.whereIn('category_id', function() {
 				this.select('id').from('categories').where('category_id', id);
 			})
@@ -151,7 +167,7 @@ module.exports = {
 	},
 
 	searchProduct(term) {
-		return getListProductsQuery().where('products.name', 'LIKE', '%' + term + '%');
+		return getListProductsQuery('PRODUCT_MEDIUM_V').where('products.name', 'LIKE', '%' + term + '%');
 	},
 
 	normalizeImageObject(data, where, extraDataFn) {
@@ -195,11 +211,11 @@ module.exports = {
 			this.normalizeImageObject(current, news);
 		});
 
-		return this.createNewsArray(news);
+		return this.createNewsArray(news, 3);
 	},
 
 	/* unfortunately view only accepts this format to carousel */
-	createNewsArray(news) {
+	createNewsArray(news, page) {
 		let toView = [], current = [];
 
 		toView.push(current);
@@ -207,7 +223,7 @@ module.exports = {
 		for( var index in news ) {
 			current.push(news[index]);
 
-			if( current.length === 3 ) {
+			if( current.length === page ) {
 				current = [];
 
 				toView.push(current);

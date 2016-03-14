@@ -4276,7 +4276,7 @@ body {
   .product-stock span {
     font-size: 22px;
     position: relative;
-    top: 5px;
+    top: 2px;
     margin-left: 5px; }
   .product-stock.has-stock span {
     color: #279d4b; }
@@ -4287,6 +4287,9 @@ body {
   float: left;
   width: 370px;
   margin-bottom: 50px; }
+
+.product-image-bigger {
+  position: relative; }
 
 .product-image-bigger img {
   width: 100%; }
@@ -4349,6 +4352,9 @@ body {
   text-align: center;
   display: inline-block; }
 
+.product-unavailable {
+  text-align: center; }
+
 .similar-products {
   clear: both;
   margin-top: 50px;
@@ -4366,6 +4372,10 @@ body {
     padding: 10px;
     font-size: 12px;
     text-transform: uppercase; }
+  .similar-products h2 {
+    margin: 10px 0;
+    text-align: center;
+    color: #B3B3B3; }
   .similar-products .similar-container {
     overflow: hidden; }
   .similar-products .pc-walker {

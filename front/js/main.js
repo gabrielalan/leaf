@@ -16,7 +16,8 @@ var Flux = require("Flux"),
 
 var counter = new CartCounter();
 
-ReactDOM.render(React.createElement(UserLocation, null), document.querySelector('.temporary-place'));
+// For this moment, we will not use userLocation
+// ReactDOM.render(React.createElement(UserLocation, null), document.querySelector('.temporary-place'));
 
 counter.render(document.querySelector('.cart-button'));
 

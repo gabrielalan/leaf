@@ -9,12 +9,17 @@ let carousel 	= fs.readFileSync('back/templates/site/partials/carousel.html', "u
 	search 		= fs.readFileSync('back/templates/site/partials/search.html', "utf-8"),
 	menu 		= fs.readFileSync('back/templates/site/partials/menu.html', "utf-8"),
 	othermenus 	= fs.readFileSync('back/templates/site/partials/othermenus.html', "utf-8"),
-	layout 		= fs.readFileSync('back/templates/site/layout.html', "utf-8");
+	layout 		= fs.readFileSync('back/templates/site/layout.html', "utf-8"),
+	numeral 	= require('../front/js/Common/NumeralInstance');
 
 class InitialConfiguration {
 
 	getBaseUrl() {
 		return 'http://leafdev.com/';
+	}
+
+	currency(value) {
+		return numeral(value).format('$ 0,0.00');
 	}
 
 	constructor() {
@@ -30,6 +35,7 @@ class InitialConfiguration {
 		handlebars.registerPartial('layout', layout);
 
 		handlebars.registerHelper('baseUrl', this.getBaseUrl);
+		handlebars.registerHelper('currency', this.currency);
 	}
 }
 

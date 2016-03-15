@@ -33,8 +33,8 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
     + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
     + "</p>\n		<a href=\"/product/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\" class=\"product-box-buy\"><span><span class=\"icon icon-chevron-thin-left\"></span></span> Comprar</a>\n		<span class=\"product-box-price\"><sup>R$</sup> "
-    + alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"value","hash":{},"data":data}) : helper)))
+    + "\" class=\"product-box-buy\"><span><span class=\"icon icon-chevron-thin-left\"></span></span> Comprar</a>\n		<span class=\"product-box-price\">"
+    + alias4((helpers.currency || (depth0 && depth0.currency) || alias2).call(alias1,(depth0 != null ? depth0.value : depth0),{"name":"currency","hash":{},"data":data}))
     + "</span>\n	</div>\n";
 },"7":function(container,depth0,helpers,partials,data) {
     var helper;

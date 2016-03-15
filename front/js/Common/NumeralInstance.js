@@ -1,7 +1,7 @@
 'use strict';
 
 var numeral = require('numeral'),
-	config = require('numeralPtBr');
+	config = require('numeral/languages/pt-br');
 
 numeral.language('pt-br', config);
 

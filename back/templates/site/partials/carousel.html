@@ -5,7 +5,7 @@
 			{{#each .}}
 			<a href="{{baseUrl}}product/{{id}}" class="pc-item">
 				<span class="pc-price-bg"></span>
-				<span class="pc-price"><span class="pc-price-icon"><span class="icon icon-shopping-cart"></span></span> <span class="pc-price-number">R$ {{value}}</span></span>
+				<span class="pc-price"><span class="pc-price-icon"><span class="icon icon-shopping-cart"></span></span> <span class="pc-price-number">{{currency value}}</span></span>
 				<img src="{{baseUrl}}{{images.PRODUCT_CAROUSEL_H}}" alt="{{name}}" />
 			</a>
 			{{/each}}

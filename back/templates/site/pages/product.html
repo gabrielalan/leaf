@@ -17,7 +17,7 @@
 		<span class="product-stock has-stock">Disponibilidade <span><span class="icon icon-{{#if product.available}}checkmark{{else}}x{{/if}}"></span></span></span>
 		<h3>{{product.name}}</h3>
 
-		<span class="product-price">R$ {{product.value}}</span>
+		<span class="product-price">{{currency product.value}}</span>
 
 		<hr />
 
@@ -37,7 +37,7 @@
 				<a href="#" class="product-quantity-more">+</a>
 			</div>
 			<div class="col-lg-5">
-				<button class="btn btn-warning btn-block product-add-to-cart">
+				<button class="btn btn-warning btn-block product-add-to-cart" data-id="{{product.id}}" data-quantity="quantity-input">
 					<span><span class="icon icon-bag"></span></span>
 					Adicionar ao carrinho
 				</button>

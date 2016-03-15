@@ -12,9 +12,9 @@ var AddToCart = Klass.create({
 
 	quantity: null,
 
-	construct: function(button, quantityInput) {
+	construct: function(button) {
 		this.button = $(button);
-		this.quantity = $(quantityInput);
+		this.quantity = $('#' + this.button.data('quantity'));
 
 		this.initLoading();
 
@@ -39,12 +39,22 @@ var AddToCart = Klass.create({
 		$.ajax({
 			url: '/rest/cart/add',
 			method: 'post',
+			data: JSON.stringify(this.getData()),
+			contentType: "application/json; charset=utf-8",
+			processData: false,
 			complete: function(result) {
 				me.loading.setState(false);
 
 				Flux.actions.loadCartTotal();
 			}
 		});
+	},
+
+	getData: function () {
+		return {
+			id: this.button.data('id'),
+			quantity: this.quantity.val()
+		}
 	},
 
 	onClick: function () {

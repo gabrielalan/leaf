@@ -13,6 +13,6 @@ System.config({
 		'underscore': '/vendor/underscore/underscore-min.js',
 		'Backbone': '/vendor/backbone/backbone.js',
 		'numeral': '/vendor/numeral/min/numeral.min.js',
-		'numeralPtBr': '/vendor/numeral/min/languages/pt-br.min.js'
+		'numeral/languages/pt-br': '/vendor/numeral/min/languages/pt-br.min.js'
 	}
 });

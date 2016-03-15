@@ -5,6 +5,8 @@ var Controller = require('../Controller'),
 	ProductsStore = require('../../models/store/Products'),
 	CategoriesStore = require('../../models/store/Categories'),
 	leafCache = require('../../cache/LeafCache'),
+	CartStore = require('../../models/store/Carts'),
+	CartItemStore = require('../../models/store/CartItems'),
 	handlebars = require('handlebars');
 
 function getDefaultData() {
@@ -73,10 +75,31 @@ class Site extends Controller {
 	cart( req, res ) {
 		var template = require('../../templates/site/pages/cart');
 
-		getDefaultData().then((results) => {
-			var html = template(results);
+		Promise.all([getDefaultData(), CartItemStore.getAll(CartStore.getToken(req, res))]).then(results => {
+			let data = results[0];
+
+			data.items = results[1];
+
+			if (data.items.length > 1)
+				data.subtotal = data.items.reduce((a, b) => (a.total || a) + b.total);
+			else if (data.items.length === 1)
+				data.subtotal = data.items[0].total;
+			else
+				data.subtotal = 0;
+
+			data.tax = 10;
+
+			data.total = data.subtotal + data.tax;
+
+			try {
+				var html = template(data);
+			} catch(e) {
+				console.log(e);
+			}
 
 			res.send(html);
+		}).catch((err) => {
+			next(error);
 		});
 	}
 

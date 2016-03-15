@@ -16,53 +16,34 @@
 			<div class="col-lg-2 cart-price">Valor Total</div>
 		</div>
 
+		{{#each items}}
 		<div class="product row">
-			<div class="col-lg-1"><img src="{{baseUrl}}img/dropdown.jpg" class="cart-prod-image" /></div>
-			<div class="col-lg-5">Moto G (2ª Geração) com 4G Dual Chip XT 1078, Desbloqueado Preto</div>
+			<div class="col-lg-1"><img src="{{baseUrl}}{{path}}" class="cart-prod-image" /></div>
+			<div class="col-lg-5">{{name}}</div>
 			<div class="col-lg-2 product-quantity">
-				<a href="#" class="product-quantity-less">-</a>
+				{{quantity}}
+				{{!<a href="#" class="product-quantity-less">-</a>
 				<input type="text" id="quantity-input" class="form-control" value="1" />
-				<a href="#" class="product-quantity-more">+</a>
+				<a href="#" class="product-quantity-more">+</a>}}
 			</div>
-			<div class="col-lg-2 cart-price">R$ 10,00</div>
-			<div class="col-lg-2 cart-price">R$ 10,00</div>
+			<div class="col-lg-2 cart-price">{{currency value}}</div>
+			<div class="col-lg-2 cart-price">{{currency total}}</div>
 		</div>
-		<div class="product row">
-			<div class="col-lg-1"><img src="{{baseUrl}}img/dropdown.jpg" class="cart-prod-image" /></div>
-			<div class="col-lg-5">Moto G (2ª Geração) com 4G Dual Chip XT 1078, Desbloqueado Preto</div>
-			<div class="col-lg-2 product-quantity">
-				<a href="#" class="product-quantity-less">-</a>
-				<input type="text" id="quantity-input" class="form-control" value="1" />
-				<a href="#" class="product-quantity-more">+</a>
-			</div>
-			<div class="col-lg-2 cart-price">R$ 10,00</div>
-			<div class="col-lg-2 cart-price">R$ 10,00</div>
-		</div>
-		<div class="product row">
-			<div class="col-lg-1"><img src="{{baseUrl}}img/dropdown.jpg" class="cart-prod-image" /></div>
-			<div class="col-lg-5">Moto G (2ª Geração) com 4G Dual Chip XT 1078, Desbloqueado Preto</div>
-			<div class="col-lg-2 product-quantity">
-				<a href="#" class="product-quantity-less">-</a>
-				<input type="text" id="quantity-input" class="form-control" value="1" />
-				<a href="#" class="product-quantity-more">+</a>
-			</div>
-			<div class="col-lg-2 cart-price">R$ 10,00</div>
-			<div class="col-lg-2 cart-price">R$ 10,00</div>
-		</div>
+		{{/each}}
 	</div>
 
 	<div class="cart-footer">
 		<div class="cart-subtotal column-right">
-			<span>Subtotal: <strong>R$ 10,00</strong></span>
+			<span>Subtotal: <strong>{{currency subtotal}}</strong></span>
 		</div>
 
 		<div class="cart-tax column-right">
-			<span>Frete: <strong>R$ 10,00</strong></span>
+			<span>Frete: <strong>{{currency tax}}</strong></span>
 		</div>
 
 		<div class="row cart-total">
 			<div class="col-lg-6"><strong>Atenção:</strong> O prazo de entrega começa a contar a partir da aprovação do pagamento.</div>
-			<div class="col-lg-6 column-right"><span>Total: <strong>R$ 20,00</strong></span></div>
+			<div class="col-lg-6 column-right"><span>Total: <strong>{{currency total}}</strong></span></div>
 		</div>
 
 		<div class="column-right">

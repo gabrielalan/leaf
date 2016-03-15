@@ -1,21 +1,21 @@
 var Handlebars = require("handlebars");module.exports = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     return "";
 },"2":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=container.escapeExpression, alias3=container.lambda;
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3=container.escapeExpression, alias4=container.lambda;
 
   return "<div class=\"product\">\n	<div class=\"product-images\">\n		<div class=\"product-image-bigger\">\n			<img src=\""
-    + alias2(((helper = (helper = helpers.baseUrl || (depth0 != null ? depth0.baseUrl : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"baseUrl","hash":{},"data":data}) : helper)))
-    + alias2(alias3(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.images : stack1)) != null ? stack1["0"] : stack1)) != null ? stack1.PRODUCT_VIEW : stack1)) != null ? stack1.path : stack1), depth0))
+    + alias3(((helper = (helper = helpers.baseUrl || (depth0 != null ? depth0.baseUrl : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"baseUrl","hash":{},"data":data}) : helper)))
+    + alias3(alias4(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.images : stack1)) != null ? stack1["0"] : stack1)) != null ? stack1.PRODUCT_VIEW : stack1)) != null ? stack1.path : stack1), depth0))
     + "\" alt=\"\" />\n		</div>\n\n		<ul class=\"product-image-list\">\n"
     + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.images : stack1),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "		</ul>\n	</div>\n\n	<div class=\"product-info\">\n		<span class=\"product-stock has-stock\">Disponibilidade <span><span class=\"icon icon-"
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.available : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
     + "\"></span></span></span>\n		<h3>"
-    + alias2(alias3(((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.name : stack1), depth0))
-    + "</h3>\n\n		<span class=\"product-price\">R$ "
-    + alias2(alias3(((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.value : stack1), depth0))
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.name : stack1), depth0))
+    + "</h3>\n\n		<span class=\"product-price\">"
+    + alias3((helpers.currency || (depth0 && depth0.currency) || alias2).call(alias1,((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.value : stack1),{"name":"currency","hash":{},"data":data}))
     + "</span>\n\n		<hr />\n\n		<p class=\"product-description\">\n			<strong>Descrição:</strong>\n			"
-    + alias2(alias3(((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.description : stack1), depth0))
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.description : stack1), depth0))
     + "\n		</p>\n\n		<hr />\n\n		<div class=\"row\">\n"
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.available : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.program(11, data, 0),"data":data})) != null ? stack1 : "")
     + "		</div>\n	</div>\n\n	<div class=\"similar-products\" id=\"similar-products\">\n"
@@ -36,11 +36,13 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
 },"7":function(container,depth0,helpers,partials,data) {
     return "x";
 },"9":function(container,depth0,helpers,partials,data) {
-    var stack1;
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "			<div class=\"col-lg-3 product-quantity\" data-limit=\""
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.quantity : stack1), depth0))
-    + "\">\n				<label for=\"quantity-input\">Quantidade</label>\n				<a href=\"#\" class=\"product-quantity-less\">-</a>\n				<input type=\"text\" id=\"quantity-input\" class=\"form-control\" value=\"1\" />\n				<a href=\"#\" class=\"product-quantity-more\">+</a>\n			</div>\n			<div class=\"col-lg-5\">\n				<button class=\"btn btn-warning btn-block product-add-to-cart\">\n					<span><span class=\"icon icon-bag\"></span></span>\n					Adicionar ao carrinho\n				</button>\n			</div>\n			<div class=\"col-lg-4\">\n				<a href=\"#\" class=\"btn btn-link btn-block\">Comprar</a>\n			</div>\n";
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.quantity : stack1), depth0))
+    + "\">\n				<label for=\"quantity-input\">Quantidade</label>\n				<a href=\"#\" class=\"product-quantity-less\">-</a>\n				<input type=\"text\" id=\"quantity-input\" class=\"form-control\" value=\"1\" />\n				<a href=\"#\" class=\"product-quantity-more\">+</a>\n			</div>\n			<div class=\"col-lg-5\">\n				<button class=\"btn btn-warning btn-block product-add-to-cart\" data-id=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.product : depth0)) != null ? stack1.id : stack1), depth0))
+    + "\" data-quantity=\"quantity-input\">\n					<span><span class=\"icon icon-bag\"></span></span>\n					Adicionar ao carrinho\n				</button>\n			</div>\n			<div class=\"col-lg-4\">\n				<a href=\"#\" class=\"btn btn-link btn-block\">Comprar</a>\n			</div>\n";
 },"11":function(container,depth0,helpers,partials,data) {
     return "			<div class=\"col-lg-12 col-md-12\">\n				<h4 class=\"product-unavailable\">Produto indisponível no momento.</h4>\n			</div>\n";
 },"13":function(container,depth0,helpers,partials,data) {

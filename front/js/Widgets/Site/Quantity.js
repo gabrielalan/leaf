@@ -16,6 +16,7 @@ var Quantity = Klass.create({
 	},
 
 	bindEvents: function() {
+		this.elements.off('click');
 		this.elements.on('click', 'a', this.onClick.bind(this));
 		this.elements.on('keyup', 'input', this.onKeyDown.bind(this));
 	},
@@ -45,6 +46,9 @@ var Quantity = Klass.create({
 			this.stepMore(input);
 		else
 			this.stepLess(input);
+
+		evt.preventDefault();
+		return false;
 	}
 });
 

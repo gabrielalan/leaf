@@ -10,16 +10,17 @@
 
 	<div class="table-holder">
 		<div class="header row">
-			<div class="col-lg-6">Produto</div>
+			<div class="col-lg-4">Produto</div>
 			<div class="col-lg-2 column-center">Quantidade</div>
 			<div class="col-lg-2 cart-price">Valor Unitário</div>
 			<div class="col-lg-2 cart-price">Valor Total</div>
+			<div class="col-lg-2 cart-price">Remover</div>
 		</div>
 
 		{{#each items}}
 		<div class="product row">
 			<div class="col-lg-1"><img src="{{baseUrl}}{{path}}" class="cart-prod-image" /></div>
-			<div class="col-lg-5">{{name}}</div>
+			<div class="col-lg-3">{{name}}</div>
 			<div class="col-lg-2 product-quantity">
 				{{quantity}}
 				{{!<a href="#" class="product-quantity-less">-</a>
@@ -28,6 +29,7 @@
 			</div>
 			<div class="col-lg-2 cart-price">{{currency value}}</div>
 			<div class="col-lg-2 cart-price">{{currency total}}</div>
+			<div class="col-lg-2 cart-price"><a href="{{baseUrl}}rest/cart/{{id}}" class="btn btn-danger remove-cart-item"><span class="icon icon-bin"></span></a></div>
 		</div>
 		{{/each}}
 	</div>

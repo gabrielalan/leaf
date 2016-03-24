@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'leaf';
     src:
-        url('/style/icomoon/fonts/leaf.ttf?87rt2t') format('truetype'),
-        url('/style/icomoon/fonts/leaf.woff?87rt2t') format('woff'),
-        url('/style/icomoon/fonts/leaf.svg?87rt2t#leaf') format('svg');
+        url('/style/icomoon/fonts/leaf.ttf?aot8cm') format('truetype'),
+        url('/style/icomoon/fonts/leaf.woff?aot8cm') format('woff'),
+        url('/style/icomoon/fonts/leaf.svg?aot8cm#leaf') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -52,5 +52,8 @@
 }
 .icon-search:before {
     content: "\e905";
+}
+.icon-bin:before {
+    content: "\e90a";
 }
 

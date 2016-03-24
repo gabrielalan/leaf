@@ -36,6 +36,18 @@ class Payment extends Controller {
 			}).catch(err => error(res, err));
 		}).catch(err => error(res, err));
 	}
+
+	remove(req, res) {
+		let entity = new CartItem(), manager = new EntityManager();
+
+		entity.set('id', req.params.id);
+
+		manager.delete(entity);
+
+		manager.flush()
+			.then(result => res.sendStatus(200))
+			.catch(err => error(res, err));
+	}
 }
 
 module.exports = Payment;

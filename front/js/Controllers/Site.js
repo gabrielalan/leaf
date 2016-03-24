@@ -4,7 +4,8 @@ var ProductsCarousel = require('Widgets/Site/ProductsCarousel'),
 	AddToCart = require('Widgets/Site/AddToCart'),
 	ProductImageViewer = require('Widgets/Site/ProductImageViewer'),
 	Quantity = require('Widgets/Site/Quantity'),
-	BuyButton = require('Widgets/Site/BuyButton');
+	BuyButton = require('Widgets/Site/BuyButton'),
+	RemoveButton = require('Widgets/Site/RemoveCartItemButton');
 
 module.exports = {
 
@@ -24,9 +25,13 @@ module.exports = {
 	},
 
 	"cart": function() {
-		var buyFinishButton = document.querySelectorAll('.cart .cart-finish');
+		var buyFinishButton = document.querySelectorAll('.cart .cart-finish'),
+			deleteButtons = document.querySelectorAll('.remove-cart-item');
 
 		if (buyFinishButton)
 			new BuyButton(buyFinishButton);
+
+		if (deleteButtons.length)
+			new RemoveButton(deleteButtons);
 	}
 };

@@ -174,7 +174,7 @@
 			},
 			"setIdx": 3,
 			"setId": 1,
-			"iconIdx": 0
+			"iconIdx": 1
 		},
 		{
 			"icon": {
@@ -200,7 +200,7 @@
 			},
 			"setIdx": 3,
 			"setId": 1,
-			"iconIdx": 1
+			"iconIdx": 2
 		},
 		{
 			"icon": {
@@ -252,6 +252,36 @@
 			"setIdx": 4,
 			"setId": 0,
 			"iconIdx": 1
+		},
+		{
+			"icon": {
+				"paths": [
+					"M128 320v640c0 35.2 28.8 64 64 64h576c35.2 0 64-28.8 64-64v-640h-704zM320 896h-64v-448h64v448zM448 896h-64v-448h64v448zM576 896h-64v-448h64v448zM704 896h-64v-448h64v448z",
+					"M848 128h-208v-80c0-26.4-21.6-48-48-48h-224c-26.4 0-48 21.6-48 48v80h-208c-26.4 0-48 21.6-48 48v80h832v-80c0-26.4-21.6-48-48-48zM576 128h-192v-63.198h192v63.198z"
+				],
+				"attrs": [],
+				"isMulticolor": false,
+				"tags": [
+					"bin",
+					"trashcan",
+					"remove",
+					"delete",
+					"recycle",
+					"dispose"
+				],
+				"grid": 16
+			},
+			"attrs": [],
+			"properties": {
+				"order": 10,
+				"id": 3,
+				"prevSize": 24,
+				"code": 59658,
+				"name": "bin"
+			},
+			"setIdx": 3,
+			"setId": 1,
+			"iconIdx": 0
 		}
 	],
 	"height": 1024,

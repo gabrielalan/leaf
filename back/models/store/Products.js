@@ -236,17 +236,18 @@ module.exports = {
 	getHomeHighlights() {
 		let defer = Promise.defer();
 
-		knex.raw("SELECT p.*, i.sizename, i.path " +
+		knex.raw("SELECT p.id, MAX(p.name) as name, MAX(p.description) as description, i.sizename, MAX(i.path) as path " +
 			"FROM products p " +
 			"INNER JOIN products_images pi ON p.id = pi.product_id " +
 			"INNER JOIN images i ON pi.image_id = i.id  AND i.sizename IN('PRODUCT_BIGGER', 'PRODUCT_BIG', 'PRODUCT_MEDIUM') " +
 			"WHERE p.highlight = 1 " +
+			"GROUP BY p.id, i.sizename " +
 			"ORDER BY p.id DESC " +
 			"LIMIT 9")
 			.then(results => {
 				let highlights = results[0],
 					ids = highlights.map(current => current.id);
-
+console.log(highlights);
 				return knex.select('products.*', 'images.sizename', 'images.path')
 					.from('products')
 					.innerJoin('products_images', 'products_images.product_id', 'products.id')

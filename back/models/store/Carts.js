@@ -1,9 +1,22 @@
 'use strict';
 
 var knex = require('../../db/Knex'),
+	CartItemsStore = require('./CartItems'),
 	Entity = require('../entities/Cart');
 
 module.exports = {
+
+	removeItems(token) {
+		return knex.select('*').from('carts').where('token', token).then(result => {
+			let cart = result[0];
+
+			if (!cart) {
+				return true;
+			}
+
+			return CartItemsStore.removeAll(cart.id);
+		});
+	},
 
 	getToken(req, res) {
 		let cookie = req.cookies.l34fc4rr0d3c0m7r4;

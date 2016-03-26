@@ -36,12 +36,19 @@ var BuyButton = Klass.create({
 
 		$.ajax({
 			url: '/rest/payment/checkout',
-			complete: function(result) {
-				var url = result.responseJSON.url;
+			success: function(response) {
+				var url = response.url;
 
-				me.loading.setState(true);
+				me.loading.setState(false);
 
 				window.location = url;
+			},
+			error: function(result) {
+				me.loading.setState(false);
+
+				alert('Desculpe, um erro ocoreu ao registrar a venda, tente novamente mais tarde!');
+
+				console.log(result.responseJSON);
 			}
 		});
 	},

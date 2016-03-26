@@ -5,6 +5,10 @@ var knex = require('../../db/Knex'),
 
 module.exports = {
 
+	removeAll(cart_id) {
+		return knex('cart_items').where({ cart_id }).del();
+	},
+
 	save(data) {
 		let record = new Entity();
 
@@ -43,9 +47,14 @@ module.exports = {
 			.where('carts.token', token);
 	},
 
-	getAll(token) {
+	getAll(token, select) {
+		const fixedSelect = ["cart_items.id", "cart_items.quantity", "products.name", "products.value", "products.id AS product_id"];
+		const defaultSelect = ["(cart_items.quantity * products.value) AS total"];
+
+		const usedSelect = fixedSelect.concat(select || defaultSelect);
+
 		return knex
-			.select(knex.raw('cart_items.id, cart_items.quantity, products.name, products.value, (cart_items.quantity * products.value) AS total'))
+			.select(knex.raw(usedSelect.join(",")))
 			.max('images.path as path')
 			.from('cart_items')
 			.innerJoin('carts', 'cart_items.cart_id', 'carts.id')
@@ -53,7 +62,7 @@ module.exports = {
 			.innerJoin('products_images', 'products_images.product_id', 'products.id')
 			.joinRaw("INNER JOIN images ON images.id = products_images.image_id AND images.sizename = 'PRODUCT_VIEW'")
 			.where('carts.token', token)
-			.groupBy('cart_items.id', 'cart_items.quantity', 'products.name', 'products.value')
+			.groupBy('cart_items.id', 'cart_items.quantity', 'products.name', 'products.value', 'products.id')
 			.orderByRaw('cart_items.quantity DESC');
 	}
 };

@@ -13,12 +13,24 @@ class PagSeguro {
 	}
 
 	checkout(data) {
-		let postData = builder.buildObject(data),
+		let defer = Promise.defer(),
+			postData = builder.buildObject(data),
 			options = config.getCheckoutOptions();
 
 		options.headers['Content-Length'] = postData.length;
 
-		return this.doRequest(options, postData);
+		this.doRequest(options, postData)
+			.then((xml) => {
+				if (xml.errors)
+					return defer.reject(xml.errors);
+
+				defer.resolve(xml);
+			})
+			.catch((err) => {
+				defer.reject(err);
+			});
+
+		return defer.promise;
 	}
 
 	notification(oid) {

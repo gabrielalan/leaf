@@ -1,6 +1,7 @@
 {{#> layout}}
 	{{#*inline "content"}}
 <div class="cart">
+{{#if items.length}}
 	<h2 class="title-diviser">
 		Meu carrinho
 		<button class="btn btn-success btn-lg cart-finish">Comprar</button>
@@ -52,6 +53,15 @@
 			<button class="btn btn-success btn-lg cart-finish">Comprar</button>
 		</div>
 	</div>
+{{else}}
+	<h2 class="title-diviser">Meu carrinho</h2>
+
+	<div class="product-empty">
+		<p><b>Nenhum produto no carrinho</b>, que tal procurar um?</p>
+
+		{{> search}}
+	</div>
+{{/if}}
 </div>
 	{{/inline}}
 {{/layout}}

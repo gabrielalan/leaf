@@ -1,18 +1,24 @@
 var Handlebars = require("handlebars");module.exports = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     return "";
 },"2":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div class=\"cart\">\n"
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},((stack1 = (depth0 != null ? depth0.items : depth0)) != null ? stack1.length : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.program(6, data, 0),"data":data})) != null ? stack1 : "")
+    + "</div>\n";
+},"3":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3=container.escapeExpression;
 
-  return "<div class=\"cart\">\n	<h2 class=\"title-diviser\">\n		Meu carrinho\n		<button class=\"btn btn-success btn-lg cart-finish\">Comprar</button>\n	</h2>\n\n	<p>Confira os produtos que você escolheu, e se desejar, continue navegando por nosso site.</p>\n\n	<div class=\"table-holder\">\n		<div class=\"header row\">\n			<div class=\"col-lg-4\">Produto</div>\n			<div class=\"col-lg-2 column-center\">Quantidade</div>\n			<div class=\"col-lg-2 cart-price\">Valor Unitário</div>\n			<div class=\"col-lg-2 cart-price\">Valor Total</div>\n			<div class=\"col-lg-2 cart-price\">Remover</div>\n		</div>\n\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.items : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+  return "	<h2 class=\"title-diviser\">\n		Meu carrinho\n		<button class=\"btn btn-success btn-lg cart-finish\">Comprar</button>\n	</h2>\n\n	<p>Confira os produtos que você escolheu, e se desejar, continue navegando por nosso site.</p>\n\n	<div class=\"table-holder\">\n		<div class=\"header row\">\n			<div class=\"col-lg-4\">Produto</div>\n			<div class=\"col-lg-2 column-center\">Quantidade</div>\n			<div class=\"col-lg-2 cart-price\">Valor Unitário</div>\n			<div class=\"col-lg-2 cart-price\">Valor Total</div>\n			<div class=\"col-lg-2 cart-price\">Remover</div>\n		</div>\n\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.items : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "	</div>\n\n	<div class=\"cart-footer\">\n		<div class=\"cart-subtotal column-right\">\n			<span>Subtotal: <strong>"
     + alias3((helpers.currency || (depth0 && depth0.currency) || alias2).call(alias1,(depth0 != null ? depth0.subtotal : depth0),{"name":"currency","hash":{},"data":data}))
     + "</strong></span>\n		</div>\n\n		<div class=\"cart-tax column-right\">\n			<span>Frete: <strong>"
     + alias3((helpers.currency || (depth0 && depth0.currency) || alias2).call(alias1,(depth0 != null ? depth0.tax : depth0),{"name":"currency","hash":{},"data":data}))
     + "</strong></span>\n		</div>\n\n		<div class=\"row cart-total\">\n			<div class=\"col-lg-6\"><strong>Atenção:</strong> O prazo de entrega começa a contar a partir da aprovação do pagamento.</div>\n			<div class=\"col-lg-6 column-right\"><span>Total: <strong>"
     + alias3((helpers.currency || (depth0 && depth0.currency) || alias2).call(alias1,(depth0 != null ? depth0.total : depth0),{"name":"currency","hash":{},"data":data}))
-    + "</strong></span></div>\n		</div>\n\n		<div class=\"column-right\">\n			<button class=\"btn btn-success btn-lg cart-finish\">Comprar</button>\n		</div>\n	</div>\n</div>\n";
-},"3":function(container,depth0,helpers,partials,data) {
+    + "</strong></span></div>\n		</div>\n\n		<div class=\"column-right\">\n			<button class=\"btn btn-success btn-lg cart-finish\">Comprar</button>\n		</div>\n	</div>\n";
+},"4":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "		<div class=\"product row\">\n			<div class=\"col-lg-1\"><img src=\""
@@ -31,6 +37,12 @@ var Handlebars = require("handlebars");module.exports = Handlebars.template({"1"
     + "rest/cart/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" class=\"btn btn-danger remove-cart-item\"><span class=\"icon icon-bin\"></span></a></div>\n		</div>\n";
+},"6":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "	<h2 class=\"title-diviser\">Meu carrinho</h2>\n\n	<div class=\"product-empty\">\n		<p><b>Nenhum produto no carrinho</b>, que tal procurar um?</p>\n\n"
+    + ((stack1 = container.invokePartial(partials.search,depth0,{"name":"search","data":data,"indent":"\t\t","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + "	</div>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 

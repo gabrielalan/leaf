@@ -247,7 +247,7 @@ module.exports = {
 			.then(results => {
 				let highlights = results[0],
 					ids = highlights.map(current => current.id);
-console.log(highlights);
+
 				return knex.select('products.*', 'images.sizename', 'images.path')
 					.from('products')
 					.innerJoin('products_images', 'products_images.product_id', 'products.id')

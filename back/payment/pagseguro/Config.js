@@ -22,11 +22,22 @@ module.exports = {
 
 	PATH: {
 		CHECKOUT: '/v2/checkout',
-		NOTIFICATION: '/v3/transactions/notifications/'
+		NOTIFICATION: '/v3/transactions/notifications/',
+		TRANSACTION: '/v3/transactions/'
 	},
 
 	getCheckoutUrl(id) {
 		return PROTOCOL + '://' + HOSTNAME + this.PATH.CHECKOUT + '/payment.html?code=' + id;
+	},
+
+	getTransactionOptions(oid, override) {
+		let options = extend(override || {}, HTTP_REQUEST_DEFAULT);
+
+		options.path = this.PATH.TRANSACTION + oid + this.QUERY;
+
+		options.method = 'GET';
+
+		return options;
 	},
 
 	getNotificationOptions(oid, override) {

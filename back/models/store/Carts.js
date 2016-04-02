@@ -6,15 +6,20 @@ var knex = require('../../db/Knex'),
 
 module.exports = {
 
-	removeItems(token) {
-		return knex.select('*').from('carts').where('token', token).then(result => {
+	removeItems(token, transaction) {
+		let query = knex.select('*').from('carts').where('token', token);
+
+		if (transaction)
+			query.transacting(transaction);
+
+		return query.then(result => {
 			let cart = result[0];
 
 			if (!cart) {
 				return true;
 			}
 
-			return CartItemsStore.removeAll(cart.id);
+			return CartItemsStore.removeAll(cart.id, transaction);
 		});
 	},
 

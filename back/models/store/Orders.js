@@ -6,14 +6,18 @@ var knex = require('../../db/Knex'),
 
 module.exports = {
 
-	create(data, items) {
+	create(data, items, transaction) {
 		let defer = Promise.defer(), record = new Entity();
 
 		record.override(data);
 
-		record.save().then(result => {
-			OrderItemsStore.addToOrder(record.getAllData().id, items)
-				.then(result => defer.resolve())
+		record.setTransactionObject(transaction);
+
+		record.save().then(order => {
+			let orderData = record.getAllData();
+
+			OrderItemsStore.addToOrder(orderData.id, items, transaction)
+				.then(result => defer.resolve(orderData))
 				.catch(error => defer.reject(new Error(error)));
 		}).catch(error => defer.reject(new Error(error)));
 

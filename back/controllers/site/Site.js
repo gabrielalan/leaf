@@ -1,6 +1,8 @@
 'use strict';
 
 var Controller = require('../Controller'),
+	Constants = require('../../payment/Constants'),
+	PaymentAPI = require('../../payment/Mediator'),
 	logger = require('../../logger/Logger'),
 	ProductsStore = require('../../models/store/Products'),
 	CategoriesStore = require('../../models/store/Categories'),
@@ -62,14 +64,23 @@ class Site extends Controller {
 		});
 	}
 
-	success( req, res ) {
+	success( req, res, next ) {
 		var template = require('../../templates/site/pages/success');
 
-		getDefaultData().then((results) => {
-			var html = template(results);
+		Promise.all([getDefaultData(), PaymentAPI.transaction(req.query.transaction_id)]).then((results) => {
+			let data = results[0], transaction = PaymentAPI.getTransactionObject(results[1].transaction);
+
+			data.transaction = {
+				items: transaction.getItems(),
+				total: transaction.getTotal(),
+				shipping: transaction.getShipping(),
+				sender: transaction.getSender()
+			};
+
+			var html = template(data);
 			
 			res.send(html);
-		});	
+		}).catch(next);
 	}
 
 	cart( req, res ) {
@@ -87,7 +98,7 @@ class Site extends Controller {
 			else
 				data.subtotal = 0;
 
-			data.tax = 10;
+			data.tax = parseFloat(Constants.shipping.cost);
 
 			data.total = data.subtotal + data.tax;
 

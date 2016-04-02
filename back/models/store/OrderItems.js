@@ -6,7 +6,7 @@ var knex = require('../../db/Knex'),
 
 module.exports = {
 
-	addToOrder(order_id, items) {
+	addToOrder(order_id, items, transaction) {
 		let manager = new Manager();
 
 		items.map(item => {
@@ -21,6 +21,6 @@ module.exports = {
 			manager.persist(entity);
 		});
 
-		return manager.flush();
+		return manager.flush(transaction);
 	}
 };

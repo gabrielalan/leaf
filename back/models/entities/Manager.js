@@ -50,10 +50,10 @@ class Manager {
 		return promises;
 	}
 
-	flush() {
+	flush(transaction) {
 		let defer = Promise.defer();
 
-		knex.transaction((trx) => {
+		let execute = (trx) => {
 			let deletePromises, persistPromises, promises;
 
 			try {
@@ -70,7 +70,12 @@ class Manager {
 			}).catch(function(error) {
 				defer.reject(error);
 			});
-		});
+		};
+
+		if (!transaction)
+			knex.transaction(execute);
+		else
+			execute(transaction);
 
 		return defer.promise;
 	}

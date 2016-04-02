@@ -13,38 +13,35 @@
 				</tr>
 			</thead>
 			<tbody>
+			{{#each transaction.items}}
 				<tr>
 					<td>
-						<h4>Asdasdasd</h4>
-						<p>Quantidade: 1</p>
-						<strong>Valor do item: R$ 100,50</strong>
+						<h4>{{description}}</h4>
+						<p>Quantidade: {{quantity}}</p>
 					</td>
-					<td>R$<strong>100,50</strong></td>
+					<td>{{currency amount}}</td>
 				</tr>
+			{{/each}}
 				<tr>
-					<td>
-						<h4>Asdasdasd</h4>
-						<p>Quantidade: 1</p>
-						<strong>Valor do item: R$ 100,50</strong>
-					</td>
-					<td>R$<strong>100,50</strong></td>
+					<td><strong>Frete</strong></td>
+					<td>{{currency transaction.shipping.cost}}</td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
 					<td><p>Total a pagar</p></td>
 					<td>
-						<span id="cartTotalAmount">R$<strong>201,00</strong></span>
+						<span id="cartTotalAmount">{{currency transaction.total}}</span>
 					</td>
 				</tr>
 			</tfoot>
 		</table>
 	</div>
 
-	<p>Obrigado, Verme Insolente. Todo o processo da compra foi finalizado e após a confirmação do pagamento você receberá mais informações.</p>
+	<p>Obrigado, {{#each transaction.sender.name}}{{this}}{{/each}}. Todo o processo da compra foi finalizado e após a confirmação do pagamento você receberá mais informações.</p>
 
 	<p>Em casos de dúvida você pode nos contactar pelo e-mail: <a href="mailto:manadistribuidor@gmail.com">manadistribuidor@gmail.com</a>.</p>
-
+	
 	<p>Nós iremos lhe enviar e-mails para cada mudança de status do seu pedido, e iremos lhe contactar por este e-mail: <a href="mailto:manadistribuidor@gmail.com">manadistribuidor@gmail.com</a>.</p>
 
 	<p>Ao lado, você pode confirmar os itens do seu pedido.</p>

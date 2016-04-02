@@ -33,6 +33,12 @@ class PagSeguro {
 		return defer.promise;
 	}
 
+	transaction(oid) {
+		let defer = Promise.defer(), options = config.getTransactionOptions(oid);
+
+		return this.doRequest(options, '');
+	}
+
 	notification(oid) {
 		let defer = Promise.defer(), options = config.getNotificationOptions(oid);
 

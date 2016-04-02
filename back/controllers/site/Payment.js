@@ -1,6 +1,8 @@
 'use strict';
 
-var Controller = require('../Controller'),
+var knex = require('../../db/Knex'),
+	Controller = require('../Controller'),
+	Constants = require('../../payment/Constants'),
 	GeneralConfig = require('../../GeneralConfiguration'),
 	PaymentAPI = require('../../payment/Mediator'),
 	defaultError = require('../../logger/HttpUtils').defaultHttpResponseError,
@@ -26,52 +28,58 @@ class Payment extends Controller {
 	checkout( req, res ) {
 		const cartToken = CartStore.getToken(req, res);
 
-		CartItemStore.getAll(cartToken, ['products.description'])
-			.then(result => {
-				let items = result.map(item => {
-					return {
-						id: item.product_id,
-						description: item.description,
-						amount: item.value.toFixed(2),
-						quantity: item.quantity
-					};
-				});
-
-				let data = {
-					checkout: {
-						currency: 'BRL',
-						reference: 123123,
-						notificationURL: GeneralConfig.getBaseUrl() + 'rest/payment/notification',
-						shipping: {
-							cost: '11.00'
-						},
-						items: {
-							item: items
-						}
-					}
+		CartItemStore.getAll(cartToken, ['products.description']).then(result => {
+			let items = result.map(item => {
+				return {
+					id: item.product_id,
+					description: item.name,
+					amount: item.value.toFixed(2),
+					quantity: item.quantity
 				};
+			});
 
-				PaymentAPI.checkout(data)
-					.then((result) => {
-						let code = result.checkout.code[0];
+			knex.transaction(trx => {
 
-						OrderStore.create({
-							token: cartToken,
-							pagseguro_checkout_id: code,
-							status: 'WAITING_PAYMENT'
-						}, items).then(result => {
+				OrderStore.create({
+					token: cartToken,
+					pagseguro_checkout_id: 0,
+					status: Constants.status.waiting_payment
+				}, items, trx).then(result => {
 
-							CartStore.removeItems(cartToken);
+					let data = {
+						checkout: {
+							currency: Constants.currency,
+							reference: result.id,
+							notificationURL: GeneralConfig.getBaseUrl() + 'rest/payment/notification',
+							shipping: Constants.shipping,
+							items: {
+								item: items
+							}
+						}
+					};
 
-							res.send({
-								success: true,
-								url: PaymentAPI.getConfig().getCheckoutUrl(code)
-							});
-						}).catch(error => defaultError(res, error));
-					})
-					.catch(error => defaultError(res, new Error(), error));
+					PaymentAPI.checkout(data)
+						.then((result) => {
+							let code = result.checkout.code[0];
+
+							CartStore.removeItems(cartToken, trx).then(result => {
+								trx.commit(code);
+
+								res.send({
+									success: true,
+									url: PaymentAPI.getConfig().getCheckoutUrl(code)
+								});
+							}).catch(trx.rollback);
+						})
+						.catch(trx.rollback);
+				}).catch(trx.rollback);
+			})
+			.then(result => {
+				console.log(result);
 			})
 			.catch(error => defaultError(res, error));
+		})
+		.catch(error => defaultError(res, error));
 	}
 }
 

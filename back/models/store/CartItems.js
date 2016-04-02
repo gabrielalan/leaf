@@ -5,8 +5,13 @@ var knex = require('../../db/Knex'),
 
 module.exports = {
 
-	removeAll(cart_id) {
-		return knex('cart_items').where({ cart_id }).del();
+	removeAll(cart_id, transaction) {
+		let query = knex('cart_items').where({ cart_id });
+
+		if (transaction)
+			query.transacting(transaction);
+
+		return query.del();
 	},
 
 	save(data) {

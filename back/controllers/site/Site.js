@@ -7,6 +7,7 @@ var Controller = require('../Controller'),
 	ProductsStore = require('../../models/store/Products'),
 	CategoriesStore = require('../../models/store/Categories'),
 	leafCache = require('../../cache/LeafCache'),
+	OrderStore = require('../../models/store/Orders'),
 	CartStore = require('../../models/store/Carts'),
 	CartItemStore = require('../../models/store/CartItems'),
 	handlebars = require('handlebars');
@@ -72,13 +73,15 @@ class Site extends Controller {
 
 			data.transaction = {
 				items: transaction.getItems(),
-				total: transaction.getTotal(),
+				total: transaction.getGrossAmount(),
 				shipping: transaction.getShipping(),
 				sender: transaction.getSender()
 			};
 
 			var html = template(data);
-			
+
+			OrderStore.updateFromAPI(transaction);
+
 			res.send(html);
 		}).catch(next);
 	}

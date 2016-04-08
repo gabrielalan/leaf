@@ -14,12 +14,20 @@ class TransactionData {
 		return defaultValue;
 	}
 
-	getTotal() {
+	getGrossAmount() {
 		return parseFloat(this.get('grossAmount', [0])[0]);
+	}
+
+	getNetAmount() {
+		return parseFloat(this.get('netAmount', [0])[0]);
 	}
 
 	getCode() {
 		return this.get('code', [null])[0];
+	}
+
+	getReference() {
+		return this.get('reference', [null])[0];
 	}
 
 	getShipping() {
@@ -35,10 +43,12 @@ class TransactionData {
 	}
 
 	getSender() {
-		return this.get('sender', [null])[0];
+		return this.normalizeObject(this.get('sender', [null])[0]);
 	}
 
-	normalizeObject(obj) {
+	normalizeObject(realObj) {
+		let obj = Object.assign({}, realObj);
+
 		for( let index in obj ) {
 			let child = obj[index][0];
 

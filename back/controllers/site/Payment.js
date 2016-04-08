@@ -43,7 +43,9 @@ class Payment extends Controller {
 				OrderStore.create({
 					token: cartToken,
 					pagseguro_checkout_id: 0,
-					status: Constants.status.waiting_payment
+					status: Constants.status.waiting_payment,
+					date_created: knex.raw('now()'),
+					date_updated: knex.raw('now()')
 				}, items, trx).then(result => {
 
 					let data = {
@@ -75,7 +77,7 @@ class Payment extends Controller {
 				}).catch(trx.rollback);
 			})
 			.then(result => {
-				console.log(result);
+				//console.log(result);
 			})
 			.catch(error => defaultError(res, error));
 		})

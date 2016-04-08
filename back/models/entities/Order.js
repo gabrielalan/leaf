@@ -14,7 +14,11 @@ class Order extends Entity {
 				'token': String,
 				'pagseguro_checkout_id': String,
 				'pagseguro_sale_id': String,
-				'status': String
+				'status': String,
+				'gross_amount': Number,
+				'net_amount': Number,
+				'date_created': String,
+				'date_updated': String
 			}
 		};
 	}

@@ -3,6 +3,7 @@
 var knex = require('../../db/Knex'),
 	logger = require('../../logger/Logger'),
 	Entity = require('../entities/Order'),
+	OrderItemsStore = require('./OrderItems'),
 	OrderInfoEntity = require('../entities/OrderInfo');
 
 module.exports = {
@@ -57,6 +58,8 @@ module.exports = {
 
 			this.updateOrderInfo(result.id, transaction);
 			this.updateOrder(result.id, transaction);
+
+			logger.log('info', 'Updating order ' + result.id + ' to status ' + transaction.getStatus());
 		});
 	},
 

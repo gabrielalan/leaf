@@ -39,7 +39,7 @@ class TransactionData {
 	}
 
 	getItems() {
-		return this.get('items', []).map(current => this.normalizeObject(current.item[0]));
+		return this.get('items', [{item: []}])[0]	.item.map(current => this.normalizeObject(current) );
 	}
 
 	getSender() {

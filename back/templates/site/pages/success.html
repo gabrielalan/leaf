@@ -1,6 +1,6 @@
 {{#> layout}}
 	{{#*inline "content"}}
-<h2 class="title-diviser">Obrigado, <b>{{#each transaction.sender.name}}{{this}}{{/each}}</b></h2>
+<h2 class="title-diviser">Obrigado, <b>{{transaction.sender.name}}</b></h2>
 
 <div class="success">
 
@@ -42,7 +42,7 @@
 
 	<p>Em casos de dúvida você pode nos contactar pelo e-mail: <a href="mailto:manadistribuidor@gmail.com">manadistribuidor@gmail.com</a>.</p>
 
-	<p>Nós iremos lhe enviar e-mails para cada mudança de status do seu pedido, e iremos lhe contactar por este e-mail: <a href="mailto:manadistribuidor@gmail.com">manadistribuidor@gmail.com</a>.</p>
+	<p>Nós iremos lhe enviar e-mails para cada mudança de status do seu pedido, e iremos lhe contactar por este e-mail: <a href="mailto:{{transaction.sender.email}}">{{transaction.sender.email}}</a>.</p>
 
 	<p>Ao lado, você pode confirmar os itens do seu pedido.</p>
 

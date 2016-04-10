@@ -83,7 +83,9 @@ class Site extends Controller {
 			OrderStore.updateFromAPI(transaction);
 
 			res.send(html);
-		}).catch(next);
+		}).catch(error => {
+			res.redirect('/');
+		});
 	}
 
 	cart( req, res ) {

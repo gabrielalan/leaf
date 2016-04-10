@@ -15,8 +15,10 @@ class Payment extends Controller {
 	notification( req, res ) {
 		PaymentAPI.notification(req.body.notificationCode)
 			.then((result) => {
-				console.log('notification');
-				console.log(result);
+				let transaction = PaymentAPI.getTransactionObject(result.transaction);
+
+				OrderStore.updateFromAPI(transaction);
+
 				res.send(result);
 			})
 			.catch((error) => {

@@ -33,6 +33,12 @@ var Grid = React.createClass({
 		});
 	},
 
+	getLineClass: function (item) {
+		var getLineClassFn = this.props.getLineClass;
+
+		return getLineClassFn ? getLineClassFn(item) : null;
+	},
+
 	mountHeader: function () {
 		return this.props.columns.map(function (current) {
 			return React.createElement(
@@ -49,7 +55,7 @@ var Grid = React.createClass({
 		return me.state.items.map(function (item) {
 			return React.createElement(
 				'tr',
-				{ key: item[me.props.rowKeyAttr] + '_row' },
+				{ key: item[me.props.rowKeyAttr] + '_row', className: me.getLineClass(item) },
 				me.mountRow(item)
 			);
 		});

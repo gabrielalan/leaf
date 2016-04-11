@@ -2,6 +2,7 @@
 
 var React = require('react'),
 	ReactDOM = require('ReactDOM'),
+	Orders = require('Views/Admin/Pages/Orders'),
 	Category = require('Views/Admin/Pages/Category'),
 	Product = require('Views/Admin/Pages/Product'),
 	Products = require('Views/Admin/Pages/Products'),
@@ -13,7 +14,15 @@ function _getContentEl() {
 
 module.exports = {
 
-	"": function() {},
+	"": function() {
+		ReactDOM.render(React.createElement(Orders, null), _getContentEl());
+	},
+
+	"order/:id": function(req) {
+		//ReactDOM.render(React.createElement(Product, {
+		//	id: req.params.id
+		//}), _getContentEl());
+	},
 
 	"products": function() {
 		ReactDOM.render(React.createElement(Products, null), _getContentEl());

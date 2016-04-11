@@ -1,6 +1,7 @@
 'use strict';
 
 var knex = require('../../db/Knex'),
+	PaymentConstants = require('../../payment/Constants'),
 	logger = require('../../logger/Logger'),
 	Entity = require('../entities/Order'),
 	OrderItemsStore = require('./OrderItems'),
@@ -65,6 +66,20 @@ module.exports = {
 
 	get(id) {
 		return knex.select('id').from('orders').where({id}).then(result => result[0]);
+	},
+
+	getGrid() {
+		return knex
+			.select('*')
+			.from('orders')
+			.leftJoin('order_infos', 'orders.id', 'order_infos.order_id')
+			.then(result => {
+			return result.map(current => {
+				current.statusName = PaymentConstants.statusText[parseInt(current.status)];
+
+				return current;
+			});
+		});
 	},
 
 	create(data, items, transaction) {

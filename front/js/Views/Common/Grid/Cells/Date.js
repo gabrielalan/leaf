@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react'),
-    formatter = require('Common/Formatters/Currency');
+    formatter = require('Common/Formatters/Date');
 
 var CurrencyCell = React.createClass({
 	displayName: 'CurrencyCell',

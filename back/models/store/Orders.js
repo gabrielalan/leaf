@@ -68,6 +68,10 @@ module.exports = {
 		return knex.select('id').from('orders').where({id}).then(result => result[0]);
 	},
 
+	getItems(id) {
+		return knex.select('products.name', 'products.description', 'order_items.quantity').from('order_items').leftJoin('products', 'order_items.product_id', 'products.id').where('order_items.order_id', id);
+	},
+
 	getGrid() {
 		return knex
 			.select('*')

@@ -5,14 +5,39 @@ var React = require('react'),
     dateFormatter = require('Common/Formatters/Date'),
     currencyFormatter = require('Common/Formatters/Currency'),
     Grid = require('Views/Common/Grid'),
-    Collection = require('Collections/Orders'),
-    RouteManager = require('Routes/Manager'),
+    Collection = require('Collections/OrderItems'),
     ButtonCell = require('Views/Common/Grid/Cells/Button'),
     Navigation = require('Views/Admin/Navigation'),
     MessageBarCentral = require('Widgets/MessageBarCentral');
 
 var Order = React.createClass({
 	displayName: 'Order',
+
+	getInitialState: function () {
+		var me = this;
+
+		me.collection = new Collection([], { id: this.props.order.id });
+
+		return {
+			columns: [{
+				id: 'name',
+				label: 'Produto',
+				modelAttr: 'name'
+			}, {
+				id: 'description',
+				label: 'Descrição',
+				modelAttr: 'description'
+			}, {
+				id: 'quantity',
+				label: 'Quantidade',
+				modelAttr: 'quantity'
+			}]
+		};
+	},
+
+	componentDidMount: function () {
+		this.collection.fetch();
+	},
 
 	getStatusClassName: function (status) {
 		var color = getStatusColor(status);
@@ -299,6 +324,20 @@ var Order = React.createClass({
 							this.props.order.pagseguro_sale_id
 						)
 					)
+				)
+			),
+			React.createElement(
+				'fieldset',
+				null,
+				React.createElement(
+					'legend',
+					null,
+					'Itens da compra'
+				),
+				React.createElement(
+					'div',
+					{ className: 'toolbar-grid' },
+					React.createElement(Grid, { collection: this.collection, columns: this.state.columns, rowKeyAttr: 'name' })
 				)
 			)
 		);

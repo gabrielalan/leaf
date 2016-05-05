@@ -30,4 +30,8 @@ router.get('/success', (req, res, next) => {
 	controller.getAction('success')(req, res, next);
 });
 
+router.get('/howtobuy', (req, res, next) => {
+	controller.getAction('howToBuy')(req, res, next);
+});
+
 module.exports = router;

@@ -329,6 +329,11 @@ $pcItemsSpace: 15px;
 	font-size: 30px;
 }
 
+.padding-to-title {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
 @-moz-keyframes spin {
     from { -moz-transform: rotate(0deg); }
     to { -moz-transform: rotate(360deg); }

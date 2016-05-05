@@ -65,6 +65,20 @@ class Site extends Controller {
 		});
 	}
 
+	howToBuy(req, res, next) {
+		var template = require('../../templates/site/pages/howtobuy');
+
+		getDefaultData().then((results) => {
+			let data = results;
+
+			var html = template(data);
+
+			res.send(html);
+		}).catch((err) => {
+			next(error);
+		});
+	}
+
 	success( req, res, next ) {
 		var template = require('../../templates/site/pages/success');
 

@@ -4505,6 +4505,10 @@ body {
   color: #05aecd;
   font-size: 30px; }
 
+.padding-to-title {
+  padding-left: 20px;
+  padding-right: 20px; }
+
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg); }

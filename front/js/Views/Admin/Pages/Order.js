@@ -19,6 +19,8 @@ var Order = React.createClass({
 		me.collection = new Collection([], { id: this.props.order.id });
 
 		return {
+			status: this.props.order.status,
+			statusName: this.props.order.statusName,
 			columns: [{
 				id: 'name',
 				label: 'Produto',
@@ -43,6 +45,59 @@ var Order = React.createClass({
 		var color = getStatusColor(status);
 
 		return 'label label-' + color;
+	},
+
+	changeStatus: function (e) {
+		var me = this,
+		    status = this.state.status < 10 ? 10 : 11;
+
+		e.stopPropagation();
+		e.preventDefault();
+
+		$.ajax({
+			url: '/admin/rest/orders/' + this.props.order.id + '/status/' + status,
+			method: 'GET',
+			success: function (response) {
+				me.setState({
+					status: response.status,
+					statusName: response.statusName
+				});
+			},
+			error: function (response) {
+				alert(response.responseText);
+			}
+		});
+
+		return false;
+	},
+
+	renderStatus: function () {
+		let changeButton = null;
+
+		if (this.state.status < 10) {
+			changeButton = React.createElement(
+				'a',
+				{ href: '#', className: 'btn btn-xs btn-link', onClick: this.changeStatus },
+				'Mudar para enviado'
+			);
+		} else if (this.state.status < 11) {
+			changeButton = React.createElement(
+				'a',
+				{ href: '#', className: 'btn btn-xs btn-link', onClick: this.changeStatus },
+				'Mudar para finalizado'
+			);
+		}
+
+		return React.createElement(
+			'div',
+			null,
+			React.createElement(
+				'span',
+				{ className: this.getStatusClassName(this.state.status) },
+				this.state.statusName
+			),
+			changeButton
+		);
 	},
 
 	render: function () {
@@ -240,11 +295,7 @@ var Order = React.createClass({
 					React.createElement(
 						'div',
 						{ className: valueClass },
-						React.createElement(
-							'span',
-							{ className: this.getStatusClassName(this.props.order.status) },
-							this.props.order.statusName
-						)
+						this.renderStatus()
 					),
 					React.createElement(
 						'div',

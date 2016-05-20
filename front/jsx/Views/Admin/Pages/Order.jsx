@@ -18,6 +18,8 @@ var Order = React.createClass({
 		me.collection = new Collection([], {id: this.props.order.id});
 
 		return {
+			status: this.props.order.status,
+			statusName: this.props.order.statusName,
 			columns: [
 				{
 					id: 'name',
@@ -46,6 +48,44 @@ var Order = React.createClass({
 		var color = getStatusColor(status);
 
 		return 'label label-' + color;
+	},
+
+	changeStatus: function(e) {
+		var me = this, status = this.state.status < 10 ? 10 : 11;
+
+		e.stopPropagation();
+		e.preventDefault();
+
+		$.ajax({
+			url: '/admin/rest/orders/' + this.props.order.id + '/status/' + status,
+			method: 'GET',
+			success: function(response) {
+				me.setState({
+					status: response.status,
+					statusName: response.statusName
+				});
+			},
+			error: function(response) {
+				alert(response.responseText);
+			}
+		});
+
+		return false;
+	},
+
+	renderStatus: function() {
+		let changeButton = null;
+
+		if (this.state.status < 10) {
+			changeButton = <a href="#" className="btn btn-xs btn-link" onClick={this.changeStatus}>Mudar para enviado</a>;
+		} else if(this.state.status < 11) {
+			changeButton = <a href="#" className="btn btn-xs btn-link" onClick={this.changeStatus}>Mudar para finalizado</a>;
+		}
+
+		return (<div>
+			<span className={this.getStatusClassName(this.state.status)}>{this.state.statusName}</span>
+			{changeButton}
+		</div>);
 	},
 
 	render: function() {
@@ -91,7 +131,7 @@ var Order = React.createClass({
 					<legend>Dados da compra</legend>
 					<div className="row">
 						<div className={labelClass}>Status</div>
-						<div className={valueClass}><span className={this.getStatusClassName(this.props.order.status)}>{this.props.order.statusName}</span></div>
+						<div className={valueClass}>{this.renderStatus()}</div>
 						<div className={labelClass}>Data da compra</div>
 						<div className={valueClass}><b>{dateFormatter(this.props.order.date_created)}</b></div>
 					</div>

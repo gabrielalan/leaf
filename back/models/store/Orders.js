@@ -72,6 +72,19 @@ module.exports = {
 		return knex.select('products.name', 'products.description', 'order_items.quantity').from('order_items').leftJoin('products', 'order_items.product_id', 'products.id').where('order_items.order_id', id);
 	},
 
+	changeStatus(id, status) {
+		const statusName = PaymentConstants.statusText[status];
+
+		if (!statusName)
+			return new Promise((resolve, reject) => reject(new Error('Status não encontrado para atualizar')));
+
+		return knex('orders').where('id', id).update({status})
+			.then(result => {
+				return {id, status, statusName};
+			})
+			.catch(error => error)
+	},
+
 	getGrid() {
 		return knex
 			.select('*')

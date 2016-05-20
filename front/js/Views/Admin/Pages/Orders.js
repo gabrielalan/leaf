@@ -77,6 +77,8 @@ var Orders = React.createClass({
 	},
 
 	backToGrid: function () {
+		Collection.fetch();
+
 		this.setState({
 			viewing: null
 		});

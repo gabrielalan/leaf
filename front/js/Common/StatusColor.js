@@ -11,6 +11,6 @@ module.exports = function getStatusColor(status) {
 		case 9:
 			return 'danger';
 		default:
-			return '';
+			return 'default';
 	}
 };

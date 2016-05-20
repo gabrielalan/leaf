@@ -16,8 +16,10 @@ module.exports = {
 		returned: 6,
 		canceled: 7,
 		debited: 8,
-		litigation: 9
+		litigation: 9,
+		sended: 10,
+		finished: 11
 	},
 
-	statusText: ['Sem situação', 'Aguardando pagamento', 'Em análise', 'Pago', 'Disponível', 'Em disputa', 'Devolvido', 'Cancelado', 'Debitado', 'Retenção temporária']
+	statusText: ['Sem situação', 'Aguardando pagamento', 'Em análise', 'Pago', 'Disponível', 'Em disputa', 'Devolvido', 'Cancelado', 'Debitado', 'Retenção temporária', 'Produto enviado', 'Finalizado']
 };

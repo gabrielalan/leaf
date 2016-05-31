@@ -8,7 +8,9 @@ var knex = require('../../db/Knex'),
 	defaultError = require('../../logger/HttpUtils').defaultHttpResponseError,
 	OrderStore = require('../../models/store/Orders'),
 	CartStore = require('../../models/store/Carts'),
-	CartItemStore = require('../../models/store/CartItems');
+	CartItemStore = require('../../models/store/CartItems'),
+	notificate = require('../../config.json').mail.notificate,
+	sendSuccessEmail = require('../../mail/sender').sendOrderUpdate;
 
 class Payment extends Controller {
 
@@ -18,6 +20,22 @@ class Payment extends Controller {
 				let transaction = PaymentAPI.getTransactionObject(result.transaction);
 
 				OrderStore.updateFromAPI(transaction);
+
+				sendSuccessEmail({
+					subject: 'Compra atualizada para: ' + Constants.statusText[transaction.getStatus()],
+					to: notificate
+				}, {
+					name: transaction.getSender().name,
+					items: transaction.getItems(),
+					shipping: transaction.getShipping().cost,
+					total: transaction.getGrossAmount()
+				}, function(err, info){
+					if(err){
+						return logger.log('error', err);
+					}
+
+					logger.log('info', info);
+				});
 
 				res.send(result);
 			})

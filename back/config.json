@@ -1,4 +1,17 @@
 {
+	"baseUrl": "http://leafdev.com/",
+  	"mail": {
+		"notificate": "gaba.alan@gmail.com"
+	},
+  	"smtp": {
+		"pool": true,
+		"host": "smtp.leafsc.com.br",
+		"port": 587,
+		"auth": {
+		  "user": "leaf@leafsc.com.br",
+		  "pass": "leaf1111"
+		}
+	},
 	"DB": {
 		"host": "localhost",
 		"user": "root",

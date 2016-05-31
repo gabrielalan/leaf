@@ -1,6 +1,7 @@
 'use strict';
 
 let handlebars = require('handlebars'),
+	config = require('./config.json'),
 	fs = require('fs');
 
 let carousel 	= fs.readFileSync('back/templates/site/partials/carousel.html', "utf-8"),
@@ -15,7 +16,7 @@ let carousel 	= fs.readFileSync('back/templates/site/partials/carousel.html', "u
 class InitialConfiguration {
 
 	getBaseUrl() {
-		return 'http://leafdev.com/';
+		return config.baseUrl;
 	}
 
 	currency(value) {

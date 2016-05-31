@@ -10,7 +10,8 @@ var Controller = require('../Controller'),
 	OrderStore = require('../../models/store/Orders'),
 	CartStore = require('../../models/store/Carts'),
 	CartItemStore = require('../../models/store/CartItems'),
-	handlebars = require('handlebars');
+	notificate = require('../../config.json').mail.notificate,
+	sendSuccessEmail = require('../../mail/sender').sendOrderUpdate;
 
 function getDefaultData() {
 	let cached = leafCache.get('defaultData'),
@@ -91,6 +92,22 @@ class Site extends Controller {
 				shipping: transaction.getShipping(),
 				sender: transaction.getSender()
 			};
+
+			sendSuccessEmail({
+				subject: 'Compra atualizada!',
+				to: notificate
+			}, {
+				name: transaction.getSender().name,
+				items: transaction.getItems(),
+				shipping: transaction.getShipping().cost,
+				total: transaction.getGrossAmount()
+			}, function(err, info){
+				if(err){
+					return logger.log('error', err);
+				}
+
+				logger.log('info', info);
+			});
 
 			var html = template(data);
 

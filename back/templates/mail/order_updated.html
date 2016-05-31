@@ -1,0 +1,36 @@
+<p>Olá, uma venda foi atualizada no sistema.</p>
+
+<p>O comprador, <strong>{{name}}</strong>, fez este pedido:</p>
+
+<table style="width: 80%;">
+	<thead>
+	<tr>
+		<th align="left">Descrição</th>
+		<th align="left">Quantidade</th>
+		<th align="left">Valor</th>
+	</tr>
+	</thead>
+	<tbody>
+	{{#each items}}
+	<tr>
+		<td>{{description}}</td>
+		<td>{{quantity}}</td>
+		<td>{{currency amount}}</td>
+	</tr>
+	{{/each}}
+	<tr>
+		<td colspan="2"><strong>Frete</strong></td>
+		<td>{{currency shipping}}</td>
+	</tr>
+	</tbody>
+	<tfoot>
+	<tr>
+		<td colspan="2"><p>Total à receber (bruto)</p></td>
+		<td>
+			<span id="cartTotalAmount">{{currency total}}</span>
+		</td>
+	</tr>
+	</tfoot>
+</table>
+
+<p>Entre em <a href="{{baseUrl}}admin">{{baseUrl}}admin</a> para ver os detalhes da transação.</p>

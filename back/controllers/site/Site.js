@@ -68,7 +68,7 @@ class Site extends Controller {
 
 	sendHowToBe(req, res, next) {
 		let data = req.body;
-console.log(data);
+
 		senders.sendHowToBe({
 			subject: 'Novo contato enviado via site',
 			to: notificate

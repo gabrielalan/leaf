@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "dir",
-    "start": "node ./back/bin/server.js"
+    "start": "node ./back/bin/forever.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
     "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
     "express-session": "^1.13.0",
+    "forever": "^0.15.2",
+    "forever-monitor": "^1.7.0",
     "handlebars": "^4.0.5",
     "jimp": "git+https://github.com/gabrielalan/jimp2.git",
     "knex": "^0.9.0",

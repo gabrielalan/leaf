@@ -11,7 +11,7 @@ var Controller = require('../Controller'),
 	CartStore = require('../../models/store/Carts'),
 	CartItemStore = require('../../models/store/CartItems'),
 	notificate = require('../../config.json').mail.notificate,
-	sendSuccessEmail = require('../../mail/sender').sendOrderUpdate;
+	senders = require('../../mail/sender');
 
 function getDefaultData() {
 	let cached = leafCache.get('defaultData'),
@@ -66,6 +66,39 @@ class Site extends Controller {
 		});
 	}
 
+	sendHowToBe(req, res, next) {
+		let data = req.body;
+console.log(data);
+		senders.sendHowToBe({
+			subject: 'Novo contato enviado via site',
+			to: notificate
+		}, data, function(err, info){
+			if(err){
+				res.send({ success: false });
+
+				return logger.log('error', err);
+			}
+
+			res.send({ success: true });
+
+			logger.log('info', info);
+		});
+	}
+
+	howToBeLeaf(req, res, next) {
+		var template = require('../../templates/site/pages/howtobeleaf');
+
+		getDefaultData().then((results) => {
+			let data = results;
+
+			var html = template(data);
+
+			res.send(html);
+		}).catch((err) => {
+			next(error);
+		});
+	}
+
 	howToBuy(req, res, next) {
 		var template = require('../../templates/site/pages/howtobuy');
 
@@ -93,7 +126,7 @@ class Site extends Controller {
 				sender: transaction.getSender()
 			};
 
-			sendSuccessEmail({
+			senders.sendOrderUpdate({
 				subject: 'Compra atualizada!',
 				to: notificate
 			}, {

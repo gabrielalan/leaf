@@ -1,0 +1,36 @@
+{{#> layout}}
+	{{#*inline "content"}}
+<div class="product-list">
+	<h2 class="title-diviser">Como ser um representante</h2>
+
+	<div class="padding-to-title">
+		<p>Nós já atuamos em alguns estados como Santa Catarina e Paraná, mas queremos que nossos produtos sejam representados por todo o Brasil.</p>
+		<p>Quer fazer parte deste negócio de sucesso? Entre em contato conosco, e nos diga como você pode nos representar.</p>
+
+		<form action="{{baseUrl}}sendHowToBe" method="post" id="howToBeLeafForm">
+			<div class="form-group">
+				<label for="name">Nome</label>
+				<input required="true" type="text" class="form-control" name="name" id="name" placeholder="Nome">
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input required="true" type="text" class="form-control" name="email" id="email" placeholder="Email">
+			</div>
+			<div class="form-group">
+				<label for="phone">Telefone</label>
+				<input required="true" type="text" class="form-control" name="phone" id="phone" placeholder="Telefone">
+			</div>
+			<div class="form-group">
+				<label for="citystate">Cidade/Estado</label>
+				<input required="true" type="text" class="form-control" name="citystate" id="citystate" placeholder="Cidade/Estado">
+			</div>
+			<div class="form-group">
+				<label for="about">Nos fale mais sobre você</label>
+				<textarea id="about" class="form-control" rows="3" name="about" required="true"></textarea>
+			</div>
+			<button type="submit" class="btn btn-lg btn-primary">Enviar</button>
+		</form>
+	</div>
+</div>
+	{{/inline}}
+{{/layout}}

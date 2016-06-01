@@ -5,11 +5,18 @@ var ProductsCarousel = require('Widgets/Site/ProductsCarousel'),
 	ProductImageViewer = require('Widgets/Site/ProductImageViewer'),
 	Quantity = require('Widgets/Site/Quantity'),
 	BuyButton = require('Widgets/Site/BuyButton'),
+	FormSender = require('Widgets/Site/FormSender'),
 	RemoveButton = require('Widgets/Site/RemoveCartItemButton');
 
 module.exports = {
 
 	"": function() {},
+
+	"howtobeleaf": function() {
+		var form = document.getElementById('howToBeLeafForm');
+
+		new FormSender(form);
+	},
 
 	"product/:id": function() {
 		var similar = document.querySelector('.similar-products .similar-pager'),

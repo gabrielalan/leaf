@@ -34,4 +34,12 @@ router.get('/howtobuy', (req, res, next) => {
 	controller.getAction('howToBuy')(req, res, next);
 });
 
+router.get('/howtobeleaf', (req, res, next) => {
+	controller.getAction('howToBeLeaf')(req, res, next);
+});
+
+router.post('/sendHowToBe', (req, res, next) => {
+	controller.getAction('sendHowToBe')(req, res, next);
+});
+
 module.exports = router;

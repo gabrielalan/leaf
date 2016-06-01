@@ -4509,6 +4509,9 @@ body {
   padding-left: 20px;
   padding-right: 20px; }
 
+#howToBeLeafForm {
+  position: relative; }
+
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg); }

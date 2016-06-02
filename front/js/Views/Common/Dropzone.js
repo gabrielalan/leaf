@@ -11,6 +11,7 @@ var impureCreateObject = function (file) {
 var Dropzone = React.createClass({
 	displayName: 'Dropzone',
 
+
 	getInitialState: function () {
 		return {
 			isDragging: false

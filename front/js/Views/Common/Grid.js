@@ -6,6 +6,7 @@ var React = require('react'),
 var Grid = React.createClass({
 	displayName: 'Grid',
 
+
 	getInitialState: function () {
 		this.props.collection.on('sync', this.onCollectionChange);
 		this.props.collection.on('request', this.onStartsRequest);

@@ -6,6 +6,7 @@ var React = require('react'),
 var Select = React.createClass({
 	displayName: 'Select',
 
+
 	getInitialState: function () {
 		this.props.collection.on('sync', this.onCollectionChange);
 		this.props.collection.on('request', this.onStartsRequest);

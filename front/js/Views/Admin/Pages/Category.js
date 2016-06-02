@@ -12,6 +12,7 @@ var React = require('react'),
 var Category = React.createClass({
 	displayName: 'Category',
 
+
 	model: null,
 
 	getInitialState: function () {

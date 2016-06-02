@@ -14,6 +14,7 @@ var React = require('react'),
 var Categories = React.createClass({
 	displayName: 'Categories',
 
+
 	getInitialState: function () {
 		return {
 			columns: [{
@@ -111,7 +112,7 @@ var Categories = React.createClass({
 					'Adicionar produto'
 				)
 			),
-			!Collection.length ? this.renderEmpty() : this.renderGrid()
+			this.renderGrid()
 		);
 	}
 });

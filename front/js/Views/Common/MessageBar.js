@@ -7,6 +7,7 @@ var React = require('react'),
 var MessageBar = React.createClass({
 	displayName: 'MessageBar',
 
+
 	getInitialState: function () {
 		Central.on('change', this.onChangeMessage);
 

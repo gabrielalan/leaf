@@ -5,6 +5,7 @@ var React = require('react');
 var ButtonCell = React.createClass({
 	displayName: 'ButtonCell',
 
+
 	getCustomHandler: function () {
 		try {
 			return this.props.column.props.onClick.bind(this);

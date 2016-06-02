@@ -11,6 +11,7 @@ var React = require('react'),
 var Categories = React.createClass({
 	displayName: 'Categories',
 
+
 	getInitialState: function () {
 		return {
 			columns: [{

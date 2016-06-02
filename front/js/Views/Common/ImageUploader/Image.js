@@ -6,6 +6,7 @@ var React = require('react'),
 var Image = React.createClass({
 	displayName: 'Image',
 
+
 	onRemove: function (evt) {
 		evt.preventDefault();
 

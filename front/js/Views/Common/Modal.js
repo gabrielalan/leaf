@@ -5,6 +5,7 @@ var React = require('react');
 var Modal = React.createClass({
 	displayName: 'Modal',
 
+
 	hide: function () {
 		this.getContainer().modal('hide');
 	},

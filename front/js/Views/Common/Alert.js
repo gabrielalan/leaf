@@ -5,6 +5,7 @@ var React = require('react');
 var Alert = React.createClass({
 	displayName: 'Alert',
 
+
 	render: function () {
 		var className = 'alert alert-' + (this.props.type || 'warning');
 

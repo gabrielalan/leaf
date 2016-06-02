@@ -112,7 +112,7 @@ var Categories = React.createClass({
 				<div className="toolbar">
 					<button className="btn btn-primary" onClick={this.onAddClick}>Adicionar produto</button>
 				</div>
-				{!Collection.length ? this.renderEmpty() : this.renderGrid()}
+				{this.renderGrid()}
 			</div>
 		);
 	}

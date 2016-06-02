@@ -5,6 +5,7 @@ var React = require('react');
 var NavBar = React.createClass({
 	displayName: 'NavBar',
 
+
 	render: function () {
 		var className = 'navbar navbar-default navbar-fixed-top';
 

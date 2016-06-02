@@ -10,6 +10,7 @@ var React = require('react'),
 var ImageUploader = React.createClass({
 	displayName: 'ImageUploader',
 
+
 	getInitialState: function () {
 		return {
 			sending: false,

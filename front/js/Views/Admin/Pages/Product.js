@@ -13,6 +13,7 @@ var React = require('react'),
 var Product = React.createClass({
 	displayName: 'Product',
 
+
 	model: null,
 
 	getInitialState: function () {

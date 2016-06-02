@@ -5,6 +5,7 @@ var React = require('react');
 var Loading = React.createClass({
 	displayName: 'Loading',
 
+
 	getContainer: function () {
 		return $(this.refs.container);
 	},

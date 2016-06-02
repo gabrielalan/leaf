@@ -7,6 +7,7 @@ var React = require('react'),
 var Navigation = React.createClass({
 	displayName: 'Navigation',
 
+
 	getInitialState: function () {
 		return {
 			activePath: window.location.hash.slice(1),

@@ -6,6 +6,7 @@ var React = require('react'),
 var CurrencyCell = React.createClass({
 	displayName: 'CurrencyCell',
 
+
 	getValue: function () {
 		var column = this.props.column,
 		    row = this.props.row;

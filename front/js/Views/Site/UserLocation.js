@@ -9,6 +9,7 @@ var React = require('react'),
 var UserLocation = React.createClass({
 	displayName: 'UserLocation',
 
+
 	getInitialState: function () {
 		return {
 			show: false

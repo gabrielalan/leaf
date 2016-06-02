@@ -169,7 +169,7 @@ var Product = React.createClass({
 						<div className="form-group">
 							<label htmlFor="description" className="col-sm-2 control-label">Descrição</label>
 							<div className="col-sm-10">
-								<input type="text" className="form-control" id="description" placeholder="Descrição" ref="description" />
+								<textarea className="form-control" id="description" placeholder="Descrição" ref="description"></textarea>
 							</div>
 						</div>
 						<div className="form-group">

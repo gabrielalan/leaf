@@ -66,7 +66,7 @@ var Navigation = React.createClass({
 				</ul>
 
 				<ul className="nav navbar-nav navbar-right">
-					<li><a href="#">PEGAR DO BACK</a></li>
+					<li><a href="#">Admin</a></li>
 					<li><a href="#" onClick={this.onClickLogout}>Sair</a></li>
 				</ul>
 			</NavBar>

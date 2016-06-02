@@ -196,7 +196,7 @@ var Product = React.createClass({
 						React.createElement(
 							'div',
 							{ className: 'col-sm-10' },
-							React.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descrição', ref: 'description' })
+							React.createElement('textarea', { className: 'form-control', id: 'description', placeholder: 'Descrição', ref: 'description' })
 						)
 					),
 					React.createElement(

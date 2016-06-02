@@ -1,7 +1,7 @@
 {
-	"baseUrl": "http://leafdev.com/",
+	"baseUrl": "http://leafsc.com.br/",
   	"mail": {
-		"notificate": "gaba.alan@gmail.com"
+		"notificate": "gaba.alan@gmail.com;manadistribuidor@gmail.com"
 	},
   	"smtp": {
 		"pool": true,
@@ -13,9 +13,9 @@
 		}
 	},
 	"DB": {
-		"host": "localhost",
-		"user": "root",
-		"password": "111111",
-		"database" : "leaf"
+		"host": "leafdb.mysql.uhserver.com",
+		"user": "leafuser",
+		"password": "leaf@312",
+		"database" : "leafdb"
 	}
 }

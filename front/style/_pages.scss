@@ -68,6 +68,25 @@
 	background-image: linear-gradient(to right, #fff 50%, #444 50%), linear-gradient(to right, #fff 50%, #444 50%), linear-gradient(to bottom, #fff 50%, #444 50%), linear-gradient(to bottom, #fff 50%, #444 50%);
 }
 
+.toolbar-grid h1 {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
+}
+
+.empty-state {
+	padding: 40px;
+	background-color: #eee;
+	text-align: center;
+	border-radius: 5px;
+	margin-top: 20px;
+
+	p {
+		color: #717171;
+		font-style: italic;
+		font-size: 20px;
+	}
+}
+
 @-webkit-keyframes marching-ants-1 {
 	0% {
 		background-position: 0 0,  0 100%,  0 0,  100% 0;

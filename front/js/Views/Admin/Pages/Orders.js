@@ -5,6 +5,7 @@ var React = require('react'),
     DateFormatter = require('Views/Common/Grid/Cells/Date'),
     CurrencyFormatter = require('Views/Common/Grid/Cells/Currency'),
     Grid = require('Views/Common/Grid'),
+    Empty = require('Views/Common/Empty'),
     Order = require('Views/Admin/Pages/Order'),
     Collection = require('Collections/Orders'),
     RouteManager = require('Routes/Manager'),
@@ -84,14 +85,27 @@ var Orders = React.createClass({
 		});
 	},
 
+	renderEmpty: function () {
+		return React.createElement(Empty, null);
+	},
+
 	renderGrid: function () {
+		return React.createElement(Grid, { collection: Collection, columns: this.state.columns, rowKeyAttr: 'id', getLineClass: this.setGridLineClass });
+	},
+
+	renderList: function () {
 		return React.createElement(
 			'div',
 			{ className: 'orders' },
 			React.createElement(
 				'div',
 				{ className: 'toolbar-grid' },
-				React.createElement(Grid, { collection: Collection, columns: this.state.columns, rowKeyAttr: 'id', getLineClass: this.setGridLineClass })
+				React.createElement(
+					'h1',
+					null,
+					'Compras efetuadas'
+				),
+				this.renderGrid()
 			)
 		);
 	},
@@ -110,7 +124,7 @@ var Orders = React.createClass({
 	},
 
 	render: function () {
-		return this.state.viewing ? this.renderOrder() : this.renderGrid();
+		return this.state.viewing ? this.renderOrder() : this.renderList();
 	}
 });
 

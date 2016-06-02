@@ -2,6 +2,7 @@
 
 var React = require('react'),
 	Grid = require('Views/Common/Grid'),
+	Empty = require('Views/Common/Empty'),
 	Collection = require('Collections/Products'),
 	RouteManager = require('Routes/Manager'),
 	ButtonCell = require('Views/Common/Grid/Cells/Button'),
@@ -97,13 +98,21 @@ var Categories = React.createClass({
 		RouteManager.dispatch('/products/add');
 	},
 
+	renderEmpty: function() {
+		return <Empty />;
+	},
+
+	renderGrid: function() {
+		return (<Grid collection={Collection} columns={this.state.columns} rowKeyAttr="id" />);
+	},
+
 	render: function() {
 		return (
 			<div className="toolbar-grid">
 				<div className="toolbar">
 					<button className="btn btn-primary" onClick={this.onAddClick}>Adicionar produto</button>
 				</div>
-				<Grid collection={Collection} columns={this.state.columns} rowKeyAttr="id" />
+				{!Collection.length ? this.renderEmpty() : this.renderGrid()}
 			</div>
 		);
 	}

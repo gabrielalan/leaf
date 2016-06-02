@@ -81,7 +81,7 @@ var Navigation = React.createClass({
 					React.createElement(
 						'a',
 						{ href: '#' },
-						'PEGAR DO BACK'
+						'Admin'
 					)
 				),
 				React.createElement(

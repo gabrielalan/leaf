@@ -2,6 +2,7 @@
 
 var React = require('react'),
     Grid = require('Views/Common/Grid'),
+    Empty = require('Views/Common/Empty'),
     Collection = require('Collections/Products'),
     RouteManager = require('Routes/Manager'),
     ButtonCell = require('Views/Common/Grid/Cells/Button'),
@@ -89,6 +90,14 @@ var Categories = React.createClass({
 		RouteManager.dispatch('/products/add');
 	},
 
+	renderEmpty: function () {
+		return React.createElement(Empty, null);
+	},
+
+	renderGrid: function () {
+		return React.createElement(Grid, { collection: Collection, columns: this.state.columns, rowKeyAttr: 'id' });
+	},
+
 	render: function () {
 		return React.createElement(
 			'div',
@@ -102,7 +111,7 @@ var Categories = React.createClass({
 					'Adicionar produto'
 				)
 			),
-			React.createElement(Grid, { collection: Collection, columns: this.state.columns, rowKeyAttr: 'id' })
+			!Collection.length ? this.renderEmpty() : this.renderGrid()
 		);
 	}
 });
